@@ -28,7 +28,15 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('suratmasuk', SuratMasukController::class);
+
+Route::get('dataoperator/{id}/password', [DataOperatorController::class, 'editPassword'])->name('dataoperator.password');
+Route::get('dataoperator/{id}/role', [DataOperatorController::class, 'editRole'])->name('dataoperator.role');
+Route::patch('dataoperator/{id}/password', [DataOperatorController::class, 'updatePassword'])->name('dataoperator.updatePassword');
+Route::patch('dataoperator/{id}/role', [DataOperatorController::class, 'updateRole'])->name('dataoperator.updateRole');
+
 Route::resource('dataoperator', DataOperatorController::class);
+
+
 // Route::get('/suratmasuk/tambah', [App\Http\Controllers\TambahSuratMasukController::class, 'index'])->name('tambah');
 Route::get('/suratkeluar', [App\Http\Controllers\SuratKeluarController::class, 'index'])->name('home');
 Route::get('/disposisi', [App\Http\Controllers\DisposisiController::class, 'index'])->name('home');

@@ -4,21 +4,30 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
+use Spatie\Permission\Models\Role;
 
 class DataOperatorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
+        $heads = [
+            'No',
+            'Nama',
+            'Username',
+            'Jabatan',
+            'Bidang',
+            'Role',
+            ['label' => 'Actions', 'no-export' => true, 'width' => 5, 'text-align' => 'center'],
+        ];
+
         $dataOperator = User::all();
+
         return view('dataoperator.index', [
-            "dataoperator" => $dataOperator
+            "dataOperator" => $dataOperator,
+            "heads" => $heads,
         ]);
     }
 
@@ -43,12 +52,7 @@ class DataOperatorController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\DataOperator  $dataOperator
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
         $dataOperator = User::findOrFail($id);
@@ -57,12 +61,6 @@ class DataOperatorController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \int $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $dataOperator = User::findOrFail($id);
@@ -72,13 +70,29 @@ class DataOperatorController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int $dataOperator
-     * @return \Illuminate\Http\Response
-     */
+    public function editPassword($id)
+    {
+        $dataOperator = User::findOrFail($id);
+
+        return view('dataoperator.edit_password', [
+            "operator" => $dataOperator,
+        ]);
+    }
+
+    public function editRole($id)
+    {
+        $dataOperator = User::findOrFail($id);
+        $roles = Role::all()->pluck('name');
+
+        $operatorRole = $dataOperator->getRoleNames()->first();
+
+        return view('dataoperator.edit_role', [
+            "operator" => $dataOperator,
+            "operatorRole" => $operatorRole,
+            "roles" => $roles,
+        ]);
+    }
+
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
@@ -87,28 +101,74 @@ class DataOperatorController extends Controller
                 Rule::unique('users')->ignore($id),
             ],
             'nama' => 'required',
-            'password' => 'required',
             'jabatan' => 'required',
             'bidang' => 'required',
         ]);
+
+
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
+
         $data = $request->except(['_token', '_method']);
+
         User::where('id', $id)->update($data);
 
         return redirect()->route('dataoperator.index')->with('success', 'Data Operator berhasil diubah');
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $dataOperator
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(USer $dataOperator)
+    public function updatePassword(Request $request, $id)
     {
-        //
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'password' => 'required|min:8|confirmed',
+                'password_confirmation' => 'required|min:8',
+            ],
+            [
+                'password.required' => 'Silakan masukkan kata sandi.',
+                'password.min' => 'Kata sandi harus minimal :min karakter.',
+                'password.confirmed' => 'Konfirmasi kata sandi tidak cocok.',
+                'password_confirmation.required' => 'Silakan konfirmasi kata sandi.',
+                'password_confirmation.min' => 'Konfirmasi kata sandi harus minimal :min karakter.',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+
+        User::where('id', $id)->update([
+            "password" => Hash::make($request->password)
+        ]);
+
+        return redirect()->route('dataoperator.index')->with('success', 'Password berhasil diubah');
+    }
+
+    public function updateRole(Request $request, $id)
+    {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'role' => 'required',
+            ],
+        );
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $dataOperator = User::findOrFail($id);
+        $dataOperator->syncRoles([$request->input('role')]);
+        $dataOperator->save();
+
+        return redirect()->route('dataoperator.index')->with('success', 'Role berhasil diubah');
+    }
+
+    public function destroy($id)
+    {
+        User::where('id', $id)->delete();
     }
 }

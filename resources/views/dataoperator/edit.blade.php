@@ -7,12 +7,25 @@
 @stop
 
 @section('content')
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">Form Edit Data Operator</h3>
         </div>
+
         <div class="card-body">
-            <form action="{{ route('dataoperator.update', $edit->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('dataoperator.update', $edit->id) }}" method="POST">
                 @csrf
                 @method('PUT')
 
@@ -23,26 +36,20 @@
                 </div>
                 <div class="form-group">
                     <label>Username</label>
-                    <input type="text" class="form-control" name="Username" placeholder="Username" required
+                    <input type="text" class="form-control" name="username" placeholder="Username" required
                         value="{{ $edit->username }}">
                 </div>
                 <div class="form-group">
                     <label>Jabatan</label>
-                    <input type="text" class="form-control" name="Jabatan" required
-                        value="{{ $edit->jabatan }}">
+                    <input type="text" class="form-control" name="jabatan" required value="{{ $edit->jabatan }}">
                 </div>
                 <div class="form-group">
                     <label>Bidang</label>
                     <input type="text" class="form-control" name="bidang" placeholder="Bidang" required
                         value="{{ $edit->bidang }}">
                 </div>
-                <div class="form-group">
-                    <label>password</label>
-                    <input type="text" class="form-control" name="password" required value="{{ $edit->password }}">
-                </div>
                 <button type="submit" class="btn btn-primary">Simpan</button>
             </form>
         </div>
     </div>
 @stop
-
