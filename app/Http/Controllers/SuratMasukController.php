@@ -11,16 +11,27 @@ use Illuminate\Support\Facades\Validator;
 
 class SuratMasukController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
+        $heads = [
+            'No',
+            'Alamat surat',
+            'Nomor Surat',
+            'Tanggal Surat',
+            'Perihal',
+            'Tanggal Diterima',
+            'Status',
+            'File',
+            // ['label' => 'Phone', 'width' => 40],
+            ['label' => 'Actions', 'no-export' => true, 'width' => 5, 'text-align' => 'center'],
+        ];
+
         $surat_masuk = SuratMasuk::all();
+
         return view('suratmasuk.index', [
-            "surat_masuk" => $surat_masuk
+            "surat_masuk" => $surat_masuk,
+            "heads" => $heads,
         ]);
     }
 
@@ -34,13 +45,6 @@ class SuratMasukController extends Controller
         return view("suratmasuk.create");
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -49,25 +53,29 @@ class SuratMasukController extends Controller
             'tanggal_surat' => 'required|date',
             'perihal' => 'required',
             'status' => 'required|integer',
-            'file' => 'required|mimes:pdf,jpeg,jpg',
+            'file' => 'required|mimes:pdf,jpeg,jpg,png',
         ]);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        // Data is valid, continue with storing the data into the database
         $data = $request->all();
 
-        $file = $request->file('file');
-        $filename = 'surat-masuk-' . time() . '.' . $file->getClientOriginalExtension();
-        $path = $file->storeAs('suratmasuk', $filename);
+        try {
+            $file = $request->file('file');
+            $filename = 'surat-masuk-' . time() . '.' . $file->getClientOriginalExtension();
+            $path = $file->storeAs('suratmasuk', $filename);
 
-        $data['file'] = $path;
+            $data['file'] = $path;
 
-        SuratMasuk::create($data);
+            SuratMasuk::create($data);
 
-        return redirect()->route('suratmasuk.index')->with('success', 'Surat Masuk berhasil ditambahkan.');
+            return redirect()->route('suratmasuk.index')->with('success', 'Surat Masuk berhasil ditambahkan.');
+        } catch (\Exception $e) {
+            // Handle any exceptions that may occur during file upload or data storage
+            return redirect()->back()->withInput()->with('error', 'Terjadi kesalahan saat menyimpan surat masuk.');
+        }
     }
 
 
