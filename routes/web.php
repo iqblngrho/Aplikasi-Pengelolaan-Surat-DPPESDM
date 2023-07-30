@@ -1,8 +1,10 @@
 <?php
 
+use App\Models\Bidang;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\BidangController;
 use App\Http\Controllers\DisposisiController;
 use App\Http\Controllers\SuratMasukController;
 use App\Http\Controllers\SuratKeluarController;
@@ -35,6 +37,7 @@ Route::patch('dataoperator/{id}/password', [DataOperatorController::class, 'upda
 Route::patch('dataoperator/{id}/role', [DataOperatorController::class, 'updateRole'])->name('dataoperator.updateRole');
 
 Route::resource('dataoperator', DataOperatorController::class);
+Route::resource('bidang', BidangController::class);
 
 
 // Route::get('/suratmasuk/tambah', [App\Http\Controllers\TambahSuratMasukController::class, 'index'])->name('tambah');

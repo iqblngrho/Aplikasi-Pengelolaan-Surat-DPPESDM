@@ -53,21 +53,13 @@
             @enderror
         </div>
         {{-- Bidang field --}}
-        <div class="input-group mb-3">
-            <input type="text" name="bidang" class="form-control @error('bidang') is-invalid @enderror"
-                   value="{{ old('bidang') }}" placeholder="Bidang">
-
-            <div class="input-group-append">
-                <div class="input-group-text">
-                    <span class="fas fa-solid fa-users {{ config('adminlte.classes_auth_icon', '') }}"></span>
-                </div>
-            </div>
-
-            @error('bidang')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
+        <div class="form-group">
+            <select class="form-control" name="bidang">
+                <option selected>Pilih Bidang</option>
+                @foreach ($bidang as $row)
+                <option value="{{$row->id}}">{{ $row->bidang }}</option>
+                @endforeach
+            </select>
         </div>
         {{-- Jabatan field --}}
         <div class="input-group mb-3">

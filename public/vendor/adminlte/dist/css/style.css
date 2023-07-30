@@ -10,7 +10,7 @@ thead{
 }
 
 #table5 tbody tr{
-    text-align: center;
+    text-align: left;
 }
 
 .table tbody tr{
@@ -27,7 +27,7 @@ tbody td{
 
 tr
  {
-    text-align: center;
+    text-align: left;
  }
  [class*=sidebar-dark] .brand-link {
     border-bottom: 0px solid #000000;

@@ -13,15 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('bidang', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->string('username')->unique();
-            // $table->string('email')->unique();
-            $table->string('password');
-            $table->string('jabatan');
-            $table->unsignedBigInteger('bidang')->nullable();
-            $table->rememberToken();
+            $table->string('bidang');
             $table->timestamps();
         });
     }
@@ -33,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('bidang');
     }
 };

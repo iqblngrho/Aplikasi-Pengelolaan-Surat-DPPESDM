@@ -340,8 +340,8 @@ return [
         ],
         ['header' => 'ACCOUNT SETTING'],
         [
-            'text' => 'profile',
-            'url'  => 'profil',
+            'text' => 'Bidang',
+            'url'  => 'bidang',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
