@@ -9,7 +9,7 @@
  @section('plugins.DatatablesPlugin', true)
 
 @section('content')
-    <a class="btn btn-success mb-3" href="{{ route('suratmasuk.create') }}">Tambah</a>
+    <a class="btn btn-success mb-3 btn-tambah" href="{{ route('suratmasuk.create') }}" data-toggle="modal" data-target="#tambahmodal">Tambah</a>
 
     @if ($message = Session::get('success'))
         <div class="alert alert-success">
@@ -97,6 +97,8 @@
         </table>
     </x-adminlte-modal>
     {{-- End Modal View Surat Masuk --}}
+
+    @include("suratmasuk.create")
 @endsection
 
 @section('css')
@@ -131,4 +133,29 @@
             });
         })
     </script>
+    <script>
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('.btn-tambah').on('click', function(event) {
+
+
+                $.post(`suratmasuk`, function(data) {
+                    $('#nomorsurat').html(data.data.nomor_surat);
+                    $('#tanggalsurat').html(data.data.tanggal_surat);
+                    $('#alamatsurat').html(data.data.alamat_surat);
+                    $('#tanggalmasuk').html(data.data.tanggal_diterima);
+                    $('#perihal').html(data.data.perihal);
+                    $('#status').html(data.data.status === 0 ? 'Belum Disposisi' :
+                        'Sudah Disposisi');
+                    $('#file').html(data.data.file);
+                })
+            });
+        })
+    </script>
+
 @stop

@@ -18,10 +18,11 @@ return new class extends Migration
             $table->unsignedBigInteger('id_surat');
             $table->unsignedBigInteger('id_user');
             $table->timestamp('tanggal_disposisi')->useCurrent();
-            $table->string('sifat');
             $table->string('catatan');
+            $table->string('tindakan_dari');
             $table->string('diteruskan_ke')->nullable();
             $table->string('file');
+            $table->string('status');
             $table->foreign('id_surat')->references('id')->on('surat_masuk');
             $table->foreign('id_user')->references('id')->on('users');
             $table->timestamps();

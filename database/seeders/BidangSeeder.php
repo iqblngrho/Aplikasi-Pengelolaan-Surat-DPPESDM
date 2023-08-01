@@ -16,6 +16,7 @@ class BidangSeeder extends Seeder
     public function run()
     {
         Bidang::create([
+            "id" => 1,
             'bidang' => 'Industri',
         ]);
     }

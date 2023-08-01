@@ -1,5 +1,5 @@
 @extends('adminlte::auth.auth-page', ['auth_type' => 'register'])
-
+@php($roles = Spatie\Permission\Models\Role::all()->pluck('name'))
 @php( $login_url = View::getSection('login_url') ?? config('adminlte.login_url', 'login') )
 @php( $register_url = View::getSection('register_url') ?? config('adminlte.register_url', 'register') )
 
@@ -10,6 +10,8 @@
     @php( $login_url = $login_url ? url($login_url) : '' )
     @php( $register_url = $register_url ? url($register_url) : '' )
 @endif
+
+
 
 @section('auth_header', __('adminlte::adminlte.register_message'))
 
@@ -78,7 +80,15 @@
                 </span>
             @enderror
         </div>
-
+        <div class="form-group">
+            <select class="form-control" id="role" name="role">
+                <option selected>Pilih Role</option>
+                @foreach ($roles as $role)
+                    <option value="{{ $role }}">
+                        {{ $role }}</option>
+                @endforeach
+            </select>
+        </div>
         {{-- Password field --}}
         <div class="input-group mb-3">
             <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"

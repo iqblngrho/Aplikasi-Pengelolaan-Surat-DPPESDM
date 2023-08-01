@@ -9,7 +9,12 @@ class Bidang extends Model
 {
     use HasFactory;
     protected $table = 'bidang';
-    protected $fillable =[
+    protected $fillable = [
         'namabidang'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'bidang');
+    }
 }

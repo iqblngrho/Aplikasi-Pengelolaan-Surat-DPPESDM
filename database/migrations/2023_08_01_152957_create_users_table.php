@@ -20,8 +20,10 @@ return new class extends Migration
             // $table->string('email')->unique();
             $table->string('password');
             $table->string('jabatan');
-            $table->unsignedBigInteger('bidang')->nullable();
+            $table->unsignedBigInteger('id_bidang');
             $table->rememberToken();
+
+            $table->foreign('id_bidang')->references('id')->on('bidang');
             $table->timestamps();
         });
     }

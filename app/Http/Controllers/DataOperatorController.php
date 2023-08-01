@@ -23,7 +23,9 @@ class DataOperatorController extends Controller
             ['label' => 'Actions', 'no-export' => true, 'width' => 5, 'text-align' => 'center'],
         ];
 
-        $dataOperator = User::all();
+        $dataOperator = User::with(["bidang"])->get();
+
+        dd($dataOperator);
 
         return view('dataoperator.index', [
             "dataOperator" => $dataOperator,
@@ -115,7 +117,6 @@ class DataOperatorController extends Controller
         User::where('id', $id)->update($data);
 
         return redirect()->route('dataoperator.index')->with('success', 'Data Operator berhasil diubah');
-
     }
 
     public function updatePassword(Request $request, $id)

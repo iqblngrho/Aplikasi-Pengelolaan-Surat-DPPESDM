@@ -26,6 +26,11 @@ class User extends Authenticatable
         'jabatan',
     ];
 
+    public function bidang()
+    {
+        return $this->hasOne(Bidang::class, 'bidang');
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
