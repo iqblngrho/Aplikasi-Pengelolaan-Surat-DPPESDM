@@ -26,7 +26,6 @@ class SuratMasukController extends Controller
             // ['label' => 'Phone', 'width' => 40],
             ['label' => 'Actions', 'no-export' => true, 'width' => 5, 'text-align' => 'center'],
         ];
-
         $surat_masuk = SuratMasuk::all();
 
         return view('suratmasuk.index', [
@@ -64,7 +63,7 @@ class SuratMasukController extends Controller
 
         try {
             $file = $request->file('file');
-            $filename = 'surat-masuk-' . time() . '.' . $file->getClientOriginalExtension();
+            $filename = 'surat-masuk-'. $file->getClientOriginalName();
             $path = $file->storeAs('suratmasuk', $filename);
 
             $data['file'] = $path;

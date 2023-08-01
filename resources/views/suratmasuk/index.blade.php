@@ -5,6 +5,8 @@
 @section('content_header')
     <h1>Surat Masuk</h1>
 @stop
+ @section('plugins.Datatables', true)
+ @section('plugins.DatatablesPlugin', true)
 
 @section('content')
     <a class="btn btn-success mb-3" href="{{ route('suratmasuk.create') }}">Tambah</a>
@@ -16,7 +18,7 @@
     @endif
 
     {{-- Table Surat masuk Database --}}
-    <x-adminlte-datatable id="table5" :heads="$heads">
+    <x-adminlte-datatable id="table5" :heads="$heads" striped hoverable with-buttons>
         @foreach ($surat_masuk as $row)
             <tr>
                 <td>{!! $row->id !!}</td>
@@ -57,7 +59,42 @@
     {{-- Modal View Surat Masuk --}}
     <x-adminlte-modal id="detailmodal" title="Detail" theme="navy" icon="fa fa-lg fa-fw fa-info-circle" size='lg'
         disable-animations>
-        <!-- Modal content will be populated via JavaScript AJAX -->
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>No</th>
+                    <td id="id"></td>
+                </tr>
+                <tr>
+                    <th>Nomor Surat</th>
+                    <td id="nomor_surat"></td>
+                </tr>
+                <tr>
+                    <th>Tanggal Surat</th>
+                    <td id="tanggal_surat"></td>
+                </tr>
+                <tr>
+                    <th>Alamat Surat</th>
+                    <td id="alamat_surat"></td>
+                </tr>
+                <tr>
+                    <th>Tanggal Diterima</th>
+                    <td id="tanggal_masuk"></td>
+                </tr>
+                <tr>
+                    <th>Perihal</th>
+                    <td id="perihal"></td>
+                </tr>
+                <tr>
+                    <th>Status</th>
+                    <td id="status"></td>
+                </tr>
+                <tr>
+                    <th>File</th>
+                    <td id="file"></td>
+                </tr>
+            </tbody>
+        </table>
     </x-adminlte-modal>
     {{-- End Modal View Surat Masuk --}}
 @endsection
@@ -68,4 +105,30 @@
 
 @section('js')
     <script src="{{ asset('js/suratmasuk.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('.btn-detail').on('click', function(event) {
+
+                var id = $(this).data('id');
+
+                $.get(`suratmasuk/${id}`, function(data) {
+                    $('#id').html(data.data.id);
+                    $('#nomor_surat').html(data.data.nomor_surat);
+                    $('#tanggal_surat').html(data.data.tanggal_surat);
+                    $('#alamat_surat').html(data.data.alamat_surat);
+                    $('#tanggal_masuk').html(data.data.tanggal_diterima);
+                    $('#perihal').html(data.data.perihal);
+                    $('#status').html(data.data.status === 0 ? 'Belum Disposisi' :
+                        'Sudah Disposisi');
+                    $('#file').html(data.data.file);
+                })
+            });
+        })
+    </script>
 @stop
