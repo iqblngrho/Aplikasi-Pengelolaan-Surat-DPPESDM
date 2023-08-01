@@ -293,12 +293,12 @@ return [
     'menu' => [
         // Navbar items:
         [
-            'type'         => 'navbar-search',
-            'text'         => 'search',
+            'type' => 'navbar-search',
+            'text' => 'search',
             'topnav_right' => true,
         ],
         [
-            'type'         => 'fullscreen-widget',
+            'type' => 'fullscreen-widget',
             'topnav_right' => true,
         ],
 
@@ -317,36 +317,41 @@ return [
 
         ['header' => 'MENU'],
         [
-            'text'        => 'Dashboard',
-            'url'         => 'home',
-            'icon'        => 'fas fa-home',
-            'label'       => 4,
+            'text' => 'Dashboard',
+            'url' => 'home',
+            'icon' => 'fas fa-home',
+            'label' => 4,
             'label_color' => 'success',
         ],
         [
             'text' => 'Surat Masuk',
-            'url'  => 'suratmasuk',
+            'url' => 'surat-masuk',
             'icon' => 'fas fa-envelope',
         ],
         [
             'text' => 'Surat Keluar',
-            'url'  => 'suratkeluar',
+            'url' => 'suratkeluar',
             'icon' => 'fas fa-solid fa-paper-plane',
         ],
         [
             'text' => 'Disposisi',
-            'url'  => 'disposisi',
+            'url' => 'disposisi',
             'icon' => 'fas fa-solid fa-scroll',
         ],
         ['header' => 'ACCOUNT SETTING'],
         [
             'text' => 'profile',
-            'url'  => 'profil',
+            'url' => 'profil',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
             'text' => 'Data Operator',
-            'url'  => 'dataoperator',
+            'url' => 'dataoperator',
+            'icon' => 'fas fa-fw fa-lock',
+        ],
+        [
+            'text' => 'Bidang',
+            'url' => 'bidang',
             'icon' => 'fas fa-fw fa-lock',
         ],
         // [
@@ -441,7 +446,7 @@ return [
 
     'plugins' => [
         'Datatables' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',

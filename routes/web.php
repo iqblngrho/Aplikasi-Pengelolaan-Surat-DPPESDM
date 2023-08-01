@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BidangController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -26,8 +27,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::resource('suratmasuk', SuratMasukController::class);
+Route::get('home', [HomeController::class, 'index'])->name('home');
+
+Route::resource('surat-masuk', SuratMasukController::class);
 
 Route::get('dataoperator/{id}/password', [DataOperatorController::class, 'editPassword'])->name('dataoperator.password');
 Route::get('dataoperator/{id}/role', [DataOperatorController::class, 'editRole'])->name('dataoperator.role');
@@ -35,8 +37,8 @@ Route::patch('dataoperator/{id}/password', [DataOperatorController::class, 'upda
 Route::patch('dataoperator/{id}/role', [DataOperatorController::class, 'updateRole'])->name('dataoperator.updateRole');
 
 Route::resource('dataoperator', DataOperatorController::class);
-
+Route::resource('disposisi', DisposisiController::class);
+Route::resource('bidang', BidangController::class);
 
 // Route::get('/suratmasuk/tambah', [App\Http\Controllers\TambahSuratMasukController::class, 'index'])->name('tambah');
 Route::get('/suratkeluar', [App\Http\Controllers\SuratKeluarController::class, 'index'])->name('home');
-Route::get('/disposisi', [App\Http\Controllers\DisposisiController::class, 'index'])->name('home');

@@ -11,8 +11,19 @@
         <div class="card-header">
             <h3 class="card-title">Form Edit Surat Masuk</h3>
         </div>
+
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <div class="card-body">
-            <form action="{{ route('suratmasuk.update', $surat->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('surat-masuk.update', $surat->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
@@ -38,7 +49,7 @@
                 </div>
                 <div class="form-group">
                     <label>File</label>
-                    <input type="file" class="form-control" name="file" required value="{{ $surat->file }}">
+                    <input type="file" class="form-control" name="file" value="{{ $surat->file }}">
                 </div>
                 <div class="form-group">
                     <label>Status</label>
@@ -52,4 +63,3 @@
         </div>
     </div>
 @stop
-
