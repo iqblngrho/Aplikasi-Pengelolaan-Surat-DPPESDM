@@ -15,6 +15,6 @@ class Bidang extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'bidang');
+        return $this->hasMany(User::class);
     }
 }

@@ -1,11 +1,8 @@
 
-    <x-adminlte-modal id="tambahmodal" title="Tambah" theme="navy" icon="fa fa-lg fa-fw fa-info-circle" size='lg'
-    disable-animations>
+    <x-adminlte-modal id="tambahmodal" title="Tambah Surat Masuk" theme="navy"  icon="fas fa-solid fa-file-medical" size='lg'
+    v-centered  scrollable>
     <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">Form Tambah Surat Masuk</h3>
-        </div>
-        <div class="card-body">
+        <div class="card-body" >
             <form action="{{ route('suratmasuk.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">

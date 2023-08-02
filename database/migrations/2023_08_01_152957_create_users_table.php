@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('jabatan');
             $table->unsignedBigInteger('id_bidang');
             $table->rememberToken();
-
             $table->foreign('id_bidang')->references('id')->on('bidang');
             $table->timestamps();
         });

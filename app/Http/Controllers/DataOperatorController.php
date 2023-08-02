@@ -25,8 +25,6 @@ class DataOperatorController extends Controller
 
         $dataOperator = User::with(["bidang"])->get();
 
-        dd($dataOperator);
-
         return view('dataoperator.index', [
             "dataOperator" => $dataOperator,
             "heads" => $heads,
