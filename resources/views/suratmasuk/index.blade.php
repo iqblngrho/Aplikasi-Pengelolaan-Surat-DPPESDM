@@ -29,8 +29,9 @@
                 <td>{!! $row->tanggal_surat !!}</td>
                 <td>{!! $row->perihal !!}</td>
                 <td>{!! $row->tanggal_diterima !!}</td>
+                <td>{{ $row->tindakan == 0 ? 'Tidak Diteruskan' : 'Diteruskan' }}</td>
+                <td>{{ $row->catatan }}</td>
                 <td>{!! $row->status !!}</td>
-                <td>{!! $row->file !!}</td>
                 <form action="{{ route('suratmasuk.destroy', $row->id) }}" method="POST">
                     <td class="d-flex">
                         @csrf
@@ -45,15 +46,20 @@
                             title="Detail" data-toggle="modal" data-target="#detailmodal" data-id="{{ $row->id }}">
                             <i class="fa fa-lg fa-fw fa-info-circle"></i>
                         </button>
-                        <button type="button" data-toggle="modal" data-target="#editmodal{{$row->id}}"
+                        <button type="button" data-toggle="modal" data-target="#editmodal{{ $row->id }}"
+                            class="btn btn-xs btn-default text-primary mx-1 shadow btn-edit" title="Edit">
+                            <i class="fa fa-lg fa-fw fa-pen"></i>
+                        </button>
+                        <button type="button" data-toggle="modal" data-target="#editTindakan{{ $row->id }}"
                             class="btn btn-xs btn-default text-primary mx-1 shadow btn-edit" title="Edit">
                             <i class="fa fa-lg fa-fw fa-pen"></i>
                         </button>
                     </td>
                 </form>
             </tr>
-              @include('suratmasuk.edit')
-             @endforeach
+            @include('suratmasuk.edit')
+            @include('suratmasuk.edit_tindakan')
+        @endforeach
 
     </x-adminlte-datatable>
     {{-- end Table Surat Masuk Database --}}
@@ -113,7 +119,7 @@
     </x-adminlte-modal>
     {{-- End Modal View Surat Masuk --}}
 
-     @include('suratmasuk.create')
+    @include('suratmasuk.create')
 
 @stop
 

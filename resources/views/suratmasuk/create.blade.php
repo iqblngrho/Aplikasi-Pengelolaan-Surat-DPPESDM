@@ -1,19 +1,18 @@
-
-    <x-adminlte-modal id="tambahmodal" title="Tambah Surat Masuk" theme="navy"  icon="fas fa-solid fa-file-medical" size='lg'
-    v-centered  scrollable>
+<x-adminlte-modal id="tambahmodal" title="Tambah Surat Masuk" theme="navy" icon="fas fa-solid fa-file-medical" size='lg'
+    v-centered scrollable>
     <div class="card">
-        <div class="card-body" >
+        <div class="card-body">
             <form action="{{ route('suratmasuk.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label>Nomor Surat</label>
-                    <input id="nomorsurat" type="text" class="form-control" name="nomor_surat" placeholder="Nomor Surat" required
-                        value="{{ old('nomor_surat') }}">
+                    <input id="nomorsurat" type="text" class="form-control" name="nomor_surat" placeholder="Nomor Surat"
+                        required value="{{ old('nomor_surat') }}">
                 </div>
                 <div class="form-group">
                     <label>Asal Surat</label>
-                    <input id="alamatsurat" type="text" class="form-control" name="asal_surat" placeholder="Alamat Surat" required
-                        value="{{ old('asal_surat') }}">
+                    <input id="alamatsurat" type="text" class="form-control" name="asal_surat"
+                        placeholder="Alamat Surat" required value="{{ old('asal_surat') }}">
                 </div>
                 <div class="form-group">
                     <label>Tanggal Surat</label>
@@ -22,12 +21,13 @@
                 </div>
                 <div class="form-group">
                     <label>Perihal</label>
-                    <input id="perihal" type="text" class="form-control" name="perihal" placeholder="Perihal" required
-                        value="{{ old('perihal') }}">
+                    <input id="perihal" type="text" class="form-control" name="perihal" placeholder="Perihal"
+                        required value="{{ old('perihal') }}">
                 </div>
                 <div class="form-group">
                     <label>File</label>
-                    <input id="file" type="file" class="form-control" name="file" required value="{{ old('file') }}">
+                    <input id="file" type="file" class="form-control" name="file" required
+                        value="{{ old('file') }}">
                 </div>
                 <div class="form-group">
                     <label>Status</label>
@@ -58,14 +58,14 @@
                         <option value="biasa">Biasa</option>
                     </select>
                 </div>
-                <div class="form-group">
+                {{-- <div class="form-group">
                     <label>Tindakan</label>
                     <select id="tindakan" class="form-control" name="tindakan" value="{{ old('tindakan') }}">>
                         <option selected>Pilih Tindakan</option>
                         <option value="diteruskan">Diteruskan</option>
                         <option value="tidak-diteruskan">Tidak diteruskan</option>
                     </select>
-                </div>
+                </div> --}}
                 <button type="submit" class="btn btn-primary">Simpan</button>
             </form>
         </div>

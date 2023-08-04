@@ -21,8 +21,9 @@ class SuratMasukController extends Controller
             'Tanggal Surat',
             'Perihal',
             'Tanggal Diterima',
+            'Tindakan',
+            'Catatan',
             'Status',
-            'File',
             // ['label' => 'Phone', 'width' => 40],
             ['label' => 'Actions', 'no-export' => true, 'width' => 5, 'text-align' => 'center'],
         ];
@@ -53,7 +54,6 @@ class SuratMasukController extends Controller
             'status' => 'required',
             'sifat' => 'required',
             'lampiran' => 'required',
-            'tindakan' => 'required',
             'file' => 'required|mimes:pdf,jpeg,jpg,png',
         ]);
 
@@ -65,12 +65,37 @@ class SuratMasukController extends Controller
 
         try {
             $file = $request->file('file');
-            $filename = 'surat-masuk-'. $file->getClientOriginalName();
+            $filename = 'surat-masuk-' . $file->getClientOriginalName();
             $path = $file->storeAs('suratmasuk', $filename);
 
             $data['file'] = $path;
 
             SuratMasuk::create($data);
+
+            return redirect()->route('suratmasuk.index')->with('success', 'Surat Masuk berhasil ditambahkan.');
+        } catch (\Exception $e) {
+            // Handle any exceptions that may occur during file upload or data storage
+            return redirect()->back()->withInput()->with('error', 'Terjadi kesalahan saat menyimpan surat masuk.');
+        }
+    }
+
+    public function updateTindakan(Request $request, $id)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'tindakan' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        try {
+
+            SuratMasuk::where('id', $id)->update([
+                "tindakan" => $request->tindakan,
+                "catatan" => $request->catatan,
+            ]);
 
             return redirect()->route('suratmasuk.index')->with('success', 'Surat Masuk berhasil ditambahkan.');
         } catch (\Exception $e) {
@@ -103,7 +128,7 @@ class SuratMasukController extends Controller
     public function edit($id)
     {
         $surat = SuratMasuk::findOrFail($id);
-        return view('suratmasuk.edit',["surat"=>$surat]);
+        return view('suratmasuk.edit', ["surat" => $surat]);
     }
 
     /**

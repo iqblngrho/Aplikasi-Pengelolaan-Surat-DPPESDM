@@ -9,13 +9,14 @@ class SuratMasuk extends Model
 {
     use HasFactory;
     protected $table = 'surat_masuk';
-    protected $fillable =[
+    protected $fillable = [
         'asal_surat',
         'nomor_surat',
         'tanggal_surat',
         'perihal',
         'status',
         'sifat',
+        'catatan',
         'tindakan',
         'lampiran',
         'file',
