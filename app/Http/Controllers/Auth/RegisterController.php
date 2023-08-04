@@ -55,7 +55,7 @@ class RegisterController extends Controller
             'username' => ['required', 'string', 'unique:users'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
             'jabatan' => ['required', 'string', 'max:255'],
-            'bidang' => ['sometimes', 'string', 'max:255'],
+            'id_bidang' => ['sometimes', 'string', 'max:255'],
         ]);
     }
 
@@ -73,7 +73,7 @@ class RegisterController extends Controller
             'username' => $data['username'],
             'password' => Hash::make($data['password']),
             'jabatan' => $data['jabatan'],
-            'bidang' => $data['bidang'],
+            'id_bidang' => $data['bidang'],
         ]);
         $user->syncRoles($data['role']);
         return $user;

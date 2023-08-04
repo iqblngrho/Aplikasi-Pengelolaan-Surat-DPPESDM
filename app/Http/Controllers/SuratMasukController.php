@@ -27,9 +27,8 @@ class SuratMasukController extends Controller
             ['label' => 'Actions', 'no-export' => true, 'width' => 5, 'text-align' => 'center'],
         ];
         $surat_masuk = SuratMasuk::all();
-
         return view('suratmasuk.index', [
-            "surat_masuk" => $surat_masuk,
+            "surat" => $surat_masuk,
             "heads" => $heads,
         ]);
     }
@@ -47,11 +46,14 @@ class SuratMasukController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'alamat_surat' => 'required',
+            'asal_surat' => 'required',
             'nomor_surat' => 'required|unique:surat_masuk',
             'tanggal_surat' => 'required|date',
             'perihal' => 'required',
-            'status' => 'required|integer',
+            'status' => 'required',
+            'sifat' => 'required',
+            'lampiran' => 'required',
+            'tindakan' => 'required',
             'file' => 'required|mimes:pdf,jpeg,jpg,png',
         ]);
 
@@ -101,10 +103,7 @@ class SuratMasukController extends Controller
     public function edit($id)
     {
         $surat = SuratMasuk::findOrFail($id);
-
-        return view('suratmasuk.edit', [
-            "surat" => $surat,
-        ]);
+        return view('suratmasuk.edit',["surat"=>$surat]);
     }
 
     /**
@@ -122,9 +121,12 @@ class SuratMasukController extends Controller
                 Rule::unique('surat_masuk')->ignore($id),
             ],
             'tanggal_surat' => 'required|date',
-            'alamat_surat' => 'required',
+            'asal_surat' => 'required',
             'perihal' => 'required',
-            'status' => 'required|integer',
+            'status' => 'required',
+            'sifat' => 'required',
+            'lampiran' => 'required',
+            'tindakan' => 'required',
             'file' => 'nullable|mimes:jpg,jpeg,pdf'
         ]);
 

@@ -11,9 +11,9 @@
                         value="{{ old('nomor_surat') }}">
                 </div>
                 <div class="form-group">
-                    <label>Alamat Surat</label>
-                    <input id="alamatsurat" type="text" class="form-control" name="alamat_surat" placeholder="Alamat Surat" required
-                        value="{{ old('alamat_surat') }}">
+                    <label>Asal Surat</label>
+                    <input id="alamatsurat" type="text" class="form-control" name="asal_surat" placeholder="Alamat Surat" required
+                        value="{{ old('asal_surat') }}">
                 </div>
                 <div class="form-group">
                     <label>Tanggal Surat</label>
@@ -31,9 +31,39 @@
                 </div>
                 <div class="form-group">
                     <label>Status</label>
-                    <select id="status" class="form-control" id="status" name="status" value="{{ old('status') }}">>
-                        <option value="0">Belum Disposisi</option>
-                        <option value="1">Sudah Disposisi</option>
+                    <select id="status" class="form-control" name="status" value="{{ old('status') }}">>
+                        <option selected>Pilih Status</option>
+                        <option value="asli">Asli</option>
+                        <option value="tembusan">Tembusan</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Lampiran</label>
+                    <select id="lampiran" class="form-control" name="lampiran" value="{{ old('lampiran') }}">>
+                        <option selected>Pilih Lampiran</option>
+                        <option value="0">0 Lampiran</option>
+                        <option value="1">1 Lampiran</option>
+                        <option value="2">2 Lampiran</option>
+                        <option value="3">3 Lampiran</option>
+                        <option value="4">4 Lampiran</option>
+                        <option value="5">5 Lampiran</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Sifat</label>
+                    <select id="sifat" class="form-control" name="sifat" value="{{ old('sifat') }}">>
+                        <option selected>Sifat</option>
+                        <option value="segera">Segera</option>
+                        <option value="sangat-segera">Sangat segera</option>
+                        <option value="biasa">Biasa</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Tindakan</label>
+                    <select id="tindakan" class="form-control" name="tindakan" value="{{ old('tindakan') }}">>
+                        <option selected>Pilih Tindakan</option>
+                        <option value="diteruskan">Diteruskan</option>
+                        <option value="tidak-diteruskan">Tidak diteruskan</option>
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary">Simpan</button>

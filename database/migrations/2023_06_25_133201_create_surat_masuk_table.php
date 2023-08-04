@@ -20,7 +20,7 @@ return new class extends Migration
             $table->date('tanggal_surat');
             $table->string('perihal');
             $table->timestamp('tanggal_diterima')->useCurrent();
-            $table->integer('status')->nullable();
+            $table->string('status');
             $table->string('file');
             $table->string('lampiran');
             $table->string('sifat');
