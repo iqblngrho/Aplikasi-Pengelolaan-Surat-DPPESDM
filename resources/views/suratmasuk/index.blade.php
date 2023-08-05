@@ -50,8 +50,12 @@
                             class="btn btn-xs btn-default text-primary mx-1 shadow btn-edit" title="Edit">
                             <i class="fa fa-lg fa-fw fa-pen"></i>
                         </button>
+                        <a href="{{ Storage::url($row->file) }}" target="_blank"
+                            class="btn btn-xs btn-default text-primary mx-1 shadow" title="Lihat File">
+                            <i class="fa fa-lg fa-fw fa-file"></i>
+                        </a>
                         <button type="button" data-toggle="modal" data-target="#editTindakan{{ $row->id }}"
-                            class="btn btn-xs btn-default text-primary mx-1 shadow btn-edit" title="Edit">
+                            class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
                             <i class="fa fa-lg fa-fw fa-pen"></i>
                         </button>
                     </td>
@@ -122,13 +126,7 @@
     @include('suratmasuk.create')
 
 @stop
-
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-@stop
-
 @section('js')
-    <script src="{{ asset('js/suratmasuk.js') }}"></script>
     <script>
         $(document).ready(function() {
             $.ajaxSetup({
@@ -155,7 +153,7 @@
                     $('#file').html(data.data.file);
                 })
             });
+
         })
     </script>
-
 @stop

@@ -92,14 +92,10 @@
         </div>
     </div>
 
-    <x-adminlte-modal id="edit" title="Edit Surat Masuk" theme="navy" icon="fas fa-solid fa-file-medical"
+    <x-adminlte-modal id="edit" title="Tambah tindakan" theme="navy" icon="fas fa-solid fa-file-medical"
         size='lg' v-centered scrollable>
 
         <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Form Edit Surat Masuk</h3>
-            </div>
-
             <div class="card-body">
                 <div class="form-group" id="catatanContainer">
                     <label>Catatan</label>
@@ -108,8 +104,9 @@
                 <div class="form-group">
                     <label>Tindakan</label>
                     <select id="tindakan" class="form-control" name="tindakan">
-                        <option value="0" selected>Tidak diteruskan</option>
-                        <option value="1">Diteruskan</option>
+                        <option value="2" selected disabled>Pilih Tindakan</option>
+                        <option value="0" >Koreksi kembali</option>
+                        <option value="1">Tindak Lanjut ke Kepala DInas</option>
                     </select>
                 </div>
                 <button type="button" class="btn btn-primary btn-update">Simpan</button>
@@ -124,19 +121,19 @@
 
             let suratId
 
-            if ($("#tindakan").val() === "1") {
-                $('#catatanContainer').hide();
-            } else {
+            if ($("#tindakan").val() === "0") {
                 $('#catatanContainer').show();
+            } else {
+                $('#catatanContainer').hide();
             }
 
             $("#tindakan").change(function() {
                 var selectedOption = $(this).val();
 
-                if (selectedOption === "1") {
-                    $('#catatanContainer').hide();
-                } else {
+                if (selectedOption === "0") {
                     $('#catatanContainer').show();
+                } else {
+                    $('#catatanContainer').hide();
                 }
             });
 

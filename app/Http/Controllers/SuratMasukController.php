@@ -27,7 +27,7 @@ class SuratMasukController extends Controller
             // ['label' => 'Phone', 'width' => 40],
             ['label' => 'Actions', 'no-export' => true, 'width' => 5, 'text-align' => 'center'],
         ];
-        $surat_masuk = SuratMasuk::all();
+        $surat_masuk = SuratMasuk::where('tindakan', 0)->get();
         return view('suratmasuk.index', [
             "surat" => $surat_masuk,
             "heads" => $heads,
@@ -86,6 +86,7 @@ class SuratMasukController extends Controller
             'tindakan' => 'required',
         ]);
 
+
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
@@ -97,10 +98,10 @@ class SuratMasukController extends Controller
                 "catatan" => $request->catatan,
             ]);
 
-            return redirect()->route('suratmasuk.index')->with('success', 'Surat Masuk berhasil ditambahkan.');
+            return redirect()->route('suratmasuk.index')->with('success', 'Surat Berhasil Diteruskan');
         } catch (\Exception $e) {
             // Handle any exceptions that may occur during file upload or data storage
-            return redirect()->back()->withInput()->with('error', 'Terjadi kesalahan saat menyimpan surat masuk.');
+            return redirect()->back()->withInput()->with('error', 'Terjadi kesalahan saat menyimpan Tindakan.');
         }
     }
 
