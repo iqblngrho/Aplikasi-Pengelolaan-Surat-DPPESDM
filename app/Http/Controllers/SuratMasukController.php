@@ -66,7 +66,7 @@ class SuratMasukController extends Controller
         try {
             $file = $request->file('file');
             $filename = 'surat-masuk-' . $file->getClientOriginalName();
-            $path = $file->storeAs('suratmasuk', $filename);
+            $path = $file->storeAs('suratmasuk', $filename, 'public');
 
             $data['file'] = $path;
 
@@ -165,7 +165,7 @@ class SuratMasukController extends Controller
         if ($request->hasFile('file')) {
             $file = $request->file('file');
             $fileName = 'profile-' . time() . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('files', $fileName);
+            $path = $file->storeAs('files', $fileName, 'public');
             $data['file'] = $path;
         }
 
