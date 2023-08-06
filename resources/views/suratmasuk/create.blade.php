@@ -32,7 +32,7 @@
                 <div class="form-group">
                     <label>Status</label>
                     <select id="status" class="form-control" name="status" value="{{ old('status') }}">>
-                        <option selected>Pilih Status</option>
+                        <option selected disabled>Pilih Status</option>
                         <option value="asli">Asli</option>
                         <option value="tembusan">Tembusan</option>
                     </select>
@@ -40,7 +40,7 @@
                 <div class="form-group">
                     <label>Lampiran</label>
                     <select id="lampiran" class="form-control" name="lampiran" value="{{ old('lampiran') }}">>
-                        <option selected>Pilih Lampiran</option>
+                        <option selected disabled>Pilih Lampiran</option>
                         <option value="0">0 Lampiran</option>
                         <option value="1">1 Lampiran</option>
                         <option value="2">2 Lampiran</option>
@@ -52,7 +52,7 @@
                 <div class="form-group">
                     <label>Sifat</label>
                     <select id="sifat" class="form-control" name="sifat" value="{{ old('sifat') }}">>
-                        <option selected>Sifat</option>
+                        <option selected disabled>Sifat</option>
                         <option value="segera">Segera</option>
                         <option value="sangat-segera">Sangat segera</option>
                         <option value="biasa">Biasa</option>
