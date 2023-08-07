@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SuratMasuk;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -33,15 +34,21 @@ class HomeController extends Controller
             'Tanggal Diterima',
             'Tindakan',
             'Status',
-            // ['label' => 'Phone', 'width' => 40],
             ['label' => 'Actions', 'no-export' => true, 'width' => 5, 'text-align' => 'center'],
         ];
 
-        $suratMasuk = SuratMasuk::where('tindakan', 1)->get();
+        $suratMasuk = [];
+
+        if (Auth::user()->hasAnyRole(['admin', 'sekretaris'])) {
+            $suratMasuk = SuratMasuk::where('tindakan', 'teruskan')->get();
+        } elseif (Auth::user()->hasRole('Kepala Dinas')) {
+            $suratMasuk = SuratMasuk::where('tindakan', 'tindak-lanjut')->get();
+        }
 
         return view('home', [
             "heads" => $heads,
             "suratMasuk" => $suratMasuk
         ]);
+
     }
 }

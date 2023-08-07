@@ -30,9 +30,9 @@
                         value="{{ old('file') }}">
                 </div>
                 <div class="form-group">
-                    <label>Status</label>
-                    <select id="status" class="form-control" name="status" value="{{ old('status') }}">>
-                        <option selected>Pilih Status</option>
+                    <label>Jenis Surat</label>
+                    <select id="jenis" class="form-control" name="jenis" value="{{ old('jenis') }}">>
+                        <option selected>Pilih Jenis Surat</option>
                         <option value="asli">Asli</option>
                         <option value="tembusan">Tembusan</option>
                     </select>
