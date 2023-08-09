@@ -44,7 +44,6 @@ class HomeController extends Controller
         } elseif (Auth::user()->hasRole('Kepala Dinas')) {
             $suratMasuk = SuratMasuk::where('tindakan', 'tindak-lanjut')->get();
         }
-
         return view('home', [
             "heads" => $heads,
             "suratMasuk" => $suratMasuk

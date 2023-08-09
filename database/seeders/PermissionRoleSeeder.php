@@ -24,14 +24,16 @@ class PermissionRoleSeeder extends Seeder
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
         // create permissions
-        Permission::create(['name' => 'update disposisi']);
+        Permission::create(['name' => 'delete']);
+        
+
 
         //create roles and assign existing permissions
         $kepalaDinasRole = Role::create(['name' => 'Kepala Dinas']);
         // $kepalaDinasRole->givePermissionTo('view posts');
         // $kepalaDinasRole->givePermissionTo('create posts');
         // $kepalaDinasRole->givePermissionTo('edit posts');
-        //  $kepalaDinasRole->givePermissionTo('delete posts');
+         $kepalaDinasRole->givePermissionTo('delete');
         // $kepalaDinasRole->givePermissionTo('publish posts');
         // $kepalaDinasRole->givePermissionTo('unpublish posts');
 

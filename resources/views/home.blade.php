@@ -18,14 +18,14 @@
                     <h3>jumlah</h3>
                     <p>Surat Masuk</p>
                 </div>
-                <div class="icon">
-                    <i class="ion ion-bag"></i>
-                </div>
-                <a href="/suratmasuk" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <div class="icon">
+                <i class="ion ion-bag"></i>
             </div>
+            <a href="/suratmasuk" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
+    </div>
 
-        <div class="col-lg-3 col-6">
+    <div class="col-lg-3 col-6">
 
             <div class="small-box bg-success">
                 <div class="inner">
@@ -77,7 +77,7 @@
                         <td>{!! $row->tanggal_surat !!}</td>
                         <td>{!! $row->perihal !!}</td>
                         <td>{!! $row->tanggal_diterima !!}</td>
-                        <td>{{ $row->tindakan == 0 ? 'Tidak Diteruskan' : 'Diteruskan' }}</td>
+                        <td>{{ $row->tindakan }}</td>
                         <td>{!! $row->status !!}</td>
                         <td>
                             <button type="button" data-toggle="modal" data-target="#edit" data-id="{{ $row->id }}"
@@ -105,7 +105,7 @@
                     <label>Tindakan</label>
                     <select id="tindakan" class="form-control" name="tindakan">
                         <option value="" selected disabled>Pilih Tindakan</option>
-                        <option value="koreksi">Koreksi kembali</option>
+                        <option value="tidak-teruskan">Koreksi kembali</option>
                         <option value="tindak-lanjut">Tindak Lanjut ke Kepala DInas</option>
                     </select>
                 </div>
@@ -121,7 +121,7 @@
 
             let suratId
 
-            if ($("#tindakan").val() === "koreksi   ") {
+            if ($("#tindakan").val() === "tidak-teruskan   ") {
                 $('#catatanContainer').show();
             } else {
                 $('#catatanContainer').hide();
@@ -130,7 +130,7 @@
             $("#tindakan").change(function() {
                 var selectedOption = $(this).val();
 
-                if (selectedOption === "koreksi") {
+                if (selectedOption === "tidak-teruskan") {
                     $('#catatanContainer').show();
                 } else {
                     $('#catatanContainer').hide();

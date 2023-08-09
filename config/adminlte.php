@@ -323,12 +323,13 @@ return [
             'label'       => 4,
             'label_color' => 'success',
         ],
-
         [
             'text' => 'Surat Masuk',
             'url'  => 'suratmasuk',
             'icon' => 'fas fa-envelope',
+            'can' => 'view'
         ],
+
         [
             'text' => 'Surat Keluar',
             'url'  => 'suratkeluar',

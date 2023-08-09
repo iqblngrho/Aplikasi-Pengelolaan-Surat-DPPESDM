@@ -34,9 +34,9 @@
                     <input type="file" class="form-control" name="file" required value="{{ $row->file }}">
                 </div>
                 <div class="form-group">
-                    <label>Status</label>
-                    <select id="status" class="form-control" name="status" value="{{ $row->status }}">>
-                        <option selected>{{ $row->status }}</option>
+                    <label>Jenis Surat</label>
+                    <select id="jenis" class="form-control" name="jenis" value="{{ $row->jenis }}">>
+                        <option selected>{{ $row->jenis }}</option>
                         <option value="asli">Asli</option>
                         <option value="tembusan">Tembusan</option>
                     </select>
