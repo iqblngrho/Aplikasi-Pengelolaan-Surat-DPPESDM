@@ -21,8 +21,5 @@ class SuratMasuk extends Model
         'lampiran',
         'file',
     ];
-    protected $attributes = [
-        'tindakan' => 'tidak-teruskan',
-     ];
     protected $guarded = [];
 }
