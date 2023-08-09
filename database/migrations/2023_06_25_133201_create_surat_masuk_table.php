@@ -20,12 +20,11 @@ return new class extends Migration {
             $table->string('perihal');
             $table->timestamp('tanggal_diterima')->useCurrent();
             $table->string('status');
-            $table->string('jenis');
             $table->string('file');
             $table->string('lampiran');
             $table->string('sifat');
             $table->string('catatan')->nullable();
-            $table->string('tindakan')->nullable();
+            $table->string('tindakan')->default(0);
             $table->timestamps();
         });
     }

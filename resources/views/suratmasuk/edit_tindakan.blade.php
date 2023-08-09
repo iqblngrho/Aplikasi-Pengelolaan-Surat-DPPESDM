@@ -12,12 +12,12 @@
                     <label>Tindakan</label>
                     <select id="tindakan" class="form-control" name="tindakan">>
                         <option selected>Pilih Tindakan</option>
-                        <option value="teruskan">Diteruskan</option>
-                        <option value="tidak-teruskan">Tidak diteruskan</option>
+                        <option value="1">Diteruskan</option>
+                        <option value="0">Tidak diteruskan</option>
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary">Simpan</button>
-        </div>
+            </div>
         </form>
     </div>
 </x-adminlte-modal>

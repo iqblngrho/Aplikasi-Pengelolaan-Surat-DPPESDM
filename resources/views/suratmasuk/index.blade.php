@@ -30,7 +30,7 @@
                 <td>{!! $row->tanggal_surat !!}</td>
                 <td>{!! $row->perihal !!}</td>
                 <td>{!! $row->tanggal_diterima !!}</td>
-                <td>{{ $row->tindakan }}</td>
+                <td>{{ $row->tindakan == 0 ? 'Tidak Diteruskan' : 'Diteruskan' }}</td>
                 <td>{{ $row->catatan }}</td>
                 <td>{!! $row->jenis !!}</td>
                 <form action="{{ route('suratmasuk.destroy', $row->id) }}" method="POST">

@@ -27,7 +27,7 @@ class SuratMasukController extends Controller
             // ['label' => 'Phone', 'width' => 40],
             ['label' => 'Actions', 'no-export' => true, 'width' => 5, 'text-align' => 'center'],
         ];
-        $surat_masuk = SuratMasuk::where('tindakan', 'tidak-teruskan')->get();
+        $surat_masuk = SuratMasuk::where('tindakan', 0)->get();
         return view('suratmasuk.index', [
             "surat" => $surat_masuk,
             "heads" => $heads,
@@ -51,7 +51,7 @@ class SuratMasukController extends Controller
             'nomor_surat' => 'required|unique:surat_masuk',
             'tanggal_surat' => 'required|date',
             'perihal' => 'required',
-            'jenis' => 'required',
+            'status' => 'required',
             'sifat' => 'required',
             'lampiran' => 'required',
             'file' => 'required|mimes:pdf,jpeg,jpg,png',
@@ -91,17 +91,12 @@ class SuratMasukController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $data = $request->except(['_token', '_method']);
-
-        if ($request->tindakan == 'tindak-lanjut') {
-            $data['status'] = $request->tindakan;
-        } else {
-            $data['status'] = 'dalam-proses';
-        }
-
-
         try {
-            SuratMasuk::where('id', $id)->update($data);
+
+            SuratMasuk::where('id', $id)->update([
+                "tindakan" => $request->tindakan,
+                "catatan" => $request->catatan,
+            ]);
 
             return redirect()->route('suratmasuk.index')->with('success', 'Surat Berhasil Diteruskan');
         } catch (\Exception $e) {

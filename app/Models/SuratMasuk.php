@@ -15,7 +15,6 @@ class SuratMasuk extends Model
         'tanggal_surat',
         'perihal',
         'status',
-        'jenis',
         'sifat',
         'catatan',
         'tindakan',

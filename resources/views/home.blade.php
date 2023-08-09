@@ -104,9 +104,9 @@
                 <div class="form-group">
                     <label>Tindakan</label>
                     <select id="tindakan" class="form-control" name="tindakan">
-                        <option value="" selected disabled>Pilih Tindakan</option>
-                        <option value="koreksi">Koreksi kembali</option>
-                        <option value="tindak-lanjut">Tindak Lanjut ke Kepala DInas</option>
+                        <option value="2" selected disabled>Pilih Tindakan</option>
+                        <option value="0" >Koreksi kembali</option>
+                        <option value="1">Tindak Lanjut ke Kepala DInas</option>
                     </select>
                 </div>
                 <button type="button" class="btn btn-primary btn-update">Simpan</button>
@@ -121,7 +121,7 @@
 
             let suratId
 
-            if ($("#tindakan").val() === "koreksi   ") {
+            if ($("#tindakan").val() === "0") {
                 $('#catatanContainer').show();
             } else {
                 $('#catatanContainer').hide();
@@ -130,7 +130,7 @@
             $("#tindakan").change(function() {
                 var selectedOption = $(this).val();
 
-                if (selectedOption === "koreksi") {
+                if (selectedOption === "0") {
                     $('#catatanContainer').show();
                 } else {
                     $('#catatanContainer').hide();
