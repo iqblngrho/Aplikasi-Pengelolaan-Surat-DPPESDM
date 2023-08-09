@@ -10,9 +10,10 @@
 @section('plugins.DatatablesPlugin', true)
 
 @section('content')
-    <a class="btn btn-success mb-3 btn-tambah" href="{{ route('suratmasuk.create') }}" data-toggle="modal"
-        data-target="#tambahmodal">Tambah</a>
-
+    @role('admin')
+        <a class="btn btn-success mb-3 btn-tambah" href="{{ route('suratmasuk.create') }}" data-toggle="modal"
+            data-target="#tambahmodal">Tambah</a>
+    @endrole
     @if ($message = Session::get('success'))
         <div class="alert alert-success">
             <p>{{ $message }}</p>
@@ -31,7 +32,7 @@
                 <td>{!! $row->tanggal_diterima !!}</td>
                 <td>{{ $row->tindakan }}</td>
                 <td>{{ $row->catatan }}</td>
-                <td>{!! $row->status !!}</td>
+                <td>{!! $row->jenis !!}</td>
                 <form action="{{ route('suratmasuk.destroy', $row->id) }}" method="POST">
                     <td class="d-flex">
                         @csrf

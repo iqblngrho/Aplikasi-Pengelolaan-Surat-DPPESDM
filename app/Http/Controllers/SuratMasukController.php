@@ -23,7 +23,7 @@ class SuratMasukController extends Controller
             'Tanggal Diterima',
             'Tindakan',
             'Catatan',
-            'Status',
+            'Jenis',
             // ['label' => 'Phone', 'width' => 40],
             ['label' => 'Actions', 'no-export' => true, 'width' => 5, 'text-align' => 'center'],
         ];
@@ -105,7 +105,6 @@ class SuratMasukController extends Controller
 
             return redirect()->route('suratmasuk.index')->with('success', 'Surat Berhasil Diteruskan');
         } catch (\Exception $e) {
-            dd($e);
             // Handle any exceptions that may occur during file upload or data storage
             return redirect()->back()->withInput()->with('error', 'Terjadi kesalahan saat menyimpan Tindakan.');
         }
@@ -155,7 +154,7 @@ class SuratMasukController extends Controller
             'tanggal_surat' => 'required|date',
             'asal_surat' => 'required',
             'perihal' => 'required',
-            'status' => 'required',
+            'jenis' => 'required',
             'sifat' => 'required',
             'lampiran' => 'required',
             'tindakan' => 'required',
