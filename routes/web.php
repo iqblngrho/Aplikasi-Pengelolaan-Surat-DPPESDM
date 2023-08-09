@@ -10,6 +10,7 @@ use App\Http\Controllers\SuratMasukController;
 use App\Http\Controllers\SuratKeluarController;
 use App\Http\Controllers\DataOperatorController;
 use App\Http\Controllers\TambahSuratMasukController;
+use App\Models\Disposisi;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,8 +40,8 @@ Route::patch('dataoperator/{id}/role', [DataOperatorController::class, 'updateRo
 
 Route::resource('dataoperator', DataOperatorController::class);
 Route::resource('bidang', BidangController::class);
+Route::resource('disposisi', DisposisiController::class);
 
 
 // Route::get('/suratmasuk/tambah', [App\Http\Controllers\TambahSuratMasukController::class, 'index'])->name('tambah');
 Route::get('/suratkeluar', [App\Http\Controllers\SuratKeluarController::class, 'index'])->name('suratkeluar');
-Route::get('/disposisi', [App\Http\Controllers\DisposisiController::class, 'index'])->name('disposisi');

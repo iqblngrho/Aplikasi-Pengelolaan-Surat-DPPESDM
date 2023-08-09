@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Disposisi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class DisposisiController extends Controller
 {
@@ -13,7 +15,20 @@ class DisposisiController extends Controller
      */
     public function index()
     {
-        return view('disposisi');
+        $heads = [
+            'No',
+            'catatan',
+            'tindakan_dari',
+            'diteruskan_ke',
+            'status',
+            // ['label' => 'Phone', 'width' => 40],
+            ['label' => 'Actions', 'no-export' => true, 'width' => 5, 'text-align' => 'center'],
+        ];
+        $disposisi = Disposisi::all();
+        return view('disposisi.index', [
+            "disposisi" => $disposisi,
+            "heads" => $heads,
+        ]);
     }
 
     /**
@@ -34,7 +49,28 @@ class DisposisiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'catatan' => 'required',
+            'tindakan_dari' => 'required',
+            'diteruskan_ke' => 'required',
+            'status' => 'required',
+
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $data = $request->all();
+
+        try {
+            Disposisi::create($data);
+
+            return redirect()->route('disposisi.index')->with('success', 'Surat Masuk berhasil ditambahkan.');
+        } catch (\Exception $e) {
+            // Handle any exceptions that may occur during file upload or data storage
+            return redirect()->back()->withInput()->with('error', 'Terjadi kesalahan saat menyimpan surat masuk.');
+        }
     }
 
     /**
