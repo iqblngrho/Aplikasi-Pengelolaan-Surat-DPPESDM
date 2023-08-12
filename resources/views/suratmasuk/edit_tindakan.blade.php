@@ -4,6 +4,7 @@
     <div class="card">
 
         <div class="card-body">
+           
             <form action="{{ route('suratmasuk.updateTindakan', $row->id) }}" method="POST">
                 @csrf
                 @method('PUT')

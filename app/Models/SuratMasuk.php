@@ -25,5 +25,10 @@ class SuratMasuk extends Model
     protected $attributes = [
         'tindakan' => 'tidak-teruskan',
      ];
-    protected $guarded = [];
+     public function disposisi()
+    {
+        return $this->hasOne(Disposisi::class);
+    }
 }
+
+

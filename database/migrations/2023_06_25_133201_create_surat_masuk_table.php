@@ -25,7 +25,7 @@ return new class extends Migration {
             $table->string('lampiran');
             $table->string('sifat');
             $table->string('catatan')->nullable();
-            $table->string('tindakan')->nullable();
+            $table->string('tindakan')->default("tidak-teruskan");
             $table->timestamps();
         });
     }

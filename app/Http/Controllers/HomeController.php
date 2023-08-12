@@ -27,15 +27,14 @@ class HomeController extends Controller
     {
         $heads = [
             'No',
-            'Alamat surat',
-            'Nomor Surat',
-            'Tanggal Surat',
+            'Asal surat',
             'Perihal',
             'Tanggal Diterima',
-            'Tindakan',
             'Status',
-            ['label' => 'Actions', 'no-export' => true, 'width' => 5, 'text-align' => 'center'],
+            ['label' => 'Actions', 'no-export' => true, 'width' => 10, 'text-align' => 'center'],
         ];
+
+
 
         $suratMasuk = [];
 
@@ -49,5 +48,12 @@ class HomeController extends Controller
             "suratMasuk" => $suratMasuk
         ]);
 
+    }
+    public function show($id)
+    {
+        $surat = SuratMasuk::findOrFail($id);
+        return response()->json([
+            'data' => $surat
+        ]);
     }
 }

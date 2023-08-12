@@ -17,4 +17,8 @@ class Bidang extends Model
     {
         return $this->hasMany(User::class);
     }
+    public function disposisi()
+    {
+        return $this->hasMany(Disposisi::class);
+    }
 }

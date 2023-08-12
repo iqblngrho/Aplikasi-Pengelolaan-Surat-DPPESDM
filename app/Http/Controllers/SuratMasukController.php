@@ -103,7 +103,7 @@ class SuratMasukController extends Controller
         try {
             SuratMasuk::where('id', $id)->update($data);
 
-            return redirect()->route('suratmasuk.index')->with('success', 'Surat Berhasil Diteruskan');
+            return redirect()->route('home.index')->with('success', 'Surat Berhasil Diteruskan');
         } catch (\Exception $e) {
             // Handle any exceptions that may occur during file upload or data storage
             return redirect()->back()->withInput()->with('error', 'Terjadi kesalahan saat menyimpan Tindakan.');
