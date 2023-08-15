@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Disposisi;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -17,14 +18,22 @@ class DisposisiController extends Controller
     {
         $heads = [
             'No',
-            'catatan',
-            'tindakan_dari',
-            'diteruskan_ke',
-            'status',
+            'Nomor Surat',
+            'Perihal',
+            'Asal Surat',
+            'Catatan',
+            'Bidang',
             // ['label' => 'Phone', 'width' => 40],
             ['label' => 'Actions', 'no-export' => true, 'width' => 5, 'text-align' => 'center'],
         ];
-        $disposisi = Disposisi::all();
+
+        $disposisi = Disposisi::with(['surat_masuk', 'bidang'])
+            ->whereHas('bidang', function ($query)  {
+                $bidang = auth()->user()->id_bidang;
+                $query->where('id', $bidang);
+            })
+            ->get();
+
         return view('disposisi.index', [
             "disposisi" => $disposisi,
             "heads" => $heads,
@@ -44,17 +53,14 @@ class DisposisiController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'catatan' => 'required',
-            'tindakan_dari' => 'required',
-            'diteruskan_ke' => 'required',
-            'status' => 'required',
-
+            'id_bidang' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -63,10 +69,12 @@ class DisposisiController extends Controller
 
         $data = $request->all();
 
-        try {
-            Disposisi::create($data);
+        $data["id_user"] = auth()->user()->id;
 
-            return redirect()->route('disposisi.index')->with('success', 'Surat Masuk berhasil ditambahkan.');
+        try {
+            $d = Disposisi::create($data);
+
+            return response()->json($d);
         } catch (\Exception $e) {
             // Handle any exceptions that may occur during file upload or data storage
             return redirect()->back()->withInput()->with('error', 'Terjadi kesalahan saat menyimpan surat masuk.');
@@ -76,7 +84,7 @@ class DisposisiController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -87,7 +95,7 @@ class DisposisiController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -98,8 +106,8 @@ class DisposisiController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -110,7 +118,7 @@ class DisposisiController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

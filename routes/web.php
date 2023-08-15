@@ -29,11 +29,19 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::middleware(['role:admin'])->group(function () {
-    // Routes that only 'admin' role can access
-    Route::resource('suratmasuk', SuratMasukController::class);
+Route::middleware(['role:admin|sekretaris'])->group(function () {
     Route::put('suratmasuk/{id}/tindakan', [SuratMasukController::class, 'updateTindakan'])->name('suratmasuk.updateTindakan');
 });
+
+Route::middleware(['role:sekretaris|Kepala Dinas'])->group(function () {
+    Route::get('suratmasuk/{id}', [SuratMasukController::class, 'show'])->name('suratmasuk.show');
+});
+
+Route::middleware(['role:admin'])->group(function () {
+    Route::resource('suratmasuk', SuratMasukController::class);
+});
+
+Route::get('bidang/all', [BidangController::class, 'all']);
 
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
 
@@ -45,7 +53,6 @@ Route::patch('dataoperator/{id}/role', [DataOperatorController::class, 'updateRo
 Route::resource('dataoperator', DataOperatorController::class);
 Route::resource('bidang', BidangController::class);
 Route::resource('disposisi', DisposisiController::class);
-
 
 // Route::get('/suratmasuk/tambah', [App\Http\Controllers\TambahSuratMasukController::class, 'index'])->name('tambah');
 Route::get('/suratkeluar', [App\Http\Controllers\SuratKeluarController::class, 'index'])->name('suratkeluar');

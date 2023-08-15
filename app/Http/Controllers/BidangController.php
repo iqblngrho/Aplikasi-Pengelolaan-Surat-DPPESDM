@@ -8,11 +8,6 @@ use Illuminate\Support\Facades\Validator;
 
 class BidangController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $heads = [
@@ -127,5 +122,12 @@ class BidangController extends Controller
     public function destroy($id)
     {
         Bidang::where('id', $id)->delete();
+    }
+
+    public function all()
+    {
+        return response()->json([
+            'bidang' => Bidang::all(),
+        ]);
     }
 }
