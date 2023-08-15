@@ -25,33 +25,14 @@ class PermissionRoleSeeder extends Seeder
 
         // create permissions
         Permission::create(['name' => 'delete']);
-        
-
 
         //create roles and assign existing permissions
         $kepalaDinasRole = Role::create(['name' => 'Kepala Dinas']);
-        // $kepalaDinasRole->givePermissionTo('view posts');
-        // $kepalaDinasRole->givePermissionTo('create posts');
-        // $kepalaDinasRole->givePermissionTo('edit posts');
-         $kepalaDinasRole->givePermissionTo('delete');
-        // $kepalaDinasRole->givePermissionTo('publish posts');
-        // $kepalaDinasRole->givePermissionTo('unpublish posts');
+//         $kepalaDinasRole->givePermissionTo('delete');
 
         $kepalaBidangRole = Role::create(['name' => 'Kepala Bidang']);
-        // $kepalaBidangRole->givePermissionTo('view posts');
-        // $kepalaBidangRole->givePermissionTo('create posts');
-        // $kepalaBidangRole->givePermissionTo('edit posts');
-        //  $kepalaBidangRole->givePermissionTo('delete posts');
-        // $kepalaBidangRole->givePermissionTo('publish posts');
-        // $kepalaBidangRole->givePermissionTo('unpublish posts');
 
         $sekretarisRole = Role::create(['name' => 'sekretaris']);
-        // $sekretarisRole->givePermissionTo('view posts');
-        // $sekretarisRole->givePermissionTo('create posts');
-        // $sekretarisRole->givePermissionTo('edit posts');
-        //  $sekretarisRole->givePermissionTo('delete posts');
-        // $sekretarisRole->givePermissionTo('publish posts');
-        // $sekretarisRole->givePermissionTo('unpublish posts');
 
         $adminRole = Role::create(['name' => 'admin']);
         // gets all permissions via Gate::before rule

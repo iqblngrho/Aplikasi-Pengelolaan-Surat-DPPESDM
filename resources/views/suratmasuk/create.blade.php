@@ -59,9 +59,9 @@
                     </select>
                 </div>
                 {{-- <div class="form-group">
-                    <label>Tindakan</label>
+                    <label>TindakanSurat</label>
                     <select id="tindakan" class="form-control" name="tindakan" value="{{ old('tindakan') }}">>
-                        <option selected>Pilih Tindakan</option>
+                        <option selected>Pilih TindakanSurat</option>
                         <option value="diteruskan">Diteruskan</option>
                         <option value="tidak-diteruskan">Tidak diteruskan</option>
                     </select>

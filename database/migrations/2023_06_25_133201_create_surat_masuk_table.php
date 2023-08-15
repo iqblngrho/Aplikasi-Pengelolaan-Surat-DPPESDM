@@ -19,13 +19,12 @@ return new class extends Migration {
             $table->date('tanggal_surat');
             $table->string('perihal');
             $table->timestamp('tanggal_diterima')->useCurrent();
-            $table->string('status');
             $table->string('jenis');
             $table->string('file');
             $table->string('lampiran');
             $table->string('sifat');
             $table->string('catatan')->nullable();
-            $table->string('tindakan')->default("tidak-teruskan");
+            $table->smallInteger('tindakan')->default(0);
             $table->timestamps();
         });
     }

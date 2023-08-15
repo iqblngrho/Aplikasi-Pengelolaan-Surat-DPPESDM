@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\TindakanSurat;
 use App\Models\SuratMasuk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class HomeController extends Controller
+class DashboardController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -18,11 +19,6 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index()
     {
         $heads = [
@@ -30,25 +26,24 @@ class HomeController extends Controller
             'Asal surat',
             'Perihal',
             'Tanggal Diterima',
-            'Status',
+            'Tindakan',
             ['label' => 'Actions', 'no-export' => true, 'width' => 10, 'text-align' => 'center'],
         ];
-
-
 
         $suratMasuk = [];
 
         if (Auth::user()->hasAnyRole(['admin', 'sekretaris'])) {
-            $suratMasuk = SuratMasuk::where('tindakan', 'teruskan')->get();
+            $suratMasuk = SuratMasuk::where('tindakan', TindakanSurat::TERUSKAN)->get();
         } elseif (Auth::user()->hasRole('Kepala Dinas')) {
-            $suratMasuk = SuratMasuk::where('tindakan', 'tindak-lanjut')->get();
+            $suratMasuk = SuratMasuk::where('tindakan', TindakanSurat::TINDAK_LANJUT)->get();
         }
+
         return view('home', [
             "heads" => $heads,
             "suratMasuk" => $suratMasuk
         ]);
-
     }
+
     public function show($id)
     {
         $surat = SuratMasuk::findOrFail($id);

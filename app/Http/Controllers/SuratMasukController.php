@@ -7,11 +7,10 @@ use App\Models\SuratMasuk;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
-
+use TindakanSurat;
 
 class SuratMasukController extends Controller
 {
-
     public function index()
     {
         $heads = [
@@ -21,13 +20,14 @@ class SuratMasukController extends Controller
             'Tanggal Surat',
             'Perihal',
             'Tanggal Diterima',
-            'Tindakan',
             'Catatan',
             'Jenis Surat',
-            // ['label' => 'Phone', 'width' => 40],
+            'Tindakan',
             ['label' => 'Actions', 'no-export' => true, 'width' => 5, 'text-align' => 'center'],
         ];
+
         $surat_masuk = SuratMasuk::where('tindakan', 'tidak-teruskan')->get();
+
         return view('suratmasuk.index', [
             "surat" => $surat_masuk,
             "heads" => $heads,
@@ -86,19 +86,11 @@ class SuratMasukController extends Controller
             'tindakan' => 'required',
         ]);
 
-
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
         $data = $request->except(['_token', '_method']);
-
-        if ($request->tindakan == 'tindak-lanjut') {
-            $data['status'] = $request->tindakan;
-        } else {
-            $data['status'] = 'dalam-proses';
-        }
-
 
         try {
             SuratMasuk::where('id', $id)->update($data);
@@ -106,7 +98,7 @@ class SuratMasukController extends Controller
             return redirect()->route('home.index')->with('success', 'Surat Berhasil Diteruskan');
         } catch (\Exception $e) {
             // Handle any exceptions that may occur during file upload or data storage
-            return redirect()->back()->withInput()->with('error', 'Terjadi kesalahan saat menyimpan Tindakan.');
+            return redirect()->back()->withInput()->with('error', 'Terjadi kesalahan saat menyimpan TindakanSurat.');
         }
     }
 
@@ -114,7 +106,7 @@ class SuratMasukController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -128,7 +120,7 @@ class SuratMasukController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -140,8 +132,8 @@ class SuratMasukController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -184,7 +176,7 @@ class SuratMasukController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

@@ -318,7 +318,7 @@ return [
         ['header' => 'MENU'],
         [
             'text'        => 'Dashboard',
-            'url'         => 'home',
+            'url'         => 'dashboard',
             'icon'        => 'fas fa-home',
             'label'       => 4,
             'label_color' => 'success',

@@ -1,5 +1,16 @@
 import 'bootstrap';
 
+import 'overlayscrollbars';
+// import '../../vendor/almasaeed2010/adminlte/dist/js/adminlte';
+
+import Alpine from 'alpinejs'
+
+window.Alpine = Alpine
+
+Alpine.start()
+
+console.log('starting boostrap...')
+
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
@@ -7,9 +18,11 @@ import 'bootstrap';
  */
 
 import axios from 'axios';
+
 window.axios = axios;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
