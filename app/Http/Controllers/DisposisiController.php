@@ -27,12 +27,20 @@ class DisposisiController extends Controller
             ['label' => 'Actions', 'no-export' => true, 'width' => 5, 'text-align' => 'center'],
         ];
 
-        $disposisi = Disposisi::with(['surat_masuk', 'bidang'])
-            ->whereHas('bidang', function ($query)  {
-                $bidang = auth()->user()->id_bidang;
-                $query->where('id', $bidang);
-            })
-            ->get();
+        if (auth()->user()->hasRole('Kepala Dinas')) {
+            $disposisi = Disposisi::with(['surat_masuk', 'bidang'])->get();
+        } else {
+            $disposisi = Disposisi::with(['surat_masuk', 'bidang'])
+                ->whereHas('bidang', function ($query) {
+                    $bidang = auth()->user()->id_bidang;
+                    $query->where('id', $bidang);
+                })
+                ->get();
+        }
+
+
+
+
 
         return view('disposisi.index', [
             "disposisi" => $disposisi,

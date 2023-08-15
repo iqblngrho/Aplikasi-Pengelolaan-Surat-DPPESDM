@@ -29,7 +29,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::middleware(['role:admin|sekretaris'])->group(function () {
+Route::middleware(['role:admin|sekretaris|Kepala Dinas'])->group(function () {
     Route::put('suratmasuk/{id}/tindakan', [SuratMasukController::class, 'updateTindakan'])->name('suratmasuk.updateTindakan');
 });
 

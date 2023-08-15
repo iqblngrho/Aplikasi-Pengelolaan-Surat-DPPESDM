@@ -42,7 +42,7 @@ class BidangController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'namabidang' => 'required',
+            'bidang' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -98,7 +98,7 @@ class BidangController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'namabidang' => 'required',
+            'bidang' => 'required',
         ]);
 
 

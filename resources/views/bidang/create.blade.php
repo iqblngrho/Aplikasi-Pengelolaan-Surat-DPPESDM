@@ -27,8 +27,8 @@
                 @csrf
                 <div class="form-group">
                     <label>Nama Bidang</label>
-                    <input type="text" class="form-control" name="namabidang" placeholder="Nama Bidang" required
-                        value="{{ old('namabidang') }}">
+                    <input type="text" class="form-control" name="bidang" placeholder="Nama Bidang" required
+                        value="{{ old('bidang') }}">
                 </div>
                 <button type="submit" class="btn btn-primary">Simpan</button>
             </form>

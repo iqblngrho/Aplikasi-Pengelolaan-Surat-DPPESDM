@@ -79,23 +79,20 @@
                         <td>{!! $tindakanSurat->toBadge($row->tindakan) !!}</td>
                         <td>
                             @role('sekretaris')
-                            <button
-                                type="button"
-                                data-toggle="modal"
-                                data-target="#ajukanModal"
-                                data-id="{{ $row->id }}"
-                                class="btn btn-xs btn-default text-primary mx-1 shadow btn-ajukan font-weight-bold"
-                                title="Edit">
-                                <span>Ajukan</span>
-                                <i class="fa fa-lg fa-fw fa-pen"></i>
-                            </button>
+                                <button type="button" data-toggle="modal" data-target="#ajukanModal"
+                                    data-id="{{ $row->id }}"
+                                    class="btn btn-xs btn-default text-primary mx-1 shadow btn-ajukan font-weight-bold"
+                                    title="Edit">
+                                    <span>Ajukan</span>
+                                    <i class="fa fa-lg fa-fw fa-pen"></i>
+                                </button>
                             @endrole
                             @role('Kepala Dinas')
-                            <button type="button" data-toggle="modal" data-target="#bidangModal"
+                                <button type="button" data-toggle="modal" data-target="#bidangModal"
                                     data-id="{{ $row->id }}"
                                     class="btn btn-xs btn-default text-primary mx-1 shadow btn-bidang" title="Edit">
-                                <i class="fa fa-lg fa-fw fa-pen"></i>
-                            </button>
+                                    <i class="fa fa-lg fa-fw fa-pen"></i>
+                                </button>
                             @endrole
                         </td>
                     </tr>
@@ -110,7 +107,7 @@
 
 @section('js')
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
 
             let suratId
 
@@ -121,7 +118,7 @@
                 $('#catatanContainer').hide();
             }
 
-            $("#tindakan").change(function () {
+            $("#tindakan").change(function() {
                 var selectedOption = $(this).val();
 
                 if (selectedOption === "1") {
@@ -150,7 +147,7 @@
             //     });
             // });
 
-            $('.btn-submit').on('click', function (event) {
+            $('.btn-submit').on('click', function(event) {
                 if (suratId) {
                     $.ajax({
                         type: 'POST',
@@ -161,7 +158,7 @@
                             tindakan: $('#tindakan').val(),
                             catatan: $('#catatan').val(),
                         },
-                        success: function (response) {
+                        success: function(response) {
                             // TindakanSurat setelah berhasil memperbarui data
                             window.location.href = "{{ route('dashboard') }}";
                         },
@@ -169,7 +166,7 @@
                 }
             });
 
-            $('.btn-submit-bidang').on('click', function (event) {
+            $('.btn-submit-bidang').on('click', function(event) {
                 if (suratId) {
                     $.ajax({
                         type: 'POST',
@@ -180,21 +177,35 @@
                             id_bidang: $('#bidang').val(),
                             catatan: $('#catatanBidang').val(),
                         },
-                        success: function (response) {
-                            window.location.href = "{{ route('disposisi.index') }}";
+                        success: function(response) {
+                            if (suratId) {
+                                $.ajax({
+                                    type: 'POST',
+                                    url: `suratmasuk/${suratId}/tindakan`,
+                                    data: {
+                                        _method: 'PUT',
+                                        _token: '{{ csrf_token() }}',
+                                        tindakan: 4,
+                                    },
+                                    success: function(response) {
+                                        window.location.href =
+                                            "{{ route('disposisi.index') }}";
+                                    },
+                                });
+                            }
                         },
                     });
                 }
             });
 
-            $('.btn-ajukan').on('click', function () {
+            $('.btn-ajukan').on('click', function() {
                 suratId = $(this).data('id')
 
                 if (suratId) {
                     $.ajax({
                         type: 'GET',
                         url: `suratmasuk/${suratId}`,
-                        success: function (data) {
+                        success: function(data) {
                             $('.id').html(data.data.id);
                             $('.nomor_surat').html(data.data.nomor_surat);
                             $('.tanggal_surat').html(data.data.tanggal_surat);
@@ -207,14 +218,14 @@
                 }
             })
 
-            $('.btn-bidang').on('click', function () {
+            $('.btn-bidang').on('click', function() {
                 suratId = $(this).data('id')
 
                 if (suratId) {
                     $.ajax({
                         type: 'GET',
                         url: `suratmasuk/${suratId}`,
-                        success: function (data) {
+                        success: function(data) {
                             $('.id').html(data.data.id);
                             $('.nomor_surat').html(data.data.nomor_surat);
                             $('.tanggal_surat').html(data.data.tanggal_surat);
@@ -229,14 +240,14 @@
                 $.ajax({
                     type: 'GET',
                     url: `bidang/all`,
-                    success: function (data) {
+                    success: function(data) {
                         const bidang = data.bidang
                         const selectElement = $('.bidang');
 
                         selectElement.empty();
 
                         // Populate the select element with options
-                        bidang.forEach(function (item) {
+                        bidang.forEach(function(item) {
                             selectElement.append($('<option>', {
                                 value: item.id,
                                 text: item.bidang
@@ -248,12 +259,12 @@
         })
     </script>
     <script>
-        {{--document.getElementById("viewPdfButton").addEventListener("click", function () {--}}
-        {{--    var pdfUrl = "{{ Storage::url($row->file) }}";--}}
-        {{--    var pdfViewer = document.getElementById("pdfViewer");--}}
-        {{--    pdfViewer.src = "https://docs.google.com/gview?url=" + encodeURIComponent(pdfUrl) + "&embedded=true";--}}
+        {{-- document.getElementById("viewPdfButton").addEventListener("click", function () { --}}
+        {{--    var pdfUrl = "{{ Storage::url($row->file) }}"; --}}
+        {{--    var pdfViewer = document.getElementById("pdfViewer"); --}}
+        {{--    pdfViewer.src = "https://docs.google.com/gview?url=" + encodeURIComponent(pdfUrl) + "&embedded=true"; --}}
 
-        {{--    document.getElementById("pdfContainer").style.display = "block";--}}
-        {{--});--}}
+        {{--    document.getElementById("pdfContainer").style.display = "block"; --}}
+        {{-- }); --}}
     </script>
 @stop
