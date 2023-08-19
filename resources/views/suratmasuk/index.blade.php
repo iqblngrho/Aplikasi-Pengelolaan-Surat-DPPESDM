@@ -39,20 +39,20 @@
                             <i class="fa fa-lg fa-fw fa-trash"></i>
                         </button>
                         <button type="button" class="btn btn-xs btn-default text-success mx-1 shadow btn-detail"
-                            title="Detail" data-toggle="modal" data-target="#detailmodal" data-id="{{ $row->id }}">
+                                title="Detail" data-toggle="modal" data-target="#detailmodal" data-id="{{ $row->id }}">
                             <i class="fa fa-lg fa-fw fa-info-circle"></i>
                         </button>
                         <button type="button" data-toggle="modal" data-target="#editmodal" data-id="{{ $row->id }}"
-                            class="btn btn-xs btn-default text-primary mx-1 shadow btn-edit" title="Edit">
+                                class="btn btn-xs btn-default text-primary mx-1 shadow btn-edit" title="Edit">
                             <i class="fa fa-lg fa-fw fa-pen"></i>
                         </button>
                         <a href="{{ Storage::url($row->file) }}" target="_blank"
-                            class="btn btn-xs btn-default text-primary mx-1 shadow" title="Lihat File">
+                           class="btn btn-xs btn-default text-primary mx-1 shadow" title="Lihat File">
                             <i class="fa fa-lg fa-fw fa-file"></i>
                         </a>
                         <button type="button" data-toggle="modal" data-target="#editTindakan"
-                            data-id="{{ $row->id }}"
-                            class="btn btn-xs btn-default text-primary mx-1 shadow btn-edit-tindakan" title="Edit">
+                                data-id="{{ $row->id }}"
+                                class="btn btn-xs btn-default text-primary mx-1 shadow btn-edit-tindakan" title="Edit">
                             <i class="fa fa-lg fa-fw fa-pen"></i>
                         </button>
                     </td>
@@ -69,9 +69,40 @@
 @stop
 @section('js')
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
+
+            let suratId;
+
+            $('.btn-edit-tindakan').click(function (e) {
+                suratId = $(this).data('id');
+            });
+
+            $('.btn-detail').on('click', function (event) {
+                suratId = $(this).data('id');
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $.get(`suratmasuk/${id}`, function (data) {
+                    $('#id').text(data.data.id);
+                    $('#nomor_surat').text(data.data.nomor_surat);
+                    $('#tanggal_surat').text(data.data.tanggal_surat);
+                    $('#asal_surat').text(data.data.asal_surat);
+                    $('#tanggal_masuk').text(data.data.tanggal_diterima);
+                    $('#perihal').text(data.data.perihal);
+                    $('#sifat').text(data.data.sifat);
+                    $('#tindakan').text(data.data.tindakan);
+                    $('#catatan').text(data.data.catatan);
+                    $('#lampiran').text(data.data.lampiran);
+                    $('#file').text(data.data.file);
+                });
+            });
+
             //Handle Create Form Submit
-            $('#createSubmitBtn').on('click', function(e) {
+            $('#createSubmitBtn').on('click', function (e) {
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -87,10 +118,10 @@
                     data: formData,
                     processData: false,
                     contentType: false,
-                    success: function(response) {
+                    success: function (response) {
                         window.location.href = '{{ route('suratmasuk.index') }}';
                     },
-                    error: function(xhr, status, error) {
+                    error: function (xhr, status, error) {
                         if (xhr.status === 422) {
                             const errors = JSON.parse(xhr.responseText)
 
@@ -99,7 +130,7 @@
                             $('.is-invalid').removeClass('is-invalid');
 
                             // Iterate through each error and display next to the input
-                            $.each(errors, function(field, messages) {
+                            $.each(errors, function (field, messages) {
                                 const input = $('[name="' + field + '"]');
                                 const errorContainer = input.siblings(
                                     '.invalid-feedback');
@@ -113,16 +144,16 @@
                 });
             });
 
-            //Handle Edit Surat
-            $('.btn-edit').click(function(e) {
-                const suratId = $(this).data('id');
+            //Handle Edit SuratÏ
+            $('.btn-edit').click(function (e) {
+                suratId = $(this).data('id');
 
                 const url = '{{ route('suratmasuk.edit', ':suratId') }}'.replace(':suratId', suratId);
 
                 $.ajax({
                     url: url,
                     type: 'GET',
-                    success: function(response) {
+                    success: function (response) {
                         $('#editNomorSurat').val(response.surat.nomor_surat);
                         $('#editTanggalSurat').val(response.surat.tanggal_surat);
                         $('#editTanggalTerima').val(response.surat.tanggal_diterima);
@@ -132,13 +163,13 @@
                         $('#editJenis').val(response.surat.jenis);
                         $('#editSifat').val(response.surat.sifat);
                     },
-                    error: function(xhr, status, error) {
+                    error: function (xhr, status, error) {
                         alert('Error fetching data');
                     }
                 });
             })
 
-            $('#editSubmitBtn').on('click', function(e) {
+            $('#editSubmitBtn').on('click', function (e) {
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -157,10 +188,10 @@
                     data: formData,
                     processData: false,
                     contentType: false,
-                    success: function(response) {
+                    success: function (response) {
                         window.location.href = '{{ route('suratmasuk.index') }}';
                     },
-                    error: function(xhr, status, error) {
+                    error: function (xhr, status, error) {
                         if (xhr.status === 422) {
                             const errors = JSON.parse(xhr.responseText)
 
@@ -169,7 +200,7 @@
                             $('.is-invalid').removeClass('is-invalid');
 
                             // Iterate through each error and display next to the input
-                            $.each(errors, function(field, messages) {
+                            $.each(errors, function (field, messages) {
                                 const input = $('[name="' + field + '"]');
                                 const errorContainer = input.siblings(
                                     '.invalid-feedback');
@@ -184,14 +215,13 @@
             });
 
             //Handle Edit Tindakan
-            $('#editTindakanSubmitBtn').on('click', function(e) {
+            $('#editTindakanSubmitBtn').on('click', function (e) {
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 });
-                const suratId = $('.btn-edit-tindakan').data('id');
-                console.log(suratId);
+
                 const form = $('#editTindakanForm');
                 const formData = new FormData(form[0]);
 
@@ -204,10 +234,10 @@
                     data: formData,
                     processData: false, // Don't process the data (already in FormData)
                     contentType: false, // Don't set content type (handled by FormData)
-                    success: function(response) {
+                    success: function (response) {
                         window.location.href = '{{ route('suratmasuk.index') }}';
                     },
-                    error: function(xhr, status, error) {
+                    error: function (xhr, status, error) {
                         if (xhr.status === 422) {
                             const errors = JSON.parse(xhr.responseText)
 
@@ -216,7 +246,7 @@
                             $('.is-invalid').removeClass('is-invalid');
 
                             // Iterate through each error and display next to the input
-                            $.each(errors, function(field, messages) {
+                            $.each(errors, function (field, messages) {
                                 const input = $('[name="' + field + '"]');
                                 const errorContainer = input.siblings(
                                     '.invalid-feedback');
@@ -229,35 +259,6 @@
                     }
                 });
             });
-        })
-    </script>
-    <script>
-        $(document).ready(function() {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-
-            $('.btn-detail').on('click', function(event) {
-                var id = $(this).data('id');
-
-                $.get(`suratmasuk/${id}`, function(data) {
-                    $('#id').text(data.data.id);
-                    $('#nomor_surat').text(data.data.nomor_surat);
-                    $('#tanggal_surat').text(data.data.tanggal_surat);
-                    $('#asal_surat').text(data.data.asal_surat);
-                    $('#tanggal_masuk').text(data.data.tanggal_diterima);
-                    $('#perihal').text(data.data.perihal);
-                    $('#sifat').text(data.data.sifat);
-                    $('#tindakan').text(data.data.tindakan);
-                    $('#catatan').text(data.data.catatan);
-                    $('#lampiran').text(data.data.lampiran);
-                    $('#file').text(data.data.file);
-                });
-            });
-
-
         })
     </script>
 @stop

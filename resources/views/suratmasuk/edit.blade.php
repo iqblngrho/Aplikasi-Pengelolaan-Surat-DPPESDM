@@ -2,7 +2,7 @@
     v-centered scrollable>
     <div class="card">
         <div class="card-body">
-            <form id="editForm" action="{{ route('suratmasuk.update', $row->id) }}" method="POST"
+            <form id="editForm" method="POST"
                 enctype="multipart/form-data">
                 @csrf
                 @method('PUT')

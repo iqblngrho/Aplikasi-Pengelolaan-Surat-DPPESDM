@@ -79,20 +79,20 @@
                         <td>{!! $tindakanSurat->toBadge($row->tindakan) !!}</td>
                         <td>
                             @role('sekretaris')
-                                <button type="button" data-toggle="modal" data-target="#ajukanModal"
+                            <button type="button" data-toggle="modal" data-target="#ajukanModal"
                                     data-id="{{ $row->id }}"
                                     class="btn btn-xs btn-default text-primary mx-1 shadow btn-ajukan font-weight-bold"
                                     title="Edit">
-                                    <span>Ajukan</span>
-                                    <i class="fa fa-lg fa-fw fa-pen"></i>
-                                </button>
+                                <span>Ajukan</span>
+                                <i class="fa fa-lg fa-fw fa-pen"></i>
+                            </button>
                             @endrole
                             @role('Kepala Dinas')
-                                <button type="button" data-toggle="modal" data-target="#bidangModal"
+                            <button type="button" data-toggle="modal" data-target="#bidangModal"
                                     data-id="{{ $row->id }}"
                                     class="btn btn-xs btn-default text-primary mx-1 shadow btn-bidang" title="Edit">
-                                    <i class="fa fa-lg fa-fw fa-pen"></i>
-                                </button>
+                                <i class="fa fa-lg fa-fw fa-pen"></i>
+                            </button>
                             @endrole
                         </td>
                     </tr>
@@ -107,10 +107,9 @@
 
 @section('js')
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
 
-            let suratId
-
+            let suratId;
 
             if ($("#tindakan").val() === "1") {
                 $('#catatanContainer').show();
@@ -118,7 +117,7 @@
                 $('#catatanContainer').hide();
             }
 
-            $("#tindakan").change(function() {
+            $("#tindakan").change(function () {
                 var selectedOption = $(this).val();
 
                 if (selectedOption === "1") {
@@ -128,34 +127,35 @@
                 }
             });
 
-            $('#btn-ajukan-submit').on('click', function(e) {
+            $('#btn-ajukan-submit').on('click', function (e) {
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 });
-                const suratId = $('.btn-ajukan').data('id');
+
                 const form = $('#ajukanForm');
                 const formData = new FormData(form[0]);
                 const url = '{{ route('suratmasuk.updateTindakan', ':suratId') }}'.replace(':suratId',
                     suratId);
+
                 $.ajax({
                     url: url,
                     type: form.attr('method'),
                     data: formData,
                     processData: false,
                     contentType: false,
-                    success: function(response) {
+                    success: function (response) {
                         window.location.href = '{{ route('dashboard.index') }}';
                     },
-                    error: function(xhr, status, error) {
+                    error: function (xhr, status, error) {
                         if (xhr.status === 422) {
                             const errors = JSON.parse(xhr.responseText)
                             // Clear previous error messages
                             $('.invalid-feedback').empty();
                             $('.is-invalid').removeClass('is-invalid');
                             // Iterate through each error and display next to the input
-                            $.each(errors, function(field, messages) {
+                            $.each(errors, function (field, messages) {
                                 const input = $('[name="' + field + '"]');
                                 const errorContainer = input.siblings(
                                     '.invalid-feedback');
@@ -169,14 +169,14 @@
                 });
             });
 
-            $('.btn-ajukan').on('click', function() {
-                const suratId = $(this).data('id')
+            $('.btn-ajukan').on('click', function () {
+                suratId = $(this).data('id')
                 $('.pdfContainer').hide();
                 const url = '{{ route('suratmasuk.show', ':suratId') }}'.replace(':suratId', suratId);
                 $.ajax({
                     type: 'GET',
                     url: url,
-                    success: function(data) {
+                    success: function (data) {
                         $('.id').html(data.data.id);
                         $('.nomor_surat').html(data.data.nomor_surat);
                         $('.tanggal_surat').html(data.data.tanggal_surat);
@@ -191,7 +191,7 @@
                     },
                 });
             })
-            $('.pdfViewerBtn').click(function(e) {
+            $('.pdfViewerBtn').click(function (e) {
                 const url = $(this).data('url');
                 $('.pdfViewer').attr('src', url);
                 $('.pdfContainer').show();

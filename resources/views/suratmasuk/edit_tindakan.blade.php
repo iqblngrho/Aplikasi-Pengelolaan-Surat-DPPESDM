@@ -3,7 +3,7 @@
 
     <div class="card">
         <div class="card-body">
-            <form id="editTindakanForm" action="{{ route('suratmasuk.updateTindakan', $row->id) }}" method="POST">
+            <form id="editTindakanForm" method="POST">
                 @csrf
                 @method('PUT')
 
