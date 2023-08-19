@@ -31,7 +31,7 @@
 
                 <div class="form-group">
                     <label>Nama Bidang</label>
-                    <input type="text" class="form-control" name="namabidang" placeholder="Nama" required
+                    <input type="text" class="form-control" name="bidang" placeholder="Nama" required
                         value="{{ $bidang->namabidang }}">
                 </div>
                 <button type="submit" class="btn btn-primary">Simpan</button>

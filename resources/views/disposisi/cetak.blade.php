@@ -1,4 +1,4 @@
-<x-adminlte-modal id="ajukanModal" title="Ajukan" theme="navy" icon="fas fa-solid fa-file-medical" size='lg' v-centered
+<x-adminlte-modal id="cetakModal" title="Ajukan" theme="navy" icon="fas fa-solid fa-file-medical" size='lg' v-centered
     scrollable>
     <x-adminlte-card id="detailsurat" title="Detail Surat" theme="navy" icon="fas fa-lg fa-fan" collapsible>
         <table class="table table-sm">
@@ -55,20 +55,22 @@
     </div>
     <div class="card">
         <div class="card-body">
-            <div class="form-group" id="catatanContainer">
-                <label>Catatan</label>
-                <x-adminlte-textarea name="catatan" placeholder="Tambah catatan" id="catatan" />
-            </div>
+            <form id="cetakForm" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="form-group">
+                    <label>TindakanSurat</label>
+                    <select id="tindakan" class="form-control" name="tindakan">
+                        <option value="" selected disabled>Pilih TindakanSurat</option>
+                        <option value="{{ SELESAI }}">Diterima</option>
+                    </select>
+                </div>
+                <x-slot name="footerSlot">
+                    <button type="submit" class="btn btn-primary btn-submit update" id="terimaTindakanSubmitBtn">Simpan</button>
+                </x-slot>
 
-            <div class="form-group">
-                <label>TindakanSurat</label>
-                <select id="tindakan" class="form-control" name="tindakan">
-                    <option value="" selected disabled>Pilih TindakanSurat</option>
-                    <option value="{{ REVISI }}">Koreksi kembali</option>
-                    <option value="{{ TINDAK_LANJUT }}">Tindak Lanjut ke Kepala DInas</option>
-                </select>
-            </div>
-            <button type="submit" class="btn btn-primary btn-submit update">Simpan</button>
+            </form>
+
         </div>
     </div>
 </x-adminlte-modal>

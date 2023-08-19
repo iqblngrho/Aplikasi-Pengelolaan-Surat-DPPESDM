@@ -37,11 +37,6 @@ class DisposisiController extends Controller
                 })
                 ->get();
         }
-
-
-
-
-
         return view('disposisi.index', [
             "disposisi" => $disposisi,
             "heads" => $heads,

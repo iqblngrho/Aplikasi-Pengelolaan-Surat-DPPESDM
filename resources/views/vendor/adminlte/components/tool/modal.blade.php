@@ -10,9 +10,9 @@
                 @isset($icon)<i class="{{ $icon }} mr-2"></i>@endisset
                 @isset($title){{ $title }}@endisset
             </h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            {{-- <button type="button" class="close" style="color: white" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
-            </button>
+            </button> --}}
         </div>
 
         {{-- Modal body --}}

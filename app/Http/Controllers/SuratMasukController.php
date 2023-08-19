@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use TindakanSurat;
 use App\Models\SuratMasuk;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
-use TindakanSurat;
 
 class SuratMasukController extends Controller
 {
@@ -37,7 +38,7 @@ class SuratMasukController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -58,24 +59,24 @@ class SuratMasukController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
+            return response()->json($validator->messages(), Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
         $data = $request->all();
 
-        try {
-            $file = $request->file('file');
-            $filename = 'surat-masuk-' . $file->getClientOriginalName();
-            $path = $file->storeAs('suratmasuk', $filename, 'public');
+        $file = $request->file('file');
+        $filename = 'surat-masuk-' . $file->getClientOriginalName();
+        $path = $file->storeAs('suratmasuk', $filename, 'public');
 
-            $data['file'] = $path;
+        $data['file'] = $path;
+        try {
 
             SuratMasuk::create($data);
 
-            return redirect()->route('suratmasuk.index')->with('success', 'Surat Masuk berhasil ditambahkan.');
+            return response()->json(['message' => 'Surat Masuk Berhasil Ditambah'], 200);
         } catch (\Exception $e) {
             // Handle any exceptions that may occur during file upload or data storage
-            return redirect()->back()->withInput()->with('error', 'Terjadi kesalahan saat menyimpan surat masuk.');
+            return response()->json(['error' => 'Gagal Membuat Surat Masuk'], 500);
         }
     }
 
@@ -87,7 +88,7 @@ class SuratMasukController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
+            return response()->json($validator->messages(), Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
         $data = $request->except(['_token', '_method']);
@@ -95,20 +96,13 @@ class SuratMasukController extends Controller
         try {
             SuratMasuk::where('id', $id)->update($data);
 
-            return redirect()->route('home.index')->with('success', 'Surat Berhasil Diteruskan');
+            return response()->json(['message' => 'Berhasil Update'], 200);
         } catch (\Exception $e) {
             // Handle any exceptions that may occur during file upload or data storage
-            return redirect()->back()->withInput()->with('error', 'Terjadi kesalahan saat menyimpan TindakanSurat.');
+            return response()->json(['error' => 'Gagal Update'], 500);
         }
     }
 
-
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $surat = SuratMasuk::findOrFail($id);
@@ -117,25 +111,14 @@ class SuratMasukController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $surat = SuratMasuk::findOrFail($id);
-        return view('suratmasuk.edit', ["surat" => $surat]);
+        return response()->json([
+            'surat' => $surat,
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
@@ -146,18 +129,16 @@ class SuratMasukController extends Controller
             'tanggal_surat' => 'required|date',
             'asal_surat' => 'required',
             'perihal' => 'required',
-            'status' => 'required',
             'sifat' => 'required',
             'lampiran' => 'required',
-            'tindakan' => 'required',
             'file' => 'nullable|mimes:jpg,jpeg,pdf'
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
+            return response()->json($validator->messages(), Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
-        $data = $request->except(['_token', '_method']); // Exclude unnecessary fields from the update data
+        $data = $request->except(['_token', '_method']);
 
         if ($request->hasFile('file')) {
             $file = $request->file('file');
@@ -168,17 +149,16 @@ class SuratMasukController extends Controller
 
         $data['tanggal_surat'] = Carbon::createFromFormat('d-m-Y', Carbon::parse($request->tanggal_surat)->format('d-m-Y'));
 
-        SuratMasuk::where('id', $id)->update($data);
+        try {
+            SuratMasuk::where('id', $id)->update($data);
 
-        return redirect()->route('suratmasuk.index')->with('success', 'Surat Masuk berhasil diubah');
+            return response()->json(['message' => 'Surat Masuk Berhasil Diupdate'], 200);
+        } catch (\Exception $e) {
+            // Handle any exceptions that may occur during file upload or data storage
+            return response()->json(['error' => 'Surat Masuk Gagal Diupdate'], 500);
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         SuratMasuk::where('id', $id)->delete();

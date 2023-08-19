@@ -20,6 +20,7 @@
         "bootstrap-fileinput": "^5.5.2",
         "icheck-bootstrap": "^3.0.1",
         "moment": "^2.29.4",
-        "overlayscrollbars": "^2.2.1"
+        "overlayscrollbars": "^2.2.1",
+        "sweetalert2": "^11.7.23"
     }
 }

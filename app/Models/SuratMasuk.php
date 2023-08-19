@@ -22,9 +22,7 @@ class SuratMasuk extends Model
         'lampiran',
         'file',
     ];
-    protected $attributes = [
-        'tindakan' => 'tidak-teruskan',
-     ];
+    
      public function disposisi()
     {
         return $this->hasOne(Disposisi::class);

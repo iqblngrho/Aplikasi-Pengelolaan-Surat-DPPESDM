@@ -30,7 +30,10 @@ class PermissionRoleSeeder extends Seeder
         $kepalaDinasRole = Role::create(['name' => 'Kepala Dinas']);
 //         $kepalaDinasRole->givePermissionTo('delete');
 
-        $kepalaBidangRole = Role::create(['name' => 'Kepala Bidang']);
+        $kepalaBidangIndustriRole = Role::create(['name' => 'Kepala Bidang Industri']);
+        $kepalaBidangEksporRole = Role::create(['name' => 'Kepala Bidang Ekspor']);
+        $kepalaBidangImporRole = Role::create(['name' => 'Kepala Bidang Impor']);
+
 
         $sekretarisRole = Role::create(['name' => 'sekretaris']);
 
@@ -43,25 +46,43 @@ class PermissionRoleSeeder extends Seeder
             'username' => 'Kepala Dinas',
             'password' => Hash::make('12345678'),
             'id_bidang' => 1,
-            'jabatan' => 'contoh jabatan'
+            'jabatan' => 'Kepala Dinas'
         ]);
         $user->assignRole($kepalaDinasRole);
 
         $user = User::factory()->create([
-            'nama' => 'Kepala Bidang',
-            'username' => 'Kepala Bidang',
+            'nama' => 'Kepala Bidang Industri',
+            'username' => 'Kepala Bidang Industri',
             'password' => Hash::make('12345678'),
-            'id_bidang' => 1,
-            'jabatan' => 'contoh jabatan'
+            'id_bidang' => 3,
+            'jabatan' => 'Kabid'
         ]);
-        $user->assignRole($kepalaBidangRole);
+        $user->assignRole($kepalaBidangIndustriRole);
+
+        $user = User::factory()->create([
+            'nama' => 'Kepala Bidang Ekspor',
+            'username' => 'Kepala Bidang Ekspor',
+            'password' => Hash::make('12345678'),
+            'id_bidang' => 5,
+            'jabatan' => 'Kabid'
+        ]);
+        $user->assignRole($kepalaBidangEksporRole);
+
+        $user = User::factory()->create([
+            'nama' => 'Kepala Bidang Impor',
+            'username' => 'Kepala Bidang Impor',
+            'password' => Hash::make('12345678'),
+            'id_bidang' => 6,
+            'jabatan' => 'Kabid'
+        ]);
+        $user->assignRole($kepalaBidangImporRole);
 
         $user = User::factory()->create([
             'nama' => 'Sekretaris',
             'username' => 'sekretaris',
             'password' => Hash::make('12345678'),
-            'id_bidang' => 1,
-            'jabatan' => 'contoh jabatan'
+            'id_bidang' => 2,
+            'jabatan' => 'Sekretaris'
         ]);
         $user->assignRole($sekretarisRole);
 
@@ -69,8 +90,8 @@ class PermissionRoleSeeder extends Seeder
             'nama' => 'Admin',
             'username' => 'admin',
             'password' => Hash::make('12345678'),
-            'id_bidang' => 1,
-            'jabatan' => 'contoh jabatan'
+            'id_bidang' => 4,
+            'jabatan' => 'Tata Usaha'
         ]);
         $user->assignRole($adminRole);
     }

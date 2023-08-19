@@ -32,9 +32,16 @@ class DashboardController extends Controller
 
         $suratMasuk = [];
 
-        if (Auth::user()->hasAnyRole(['admin', 'sekretaris'])) {
+
+        if (Auth::user()->hasRole('admin')) {
+            $suratMasuk = SuratMasuk::where('tindakan', '<>', TindakanSurat::TIDAK_TERUSKAN)->get();
+        }
+
+        if (Auth::user()->hasRole('sekretaris')) {
             $suratMasuk = SuratMasuk::where('tindakan', TindakanSurat::TERUSKAN)->get();
-        } elseif (Auth::user()->hasRole('Kepala Dinas')) {
+        }
+
+        if (Auth::user()->hasRole('Kepala Dinas')) {
             $suratMasuk = SuratMasuk::where('tindakan', TindakanSurat::TINDAK_LANJUT)->get();
         }
 

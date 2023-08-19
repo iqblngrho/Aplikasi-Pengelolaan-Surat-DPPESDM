@@ -79,8 +79,7 @@
                         <td>{!! $tindakanSurat->toBadge($row->tindakan) !!}</td>
                         <td>
                             @role('sekretaris')
-                                <button type="button" data-toggle="modal" data-target="#ajukanModal"
-                                    data-id="{{ $row->id }}"
+                                <button type="button" data-toggle="modal" data-target="#ajukanModal" data-id="{{ $row->id }}"
                                     class="btn btn-xs btn-default text-primary mx-1 shadow btn-ajukan font-weight-bold"
                                     title="Edit">
                                     <span>Ajukan</span>

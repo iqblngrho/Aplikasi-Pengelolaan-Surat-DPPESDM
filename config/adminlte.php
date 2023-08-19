@@ -336,7 +336,7 @@ return [
             'icon' => 'fas fa-solid fa-paper-plane',
         ],
         [
-            'text' => 'Disposisi',
+            'text' => 'Data Disposisi',
             'url'  => 'disposisi',
             'icon' => 'fas fa-solid fa-scroll',
         ],

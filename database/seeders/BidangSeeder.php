@@ -15,9 +15,35 @@ class BidangSeeder extends Seeder
      */
     public function run()
     {
-        Bidang::create([
-            "id" => 1,
-            'bidang' => 'Industri',
-        ]);
+        $bidang = [
+            [
+                'id' => 1,
+                'bidang' => 'Kepala Dinas',
+            ],
+            [
+                'id' => 2,
+                'bidang' => 'Sekretaris',
+            ],
+            [
+                'id' => 3,
+                'bidang' => 'Industri',
+            ],
+            [
+                'id' => 4,
+                'bidang' => 'Tata Usaha',
+            ],
+            [
+                'id' => 5,
+                'bidang' => 'Ekspor',
+            ],
+            [
+                'id' => 6,
+                'bidang' => 'Impor',
+            ],
+        ];
+
+        foreach ($bidang as $data) {
+            Bidang::create($data);
+        }
     }
 }

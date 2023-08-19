@@ -23,7 +23,7 @@ return new class extends Migration {
             $table->string('file');
             $table->string('lampiran');
             $table->string('sifat');
-            $table->string('catatan')->nullable();
+            $table->string('catatan');
             $table->smallInteger('tindakan')->default(0);
             $table->timestamps();
         });
