@@ -26,19 +26,31 @@ class BidangSeeder extends Seeder
             ],
             [
                 'id' => 3,
-                'bidang' => 'Industri',
-            ],
-            [
-                'id' => 4,
                 'bidang' => 'Tata Usaha',
             ],
             [
+                'id' => 4,
+                'bidang' => 'Industri',
+            ],
+            [
                 'id' => 5,
-                'bidang' => 'Ekspor',
+                'bidang' => 'Daglu',
             ],
             [
                 'id' => 6,
-                'bidang' => 'Impor',
+                'bidang' => 'Dagri',
+            ],
+            [
+                'id' => 7,
+                'bidang' => 'Listrik/Energi',
+            ],
+            [
+                'id' => 8,
+                'bidang' => 'Pengujian/Sertifikasi',
+            ],
+            [
+                'id' => 9,
+                'bidang' => 'SDM',
             ],
         ];
 
