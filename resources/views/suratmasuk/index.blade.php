@@ -77,16 +77,9 @@
                 suratId = $(this).data('id');
             });
 
-            $('.btn-detail').on('click', function (event) {
-                suratId = $(this).data('id');
-
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-
-                $.get(`suratmasuk/${id}`, function (data) {
+            $('.btn-detail').on('click', function(event) {
+                var id = $(this).data('id');
+                $.get(`suratmasuk/${id}`, function(data) {
                     $('#id').text(data.data.id);
                     $('#nomor_surat').text(data.data.nomor_surat);
                     $('#tanggal_surat').text(data.data.tanggal_surat);
