@@ -191,7 +191,93 @@
                     },
                 });
             })
-            $('.pdfViewerBtn').click(function (e) {
+            
+            $('.btn-submit-bidang').on('click', function (event) {
+                const suratId = $('.btn-bidang').data('id');
+                const form = $('#tindakanBidangForm');
+                const formData = new FormData(form[0]);
+                formData.append('id_surat', suratId);
+                $.ajax({
+                    url: '{{ route('disposisi.store') }}',
+                    type: form.attr('method'),
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        if (suratId) {
+                            $.ajax({
+                                type: 'POST',
+                                url: `suratmasuk/${suratId}/tindakan`,
+                                data: {
+                                    _method: 'PUT',
+                                    _token: '{{ csrf_token() }}',
+                                    tindakan: 4,
+                                },
+                                success: function (response) {
+                                    window.location.href =
+                                        "{{ route('disposisi.index') }}";
+                                },
+                            });
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        if (xhr.status === 422) {
+                            const errors = JSON.parse(xhr.responseText)
+                            // Clear previous error messages
+                            $('.invalid-feedback').empty();
+                            $('.is-invalid').removeClass('is-invalid');
+                            // Iterate through each error and display next to the input
+                            $.each(errors, function (field, messages) {
+                                const input = $('[name="' + field + '"]');
+                                const errorContainer = input.siblings('.invalid-feedback');
+                                errorContainer.text(messages[0]);
+                                input.addClass('is-invalid');
+                            });
+                        } else {
+                            console.log(error)
+                            alert('Terjadi kesalahan pada server!');
+                        }
+                    }
+                });
+            });
+            $('.btn-bidang').on('click', function () {
+                const suratId = $(this).data('id')
+                $('.pdfContainer').hide();
+                const url = '{{ route('suratmasuk.show', ':suratId') }}'.replace(':suratId', suratId);
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    success: function (data) {
+                        $('.id').html(data.data.id);
+                        $('.nomor_surat').html(data.data.nomor_surat);
+                        $('.tanggal_surat').html(data.data.tanggal_surat);
+                        $('.asal_surat').html(data.data.asal_surat);
+                        $('.tanggal_masuk').html(data.data.tanggal_diterima);
+                        $('.perihal').html(data.data.perihal);
+                        $('.jenis').html(data.data.jenis);
+                        $('.downloadFile').attr('href', '{{ Storage::url(':file') }}'.replace(':file', data.data.file))
+                        $('.pdfViewerBtn').attr('data-url', '{{ Storage::url(':file') }}'.replace(':file', data.data.file))
+                    },
+                });
+                $.ajax({
+                    type: 'GET',
+                    url: `bidang/all`,
+                    success: function (data) {
+                        const bidang = data.bidang
+                        const selectElement = $('.bidang');
+                        selectElement.empty();
+                        // Populate the select element with options
+                        bidang.forEach(function (item) {
+                            selectElement.append($('<option>', {
+                                value: item.id,
+                                text: item.bidang
+                            }));
+                        });
+                    },
+                });
+            });
+            
+            $('.pdfViewerBtn').click(function(e) {
                 const url = $(this).data('url');
                 $('.pdfViewer').attr('src', url);
                 $('.pdfContainer').show();
