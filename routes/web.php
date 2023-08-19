@@ -11,6 +11,7 @@ use App\Http\Controllers\SuratKeluarController;
 use App\Http\Controllers\DataOperatorController;
 use App\Http\Controllers\TambahSuratMasukController;
 use App\Models\Disposisi;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +51,7 @@ Route::get('dataoperator/{id}/role', [DataOperatorController::class, 'editRole']
 Route::patch('dataoperator/{id}/password', [DataOperatorController::class, 'updatePassword'])->name('dataoperator.updatePassword');
 Route::patch('dataoperator/{id}/role', [DataOperatorController::class, 'updateRole'])->name('dataoperator.updateRole');
 
+Route::resource('dashboard', DashboardController::class);
 Route::resource('dataoperator', DataOperatorController::class);
 Route::resource('bidang', BidangController::class);
 Route::resource('disposisi', DisposisiController::class);

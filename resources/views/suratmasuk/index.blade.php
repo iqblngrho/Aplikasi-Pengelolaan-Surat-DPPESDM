@@ -191,8 +191,9 @@
                     }
                 });
                 const suratId = $('.btn-edit-tindakan').data('id');
+                console.log(suratId);
                 const form = $('#editTindakanForm');
-                const formData = new FormData(form[0]) ;
+                const formData = new FormData(form[0]);
 
                 const url = '{{ route('suratmasuk.updateTindakan', ':suratId') }}'.replace(':suratId',
                     suratId);
