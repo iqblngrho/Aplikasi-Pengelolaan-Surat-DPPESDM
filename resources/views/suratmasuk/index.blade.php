@@ -50,8 +50,9 @@
                             class="btn btn-xs btn-default text-primary mx-1 shadow" title="Lihat File">
                             <i class="fa fa-lg fa-fw fa-file"></i>
                         </a>
-                        <button type="button" data-toggle="modal" data-target="#editTindakan{{ $row->id }}"
-                            class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
+                        <button type="button" data-toggle="modal" data-target="#editTindakan"
+                            data-id="{{ $row->id }}"
+                            class="btn btn-xs btn-default text-primary mx-1 shadow btn-edit-tindakan" title="Edit">
                             <i class="fa fa-lg fa-fw fa-pen"></i>
                         </button>
                     </td>
@@ -189,10 +190,9 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 });
-
                 const suratId = $('.btn-edit-tindakan').data('id');
                 const form = $('#editTindakanForm');
-                const formData = new FormData(form[0]);
+                const formData = new FormData(form[0]) ;
 
                 const url = '{{ route('suratmasuk.updateTindakan', ':suratId') }}'.replace(':suratId',
                     suratId);
