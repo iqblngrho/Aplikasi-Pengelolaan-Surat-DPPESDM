@@ -30,7 +30,7 @@
                 <td>Jenis</td>
                 <td class="jenis"></td>
             </tr>
-            {{-- <tr>
+            <tr>
                 <td>File</td>
                 <td class="d-flex">
                     <a type="application/pdf" href="{{ Storage::url($row->file) }}" target="_blank"
@@ -41,7 +41,7 @@
                         title="Lihat File">Lihat PDF
                     </button>
                 </td>
-            </tr> --}}
+            </tr>
         </table>
     </x-adminlte-card>
 
@@ -66,7 +66,7 @@
                     </select>
                 </div>
                 <x-slot name="footerSlot">
-                    <button type="submit" class="btn btn-primary btn-submit update" id="terimaTindakanSubmitBtn">Simpan</button>
+                    <button type="button" class="btn btn-success update" id="terimaTindakanSubmitBtn">Simpan</button>
                 </x-slot>
 
             </form>

@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Disposisi;
 use App\Models\User;
+use App\Models\Disposisi;
+use App\Models\SuratMasuk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class DisposisiController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -22,6 +24,7 @@ class DisposisiController extends Controller
             'Perihal',
             'Asal Surat',
             'Catatan',
+            'Tindakan',
             'Bidang',
             // ['label' => 'Phone', 'width' => 40],
             ['label' => 'Actions', 'no-export' => true, 'width' => 5, 'text-align' => 'center'],
@@ -92,7 +95,10 @@ class DisposisiController extends Controller
      */
     public function show($id)
     {
-        //
+        $surat = SuratMasuk::findOrFail($id);
+        return response()->json([
+            'data' => $surat
+        ]);
     }
 
     /**

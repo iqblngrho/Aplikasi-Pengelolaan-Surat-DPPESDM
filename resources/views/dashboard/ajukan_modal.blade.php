@@ -71,7 +71,7 @@
                     <select id="tindakan" class="form-control" name="tindakan">
                         <option value="" selected disabled>Pilih TindakanSurat</option>
                         <option value="{{ REVISI }}">Koreksi kembali</option>
-                        <option value="{{ TINDAK_LANJUT }}">Tindak Lanjut ke Kepala DInas</option>
+                        <option value="{{ TINDAK_LANJUT }}">Tindak Lanjut ke Kepala Dinas</option>
                     </select>
                 </div>
                 <x-slot name="footerSlot">
