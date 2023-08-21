@@ -17,7 +17,7 @@
                 </div>
                 <x-slot name="footerSlot">
                     <x-adminlte-button theme="danger" label="Tutup" data-dismiss="modal" />
-                    <button type="button" class="btn btn-primary" id="editTindakanSubmitBtn">Simpan</button>
+                    <button type="button" class="btn btn-success" id="editTindakanSubmitBtn">Simpan</button>
                 </x-slot>
             </form>
         </div>
