@@ -15,13 +15,15 @@ return new class extends Migration
     {
         Schema::create('surat_keluar', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('id_bidang');
             $table->string('alamat_tujuan');
             $table->string('nomor_surat')->unique();
             $table->date('tanggal_surat');
+            $table->string('sifat');
             $table->string('perihal');
-            $table->string('bidang');
-            $table->integer('status');
-            $table->string('file');
+            $table->string('catatan');
+            $table->smallInteger('status')->default(0);
+            $table->foreign('id_bidang')->references('id')->on('bidang');
             $table->timestamps();
         });
     }

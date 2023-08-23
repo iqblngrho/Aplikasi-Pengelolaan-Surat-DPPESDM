@@ -5,28 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SuratMasuk extends Model
+class SuratKeluar extends Model
 {
     use HasFactory;
-    protected $table = 'surat_masuk';
+    use HasFactory;
+    protected $table = 'surat_keluar';
     protected $fillable = [
-        'asal_surat',
+        'alamat_tujuan',
         'nomor_surat',
         'tanggal_surat',
+        'sifat',
         'perihal',
         'status',
-        'jenis',
-        'sifat',
         'catatan',
-        'tindakan',
-        'lampiran',
-        'file',
+        'id_bidang',
     ];
-
-     public function disposisi()
+    public function bidang()
     {
-        return $this->hasOne(Disposisi::class);
+        return $this->belongsTo(Bidang::class, 'id_bidang');
     }
 }
-
-
