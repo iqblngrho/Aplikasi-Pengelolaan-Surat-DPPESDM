@@ -33,11 +33,11 @@
             <tr>
                 <td>File</td>
                 <td class="d-flex">
-                    <a type="application/pdf" href="{{ Storage::url($row->file) }}" target="_blank"
-                        class="btn btn-xs btn-default text-primary mx-1 shadow" title="Lihat File">Download
+                    <a target="_blank" class="btn btn-xs btn-default text-primary mx-1 shadow downloadFile"
+                        title="Lihat File">Download
                         <i class="fa fa-lg fa-fw fa-file"></i>
                     </a>
-                    <button id="viewPdfButton" class="btn btn-xs btn-default text-primary mx-1 shadow"
+                    <button class="btn btn-xs btn-default text-primary mx-1 shadow pdfViewerBtn"
                         title="Lihat File">Lihat PDF
                     </button>
                 </td>
@@ -47,8 +47,8 @@
 
     <div class="card">
         <div class="card-body">
-            <div id="pdfContainer" style="display: none;">
-                <iframe id="pdfViewer" style="width: 100%; height: 500px;"></iframe>
+            <div class="pdfContainer">
+                <iframe class="pdfViewer" style="width: 100%; height: 500px;"></iframe>
             </div>
 
         </div>

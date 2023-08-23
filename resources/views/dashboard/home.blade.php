@@ -3,7 +3,9 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    @if (Auth::check())
+        <h1>Dashboard {{ Auth::user()->nama }}</h1>
+    @endif
 @stop
 
 @section('plugins.Datatables', true)
@@ -44,7 +46,7 @@
 
             <div class="small-box bg-warning">
                 <div class="inner">
-                    <h3>jumlah</h3>
+                    <h3>{{ $jumlahDisposisi }}</h3>
                     <p>Disposisi Surat</p>
                 </div>
                 <div class="icon">
@@ -280,6 +282,7 @@
 
             $('.pdfViewerBtn').click(function(e) {
                 const url = $(this).data('url');
+                console.log(url);
                 $('.pdfViewer').attr('src', url);
                 $('.pdfContainer').show();
             })

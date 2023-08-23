@@ -1,6 +1,9 @@
-@extends('adminlte::page')
+@can('view')
 
-@section('title', 'Surat Masuk')
+
+    @extends('adminlte::page')
+
+    @section('title', 'Surat Masuk')
 
 @section('content_header')
     <h1>Surat Masuk</h1>
@@ -31,28 +34,46 @@
                 <td>{{ $row->catatan }}</td>
                 <td>{{ $row->jenis }}</td>
                 <td>{!! $tindakanSurat->toBadge($row->tindakan) !!}</td>
-                <td class="d-flex">
-                    <button type="button" data-toggle="modal" data-target="#deleteSuratMasukModal"
-                        data-id="{{ $row->id }}" class="btn btn-xs btn-default text-danger mx-1 shadow btn-delete"
-                        title="Delete">
-                        <i class="fa fa-lg fa-fw fa-trash"></i>
-                    </button>
-                    <button type="button" class="btn btn-xs btn-default text-success mx-1 shadow btn-detail" title="Detail"
-                        data-toggle="modal" data-target="#detailmodal" data-id="{{ $row->id }}">
-                        <i class="fa fa-lg fa-fw fa-info-circle"></i>
-                    </button>
-                    <button type="button" data-toggle="modal" data-target="#editmodal" data-id="{{ $row->id }}"
-                        class="btn btn-xs btn-default text-primary mx-1 shadow btn-edit" title="Edit Surat">
-                        <i class="fa fa-lg fa-fw fa-pen"></i>
-                    </button>
-                    <a href="{{ Storage::url($row->file) }}" target="_blank"
-                        class="btn btn-xs btn-default text-primary mx-1 shadow" title="Lihat File">
-                        <i class="fa fa-lg fa-fw fa-file"></i>
-                    </a>
-                    <button type="button" data-toggle="modal" data-target="#editTindakan" data-id="{{ $row->id }}"
-                        class="btn btn-xs btn-default text-warning mx-1 shadow btn-edit-tindakan" title="Ajukan">
-                        <i class="fa fa-lg fa-fw fa-solid fa-share"></i>
-                    </button>
+                <td class="d-flex" style="justify-content: center">
+                    @if ($row->tindakan == SELESAI)
+                        <button type="button" class="btn btn-xs btn-default text-success mx-1 shadow btn-detail"
+                            title="Detail" data-toggle="modal" data-target="#detailmodal" data-id="{{ $row->id }}">
+                            <i class="fa fa-lg fa-fw fa-info-circle"></i>
+                        </button>
+                        <a href="{{ Storage::url($row->file) }}" target="_blank"
+                            class="btn btn-xs btn-default text-primary  mx-1 shadow" title="Lihat File">
+                            <i class="fa fa-lg fa-fw fa-print"></i>
+                        </a>
+                        <button type="button" data-toggle="modal" data-target="#deleteSuratMasukModal"
+                            data-id="{{ $row->id }}" class="btn btn-xs btn-default text-danger mx-1 shadow btn-delete"
+                            title="Delete">
+                            <i class="fa fa-lg fa-fw fa-trash"></i>
+                        </button>
+                    @else
+                        <button type="button" data-toggle="modal" data-target="#deleteSuratMasukModal"
+                            data-id="{{ $row->id }}" class="btn btn-xs btn-default text-danger mx-1 shadow btn-delete"
+                            title="Delete">
+                            <i class="fa fa-lg fa-fw fa-trash"></i>
+                        </button>
+                        <button type="button" class="btn btn-xs btn-default text-success mx-1 shadow btn-detail"
+                            title="Detail" data-toggle="modal" data-target="#detailmodal" data-id="{{ $row->id }}">
+                            <i class="fa fa-lg fa-fw fa-info-circle"></i>
+                        </button>
+                        <button type="button" data-toggle="modal" data-target="#editmodal" data-id="{{ $row->id }}"
+                            class="btn btn-xs btn-default text-primary mx-1 shadow btn-edit" title="Edit Surat">
+                            <i class="fa fa-lg fa-fw fa-pen"></i>
+                        </button>
+                        <a href="{{ Storage::url($row->file) }}" target="_blank"
+                            class="btn btn-xs btn-default text-primary mx-1 shadow" title="Lihat File">
+                            <i class="fa fa-lg fa-fw fa-file"></i>
+                        </a>
+                        <button type="button" data-toggle="modal" data-target="#editTindakan"
+                            data-id="{{ $row->id }}"
+                            class="btn btn-xs btn-default text-warning mx-1 shadow btn-edit-tindakan" title="Ajukan">
+                            <i class="fa fa-lg fa-fw fa-solid fa-share"></i>
+                        </button>
+                    @endif
+
                 </td>
             </tr>
         @endforeach
@@ -105,8 +126,33 @@
                 suratId = $(this).data('id');
             });
 
+            const tindakanToString = (status) => {
+                switch (status) {
+                    case {{ ARSIP }}:
+                        return "Arsip";
+                    case {{ REVISI }}:
+                        return "Revisi";
+                    case {{ SELESAI }}:
+                        return "Arsip";
+                }
+            }
+
+            const tindakanToBadge = (status) => {
+                switch (status) {
+                    case {{ ARSIP }}:
+                        return "success";
+                    case {{ REVISI }}:
+                        return "warning";
+                    case {{ SELESAI }}:
+                        return "success";
+                }
+            }
+
+
             $('.btn-detail').on('click', function(event) {
                 var id = $(this).data('id');
+
+
                 $.get(`suratmasuk/${id}`, function(data) {
                     $('#id').text(data.data.id);
                     $('#nomor_surat').text(data.data.nomor_surat);
@@ -115,9 +161,10 @@
                     $('#tanggal_masuk').text(data.data.tanggal_diterima);
                     $('#perihal').text(data.data.perihal);
                     $('#sifat').text(data.data.sifat);
-                    $('#tindakan').text(data.data.tindakan);
+                    $('.tindakan').addClass(`badge-${tindakanToBadge(data.data.tindakan)}`)
+                    $('#tindakan').text(tindakanToString(data.data.tindakan));
                     $('#catatan').text(data.data.catatan);
-                    $('#lampiran').text(data.data.lampiran);
+                    $('#lampiran').text(`${data.data.lampiran} Lampiran`);
                     $('#file').text(data.data.file);
                 });
             });
@@ -283,3 +330,4 @@
         })
     </script>
 @stop
+@endcan

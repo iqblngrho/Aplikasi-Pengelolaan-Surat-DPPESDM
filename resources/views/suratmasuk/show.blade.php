@@ -37,7 +37,9 @@
             </tr>
             <tr>
                 <th>Tindakan</th>
-                <td id="tindakan"></td>
+                <td >
+                    <span id="tindakan" class="tindakan badge"></span>
+                </td>
             </tr>
             <tr>
                 <th>Catatan</th>

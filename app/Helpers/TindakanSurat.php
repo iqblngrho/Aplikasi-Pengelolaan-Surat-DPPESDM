@@ -4,7 +4,7 @@ namespace App\Helpers;
 
 class TindakanSurat
 {
-    const TIDAK_TERUSKAN = 0;
+    const ARSIP = 0;
     const REVISI = 1;
     const TERUSKAN = 2;
     const TINDAK_LANJUT = 3;
@@ -22,8 +22,8 @@ class TindakanSurat
     public function toString($status)
     {
         switch ($status) {
-            case self::TIDAK_TERUSKAN:
-                return "Tidak Diteruskan";
+            case self::ARSIP:
+                return "Arsip";
             case self::REVISI:
                 return "Revisi";
             case self::TERUSKAN:
@@ -33,15 +33,15 @@ class TindakanSurat
             case self::DISPOSISI:
                 return "Disposisi";
             case self::SELESAI:
-                return "Selesai";
+                return "Arsip";
         }
     }
 
     public function getBadgeColor($status)
     {
         switch ($status) {
-            case self::TIDAK_TERUSKAN:
-                return "danger";
+            case self::ARSIP:
+                return "success";
             case self::REVISI:
                 return "warning";
             case self::TERUSKAN:
@@ -49,8 +49,8 @@ class TindakanSurat
             case self::DISPOSISI:
             case self::TINDAK_LANJUT:
                 return "primary";
-            case self::SELESAI:
-                return "success";
+                case self::SELESAI:
+                    return "success";
             default:
                 return "secondary";
         }

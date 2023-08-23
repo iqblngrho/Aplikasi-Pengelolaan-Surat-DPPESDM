@@ -14,7 +14,7 @@ class TindakanSuratServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        define('TIDAK_TERUSKAN', TindakanSurat::TIDAK_TERUSKAN);
+        define('ARSIP', TindakanSurat::ARSIP);
         define('REVISI', TindakanSurat::REVISI);
         define('TERUSKAN', TindakanSurat::TERUSKAN);
         define('TINDAK_LANJUT', TindakanSurat::TINDAK_LANJUT);

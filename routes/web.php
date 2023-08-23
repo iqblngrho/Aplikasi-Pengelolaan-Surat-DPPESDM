@@ -34,7 +34,7 @@ Route::middleware(['role:admin|sekretaris|Kepala Dinas|Kepala Bidang Industri'])
     Route::put('suratmasuk/{id}/tindakan', [SuratMasukController::class, 'updateTindakan'])->name('suratmasuk.updateTindakan');
 });
 
-Route::middleware(['role:admin|sekretaris|Kepala Dinas'])->group(function () {
+Route::middleware(['role:admin|sekretaris|Kepala Dinas|Kepala Bidang Industri'])->group(function () {
     Route::get('suratmasuk/{id}', [SuratMasukController::class, 'show'])->name('suratmasuk.show');
 });
 

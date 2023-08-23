@@ -16,13 +16,22 @@
                     <td>{!! $row->surat_masuk->perihal !!}</td>
                     <td>{!! $row->surat_masuk->asal_surat !!}</td>
                     <td>{!! $row->catatan !!}</td>
-                    <td>{!! $tindakanSurat->toBadge($row->surat_masuk->tindakan)  !!}</td>
+                    <td>{!! $tindakanSurat->toBadge($row->surat_masuk->tindakan) !!}</td>
                     <td>{!! $row->bidang->bidang !!}</td>
                     <td class="d-flex">
-                        <button type="button" data-toggle="modal" data-target="#cetakModal" data-id="{{ $row->surat_masuk->id }}"
-                            class="btn btn-xs btn-default text-primary mx-1 shadow btn-terima-tindakan" title="Edit">
-                            <i class="fa fa-lg fa-fw fa-pen"></i>
-                        </button>
+                        @if ($row->surat_masuk->tindakan == SELESAI)
+                            <button type="button" data-toggle="modal" data-target="#cetakModal"
+                                data-id="{{ $row->surat_masuk->id }}"
+                                class="btn btn-xs btn-default text-primary mx-1 shadow btn-terima-tindakan" title="Edit">
+                                <i class="fa fa-lg fa-fw fa-file"></i>
+                            </button>
+                        @else
+                            <button type="button" data-toggle="modal" data-target="#cetakModal"
+                                data-id="{{ $row->surat_masuk->id }}"
+                                class="btn btn-xs btn-default text-primary mx-1 shadow btn-terima-tindakan" title="Edit">
+                                <i class="fa fa-lg fa-fw fa-pen"></i>
+                            </button>
+                        @endif
                     </td>
                 </tr>
             @endforeach
@@ -101,6 +110,11 @@
                         }
                     });
                 });
+                $('.pdfViewerBtn').click(function(e) {
+                    const url = $(this).data('url');
+                    $('.pdfViewer').attr('src', url);
+                    $('.pdfContainer').show();
+                })
             })
         </script>
- @stop
+    @stop

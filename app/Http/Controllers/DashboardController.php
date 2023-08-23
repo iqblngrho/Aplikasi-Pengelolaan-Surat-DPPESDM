@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\TindakanSurat;
+use App\Models\Disposisi;
 use App\Models\SuratMasuk;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -34,7 +36,7 @@ class DashboardController extends Controller
 
 
         if (Auth::user()->hasRole('admin')) {
-            $suratMasuk = SuratMasuk::where('tindakan', '<>', TindakanSurat::TIDAK_TERUSKAN)->get();
+            $suratMasuk = SuratMasuk::where('tindakan', '<>', TindakanSurat::ARSIP)->get();
         }
 
         if (Auth::user()->hasRole('sekretaris')) {
@@ -45,17 +47,22 @@ class DashboardController extends Controller
             $suratMasuk = SuratMasuk::where('tindakan', TindakanSurat::TINDAK_LANJUT)->get();
         }
 
+        $jumlahDisposisi = Disposisi::all();
+
         return view('dashboard.home', [
             "heads" => $heads,
-            "suratMasuk" => $suratMasuk
+            "suratMasuk" => $suratMasuk,
+            "jumlahDisposisi" => count($jumlahDisposisi)
         ]);
     }
 
     public function show($id)
     {
+        $user = User::findOrFail($id);
         $surat = SuratMasuk::findOrFail($id);
         return response()->json([
-            'data' => $surat
+            'data' => $surat,
+            'user' => $user
         ]);
     }
 }

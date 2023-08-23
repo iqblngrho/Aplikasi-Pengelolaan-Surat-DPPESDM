@@ -31,11 +31,23 @@ class PermissionRoleSeeder extends Seeder
 //         $kepalaDinasRole->givePermissionTo('delete');
 
         $kepalaBidangIndustriRole = Role::create(['name' => 'Kepala Bidang Industri']);
+        // $kepalaBidangIndustriRole->givePermissionTo('view');
+
         $kepalaBidangDagluRole = Role::create(['name' => 'Kepala Bidang Daglu']);
+        // $kepalaBidangDagluRole->givePermissionTo('view');
+
         $kepalaBidangDagriRole = Role::create(['name' => 'Kepala Bidang Dagri']);
+        // $kepalaBidangIndustriRole->givePermissionTo('view');
+
         $kepalaBidangListrikEnergiRole = Role::create(['name' => 'Kepala Bidang Listrik/Energi']);
+        // $kepalaBidangListrikEnergiRole->givePermissionTo('view');
+
         $kepalaBidangPengujianSertifikasiRole = Role::create(['name' => 'Kepala Bidang Pengujian/Sertifikasi']);
+        // $kepalaBidangPengujianSertifikasiRole->givePermissionTo('view');
+
         $kepalaBidangSDMRole = Role::create(['name' => 'Kepala Bidang SDM']);
+        // $kepalaBidangSDMRole->givePermissionTo('view');
+
 
 
         $sekretarisRole = Role::create(['name' => 'sekretaris']);

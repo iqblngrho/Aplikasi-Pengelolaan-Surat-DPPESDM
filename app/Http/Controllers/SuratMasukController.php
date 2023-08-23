@@ -27,7 +27,7 @@ class SuratMasukController extends Controller
             ['label' => 'Actions', 'no-export' => true, 'width' => 5, 'text-align' => 'center'],
         ];
 
-        $surat_masuk = SuratMasuk::whereIn('tindakan', [0, 1])->get();
+        $surat_masuk = SuratMasuk::whereIn('tindakan', [0, 1, 5])->get();
 
         return view('suratmasuk.index', [
             "surat" => $surat_masuk,

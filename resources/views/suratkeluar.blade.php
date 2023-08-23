@@ -1,4 +1,3 @@
-@can('view posts', Post::class)
 @extends('adminlte::page')
 
 @section('title', 'Surat Keluar')
@@ -18,4 +17,3 @@
 @section('js')
     <script> console.log('Hi!'); </script>
 @stop
-@endcan
