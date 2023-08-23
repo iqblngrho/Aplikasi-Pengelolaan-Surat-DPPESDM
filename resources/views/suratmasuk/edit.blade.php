@@ -36,8 +36,8 @@
                         <div class="form-group">
                             <label for="editJenis">Jenis Surat</label>
                             <select id="editJenis" class="form-control" name="jenis">
-                                <option value="asli">Asli</option>
-                                <option value="tembusan">Tembusan</option>
+                                <option value="Asli">Asli</option>
+                                <option value="Tembusan">Tembusan</option>
                             </select>
                         </div>
                     </div>
@@ -58,9 +58,9 @@
                         <div class="form-group">
                             <label>Sifat</label>
                             <select id="editSifat" class="form-control" name="sifat">
-                                <option value="segera">Segera</option>
-                                <option value="sangat-segera">Sangat segera</option>
-                                <option value="biasa">Biasa</option>
+                                <option value="Segera">Segera</option>
+                                <option value="Sangat Segera">Sangat segera</option>
+                                <option value="Biasa">Biasa</option>
                             </select>
                         </div>
                     </div>

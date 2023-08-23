@@ -11,6 +11,7 @@ use App\Http\Controllers\SuratKeluarController;
 use App\Http\Controllers\DataOperatorController;
 use App\Http\Controllers\TambahSuratMasukController;
 use App\Models\Disposisi;
+use App\Models\SuratKeluar;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
@@ -55,6 +56,7 @@ Route::resource('dashboard', DashboardController::class);
 Route::resource('dataoperator', DataOperatorController::class);
 Route::resource('bidang', BidangController::class);
 Route::resource('disposisi', DisposisiController::class);
+Route::resource('suratkeluar', SuratKeluarController::class);
 
 // Route::get('/suratmasuk/tambah', [App\Http\Controllers\TambahSuratMasukController::class, 'index'])->name('tambah');
-Route::get('/suratkeluar', [App\Http\Controllers\SuratKeluarController::class, 'index'])->name('suratkeluar');
+// Route::get('/suratkeluar', [App\Http\Controllers\SuratKeluarController::class, 'index'])->name('suratkeluar');

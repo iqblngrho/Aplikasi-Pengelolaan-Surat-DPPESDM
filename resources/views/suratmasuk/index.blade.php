@@ -1,9 +1,6 @@
-@can('view')
+@extends('adminlte::page')
 
-
-    @extends('adminlte::page')
-
-    @section('title', 'Surat Masuk')
+@section('title', 'Surat Masuk')
 
 @section('content_header')
     <h1>Surat Masuk</h1>
@@ -13,9 +10,9 @@
 @section('plugins.DatatablesPlugin', true)
 
 @section('content')
-<div class="text-right" style="margin-top: -40px">
-    <a class="btn btn-success mb-3 btn-tambah" data-toggle="modal" data-target="#tambahmodal">Tambah</a>
-</div>
+    <div class="text-right" style="margin-top: -40px">
+        <a class="btn btn-success mb-3 btn-tambah" data-toggle="modal" data-target="#tambahmodal">Tambah</a>
+    </div>
 
 
     @if ($message = Session::get('message'))
@@ -97,7 +94,6 @@
 
             // When the delete button in the modal is clicked, send an AJAX request to delete the operator
             $('#confirmDeleteBtn').on('click', function() {
-
                 if (suratId) {
                     $.ajax({
                         type: 'POST',
@@ -157,18 +153,19 @@
 
 
                 $.get(`suratmasuk/${id}`, function(data) {
-                    $('#id').text(data.data.id);
-                    $('#nomor_surat').text(data.data.nomor_surat);
-                    $('#tanggal_surat').text(data.data.tanggal_surat);
-                    $('#asal_surat').text(data.data.asal_surat);
-                    $('#tanggal_masuk').text(data.data.tanggal_diterima);
-                    $('#perihal').text(data.data.perihal);
-                    $('#sifat').text(data.data.sifat);
+                    $('.id').text(data.data.id);
+                    $('.nomor_surat').text(data.data.nomor_surat);
+                    $('.tanggal_surat').text(data.data.tanggal_surat);
+                    $('.tanggal_masuk').text(data.data.tanggal_diterima);
+                    $('.asal_surat').text(data.data.asal_surat);
+                    $('.perihal').text(data.data.perihal);
+                    $('.sifat').text(data.data.sifat);
                     $('.tindakan').addClass(`badge-${tindakanToBadge(data.data.tindakan)}`)
-                    $('#tindakan').text(tindakanToString(data.data.tindakan));
-                    $('#catatan').text(data.data.catatan);
-                    $('#lampiran').text(`${data.data.lampiran} Lampiran`);
-                    $('#file').text(data.data.file);
+                    $('.tindakan').text(tindakanToString(data.data.tindakan));
+                    $('.catatan').text(data.data.catatan);
+                    $('.jenis').text(data.data.jenis);
+                    $('.lampiran').text(`${data.data.lampiran} Lampiran`);
+                    $('.file').text(data.data.file);
                 });
             });
 
@@ -246,8 +243,6 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 });
-
-                const suratId = $('.btn-edit').data('id');
                 const form = $('#editForm');
                 const formData = new FormData(form[0]);
 
@@ -333,4 +328,3 @@
         })
     </script>
 @stop
-@endcan

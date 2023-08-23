@@ -38,8 +38,8 @@
                             <label for="jenis">Jenis Surat</label>
                             <select id="jenis" class="form-control" name="jenis" value="{{ old('jenis') }}">>
                                 <option selected disabled>Pilih Jenis Surat</option>
-                                <option value="asli">Asli</option>
-                                <option value="tembusan">Tembusan</option>
+                                <option value="Asli">Asli</option>
+                                <option value="Tembusan">Tembusan</option>
                             </select>
                             <div class="invalid-feedback"></div>
                         </div>
@@ -64,9 +64,9 @@
                             <label for="sifat">Sifat</label>
                             <select id="sifat" class="form-control" name="sifat" value="{{ old('sifat') }}">>
                                 <option selected disabled>Sifat</option>
-                                <option value="segera">Segera</option>
-                                <option value="sangat-segera">Sangat segera</option>
-                                <option value="biasa">Biasa</option>
+                                <option value="Segera">Segera</option>
+                                <option value="Sangat Segera">Sangat segera</option>
+                                <option value="Biasa">Biasa</option>
                             </select>
                             <div class="invalid-feedback"></div>
                         </div>
