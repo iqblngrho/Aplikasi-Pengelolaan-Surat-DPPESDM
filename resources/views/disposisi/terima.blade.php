@@ -1,4 +1,4 @@
-<x-adminlte-modal id="cetakModal" title="Ajukan" theme="navy" icon="fas fa-solid fa-file-medical" size='lg' v-centered
+<x-adminlte-modal id="terimaModal" title="Ajukan" theme="navy" icon="fas fa-solid fa-file-medical" size='lg' v-centered
     scrollable>
     <x-adminlte-card id="detailsurat" title="Detail Surat" theme="navy" icon="fas fa-lg fa-fan" collapsible>
         <table class="table table-sm">
@@ -55,7 +55,7 @@
     </div>
     <div class="card">
         <div class="card-body">
-            <form id="cetakForm" method="POST">
+            <form id="terimaForm" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="form-group">

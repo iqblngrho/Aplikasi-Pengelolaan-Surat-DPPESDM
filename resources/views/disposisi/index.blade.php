@@ -22,11 +22,11 @@
                         @if ($row->surat_masuk->tindakan == SELESAI)
                             <button type="button" data-toggle="modal" data-target="#cetakModal"
                                 data-id="{{ $row->surat_masuk->id }}"
-                                class="btn btn-xs btn-default text-primary mx-1 shadow btn-terima-tindakan" title="Edit">
+                                class="btn btn-xs btn-default text-primary mx-1 shadow btn-cetak-tindakan" title="Edit">
                                 <i class="fa fa-lg fa-fw fa-file"></i>
                             </button>
                         @else
-                            <button type="button" data-toggle="modal" data-target="#cetakModal"
+                            <button type="button" data-toggle="modal" data-target="#terimaModal"
                                 data-id="{{ $row->surat_masuk->id }}"
                                 class="btn btn-xs btn-default text-primary mx-1 shadow btn-terima-tindakan" title="Edit">
                                 <i class="fa fa-lg fa-fw fa-pen"></i>
@@ -37,7 +37,7 @@
             @endforeach
 
         </x-adminlte-datatable>
-        @include('disposisi.cetak')
+        @include('disposisi.terima')
     @stop
     @section('js')
         <script>
@@ -74,7 +74,7 @@
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         }
                     });
-                    const form = $('#cetakForm');
+                    const form = $('#terimaForm');
                     const formData = new FormData(form[0]);
                     const url = '{{ route('suratmasuk.updateTindakan', ':suratId') }}'.replace(':suratId',
                         suratId);

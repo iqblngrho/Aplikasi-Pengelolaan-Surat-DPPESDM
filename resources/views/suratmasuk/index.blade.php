@@ -13,7 +13,10 @@
 @section('plugins.DatatablesPlugin', true)
 
 @section('content')
+<div class="text-right" style="margin-top: -40px">
     <a class="btn btn-success mb-3 btn-tambah" data-toggle="modal" data-target="#tambahmodal">Tambah</a>
+</div>
+
 
     @if ($message = Session::get('message'))
         <x-adminlte-alert theme="success" title="Success">
