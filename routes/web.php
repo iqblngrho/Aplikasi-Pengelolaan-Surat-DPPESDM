@@ -43,8 +43,8 @@ Route::middleware(['role:admin'])->group(function () {
     Route::resource('suratmasuk', SuratMasukController::class);
 });
 
+Route::get('disposisi/print', [App\Http\Controllers\DisposisiController::class, 'print'])->name('disposisi.print');
 Route::get('bidang/all', [BidangController::class, 'all']);
-
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
 
 Route::get('dataoperator/{id}/password', [DataOperatorController::class, 'editPassword'])->name('dataoperator.password');
@@ -55,8 +55,8 @@ Route::patch('dataoperator/{id}/role', [DataOperatorController::class, 'updateRo
 Route::resource('dashboard', DashboardController::class);
 Route::resource('dataoperator', DataOperatorController::class);
 Route::resource('bidang', BidangController::class);
-Route::resource('disposisi', DisposisiController::class);
 Route::resource('suratkeluar', SuratKeluarController::class);
+Route::resource('disposisi', DisposisiController::class);
 
 // Route::get('/suratmasuk/tambah', [App\Http\Controllers\TambahSuratMasukController::class, 'index'])->name('tambah');
 // Route::get('/suratkeluar', [App\Http\Controllers\SuratKeluarController::class, 'index'])->name('suratkeluar');

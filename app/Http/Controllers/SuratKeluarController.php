@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\SuratKeluar;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Validator;
 
 class SuratKeluarController extends Controller
 {
@@ -22,21 +24,17 @@ class SuratKeluarController extends Controller
             'Status',
             ['label' => 'Actions', 'no-export' => true, 'width' => 5, 'text-align' => 'center'],
         ];
-        $suratKeluar =SuratKeluar::all();
+        $suratKeluar = SuratKeluar::all();
         return view('suratkeluar.index', [
             "suratkeluar" => $suratKeluar,
             "heads" => $heads
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function create()
     {
-        //
+        return view('suratkeluar.create');
     }
 
     /**
@@ -47,7 +45,35 @@ class SuratKeluarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'nomor_surat' => 'required|unique:surat_masuk',
+            'tanggal_surat' => 'required|date',
+            'asal_surat' => 'required',
+            'perihal' => 'required',
+            'lampiran' => 'required',
+            'jenis' => 'required',
+            'sifat' => 'required',
+            'file' => 'required|mimes:jpg,jpeg,pdf,png',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->messages(), Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        $data = $request->all();
+
+        $file = $request->file('file');
+        $fileName = 'suratmasuk-' . $file->getClientOriginalName();
+        $path = $file->storeAs('suratmasuk', $fileName, 'public');
+
+        $data['file'] = $path;
+
+        try {
+            SuratKeluar::create($data);
+            return response()->json(['message' => 'Surat Masuk berhasil ditambahkan'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Gagal membuat Surat Masuk'], 500);
+        }
     }
 
     /**
