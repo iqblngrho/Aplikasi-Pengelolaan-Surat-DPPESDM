@@ -40,15 +40,15 @@
                             title="Detail" data-toggle="modal" data-target="#detailmodal" data-id="{{ $row->id }}">
                             <i class="fa fa-lg fa-fw fa-info-circle"></i>
                         </button>
-                        <a href="{{ Storage::url($row->file) }}" target="_blank"
-                            class="btn btn-xs btn-default text-primary  mx-1 shadow" title="Lihat File">
-                            <i class="fa fa-lg fa-fw fa-print"></i>
-                        </a>
                         <button type="button" data-toggle="modal" data-target="#deleteSuratMasukModal"
                             data-id="{{ $row->id }}" class="btn btn-xs btn-default text-danger mx-1 shadow btn-delete"
                             title="Delete">
                             <i class="fa fa-lg fa-fw fa-trash"></i>
                         </button>
+                        <a target="_blank" class="btn btn-xs btn-default text-primary mx-1 shadow downloadFile"
+                            title="Cetak Disposisi">
+                            <i class="fa fa-lg fa-fw fa-print"></i>
+                        </a>
                     @else
                         <button type="button" data-toggle="modal" data-target="#deleteSuratMasukModal"
                             data-id="{{ $row->id }}" class="btn btn-xs btn-default text-danger mx-1 shadow btn-delete"
@@ -150,8 +150,7 @@
 
             $('.btn-detail').on('click', function(event) {
                 var id = $(this).data('id');
-
-
+                $('.pdfContainer').hide();
                 $.get(`suratmasuk/${id}`, function(data) {
                     $('.id').text(data.data.id);
                     $('.nomor_surat').text(data.data.nomor_surat);
@@ -165,7 +164,8 @@
                     $('.catatan').text(data.data.catatan);
                     $('.jenis').text(data.data.jenis);
                     $('.lampiran').text(`${data.data.lampiran} Lampiran`);
-                    $('.file').text(data.data.file);
+                    $('.pdfViewerBtn').attr('data-url', '{{ Storage::url(':file') }}'
+                        .replace(':file', data.data.file))
                 });
             });
 
@@ -325,6 +325,13 @@
                     }
                 });
             });
+
+            $('.pdfViewerBtn').click(function(e) {
+                const url = $(this).data('url');
+                console.log(url);
+                $('.pdfViewer').attr('src', url);
+                $('.pdfContainer').show();
+            })
         })
     </script>
 @stop

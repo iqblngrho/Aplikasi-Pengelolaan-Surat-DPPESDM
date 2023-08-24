@@ -74,5 +74,12 @@
             </tr>
         </table>
     </x-adminlte-card>
+    <div class="card">
+        <div class="card-body">
+            <div class="pdfContainer">
+                <iframe class="pdfViewer" style="width: 100%; height: 500px;"></iframe>
+            </div>
+        </div>
+    </div>
 </x-adminlte-modal>
 {{-- End Modal View Surat Masuk --}}
