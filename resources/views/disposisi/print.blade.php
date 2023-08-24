@@ -4,6 +4,7 @@
     table,
     th,
     td {
+        border: 1px solid black;
         font-size: 12px
     }
 </style>
@@ -56,22 +57,55 @@
             <h1 class="text-center text-lg font-semibold" style="font-size: 14px">LEMBAR DISPOSISI</h1>
             <table class="text-left border-collapse border border-black w-full mt-3">
                 <tr>
-                    <td>Kode <td>: sdasdas</td>
-                    </td>
-                    <td>
-                        Indeks <td>: sasass</td>
-                    </td>
+                    <td style="width: 25%;">Kode</td>
+                    <td style="width: 25%;">:</td>
+
+                    <td style="width: 25%;">Indeks</td>
+                    <td style="width: 25%;">:</td>
                 </tr>
                 <tr>
-                    <td style="height: 25%">Perihal <td colspan="3">: sdasdgasgdjhasgdasgjhdasjhgddfsdfsd </td>
-                    </td>
+                    <td style="height: 40px;">Perihal</td>
+                    <td colspan="3">:</td>
                 </tr>
                 <tr>
-                    <td>Sifat:</td>
+                    <td>Tgl/Nomor</td>
+                    <td colspan="3">:</td>
                 </tr>
                 <tr>
-                    <td>adasd</td>
+                    <td>Asal Surat</td>
+                    <td colspan="3">:</td>
                 </tr>
+                <tr>
+                    <td>Dari Unit Kerja</td>
+                    <td colspan="3">:</td>
+                </tr>
+                <tr>
+                    <td>Dikemukakan Kepada</td>
+                    <td colspan="3">:</td>
+                </tr>
+                <tr>
+                    <th colspan="4" class="text-center">CATATAN</th>
+                </tr>
+                <tr>
+                    <td style="height: 100px; vertical-align: top">Sekretaris</td>
+                    <td colspan="3"></td>
+                </tr>
+                <tr>
+                    <th colspan="4" class="text-center">DISPOSISI/NOTA</th>
+                </tr>
+                <tr>
+                    <td style="height: 100px; vertical-align: top">Kepala Dinas</td>
+                    <td colspan="3"></td>
+                </tr>
+                <tr>
+                    <td style="height: 100px; vertical-align: top">Sekretaris/Kepala Bidang</td>
+                    <td colspan="3"></td>
+                </tr>
+                <tr>
+                    <td style="height: 100px; vertical-align: top">Kepala Sub Bagian/Kepala Seksi</td>
+                    <td colspan="3"></td>
+                </tr>
+
             </table>
         </main>
     </div>
