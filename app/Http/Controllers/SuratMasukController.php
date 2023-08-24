@@ -161,6 +161,11 @@ class SuratMasukController extends Controller
 
     public function destroy($id)
     {
-        SuratMasuk::where('id', $id)->delete();
+        $suratMasuk = SuratMasuk::find($id);
+
+        if($suratMasuk->disposisi){
+            $suratMasuk->disposisi->delete();
+        }
+
     }
 }
