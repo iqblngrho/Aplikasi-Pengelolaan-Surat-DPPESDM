@@ -136,12 +136,18 @@ class DisposisiController extends Controller
         //
     }
 
-    public function print()
+    public function print($id)
     {
-        $suratMasuk = SuratMasuk::find(1);
+        $disposisi = Disposisi::with(['surat_masuk', 'bidang'])
+            ->whereHas('surat_masuk', function ($query) use ($id) {
+                $query->where('id', $id);
+            })
+            ->first();
+
+        // dd($disposisi->bidang);
 
         return view('disposisi.print', [
-            "suratMasuk" => $suratMasuk
+            "disposisi" => $disposisi
         ]);
     }
 }

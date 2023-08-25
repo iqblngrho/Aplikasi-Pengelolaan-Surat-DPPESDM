@@ -21,8 +21,8 @@ return new class extends Migration
             $table->date('tanggal_surat');
             $table->string('sifat');
             $table->string('perihal');
-            $table->string('catatan');
-            $table->smallInteger('status')->default(0);
+            $table->string('lampiran');
+            $table->string('file');
             $table->foreign('id_bidang')->references('id')->on('bidang');
             $table->timestamps();
         });

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,6 +10,7 @@ class SuratMasuk extends Model
 {
     use HasFactory;
     protected $table = 'surat_masuk';
+
     protected $fillable = [
         'asal_surat',
         'nomor_surat',
@@ -23,10 +25,8 @@ class SuratMasuk extends Model
         'file',
     ];
 
-     public function disposisi()
+    public function disposisi()
     {
         return $this->hasOne(Disposisi::class, 'id_surat');
     }
 }
-
-

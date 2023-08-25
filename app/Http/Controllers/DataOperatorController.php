@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bidang;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -64,9 +65,10 @@ class DataOperatorController extends Controller
     public function edit($id)
     {
         $dataOperator = User::findOrFail($id);
-
+        $bidang = Bidang::all();
         return view('dataoperator.edit', [
             "edit" => $dataOperator,
+            "bidang" => $bidang
         ]);
     }
 
@@ -102,7 +104,7 @@ class DataOperatorController extends Controller
             ],
             'nama' => 'required',
             'jabatan' => 'required',
-            'bidang' => 'required',
+            'id_bidang' => 'required',
         ]);
 
 

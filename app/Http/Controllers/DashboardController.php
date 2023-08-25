@@ -36,7 +36,8 @@ class DashboardController extends Controller
 
 
         if (Auth::user()->hasRole('admin')) {
-            $suratMasuk = SuratMasuk::where('tindakan', '<>', TindakanSurat::ARSIP)->get();
+            $suratMasuk = SuratMasuk::where('tindakan', '<>', TindakanSurat::ARSIP)->where('tindakan', '<>', TindakanSurat::SELESAI)
+                ->get();
         }
 
         if (Auth::user()->hasRole('sekretaris')) {

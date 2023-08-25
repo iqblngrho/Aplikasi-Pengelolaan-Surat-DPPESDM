@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bidang;
 use App\Models\SuratKeluar;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -24,14 +25,16 @@ class SuratKeluarController extends Controller
             'Status',
             ['label' => 'Actions', 'no-export' => true, 'width' => 5, 'text-align' => 'center'],
         ];
+        $bidang = Bidang::all();
         $suratKeluar = SuratKeluar::all();
         return view('suratkeluar.index', [
+            "bidang" => $bidang,
             "suratkeluar" => $suratKeluar,
             "heads" => $heads
         ]);
     }
 
-   
+
     public function create()
     {
         return view('suratkeluar.create');
@@ -48,10 +51,10 @@ class SuratKeluarController extends Controller
         $validator = Validator::make($request->all(), [
             'nomor_surat' => 'required|unique:surat_masuk',
             'tanggal_surat' => 'required|date',
-            'asal_surat' => 'required',
+            'id_bidang' => 'required',
+            'alamat_tujuan' => 'required',
             'perihal' => 'required',
             'lampiran' => 'required',
-            'jenis' => 'required',
             'sifat' => 'required',
             'file' => 'required|mimes:jpg,jpeg,pdf,png',
         ]);
@@ -63,16 +66,16 @@ class SuratKeluarController extends Controller
         $data = $request->all();
 
         $file = $request->file('file');
-        $fileName = 'suratmasuk-' . $file->getClientOriginalName();
-        $path = $file->storeAs('suratmasuk', $fileName, 'public');
+        $fileName = 'suratkeluar-' . $file->getClientOriginalName();
+        $path = $file->storeAs('suratkeluar', $fileName, 'public');
 
         $data['file'] = $path;
 
         try {
             SuratKeluar::create($data);
-            return response()->json(['message' => 'Surat Masuk berhasil ditambahkan'], 200);
+            return response()->json(['message' => 'Surat Keluar berhasil ditambahkan'], 200);
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Gagal membuat Surat Masuk'], 500);
+            return response()->json(['error' => 'Gagal membuat Surat Keluar'], 500);
         }
     }
 

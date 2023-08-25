@@ -31,19 +31,16 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::middleware(['role:admin|sekretaris|Kepala Dinas|Kepala Bidang Industri'])->group(function () {
-    Route::put('suratmasuk/{id}/tindakan', [SuratMasukController::class, 'updateTindakan'])->name('suratmasuk.updateTindakan');
-});
+Route::put('suratmasuk/{id}/tindakan', [SuratMasukController::class, 'updateTindakan'])->name('suratmasuk.updateTindakan');
 
-Route::middleware(['role:admin|sekretaris|Kepala Dinas|Kepala Bidang Industri'])->group(function () {
-    Route::get('suratmasuk/{id}', [SuratMasukController::class, 'show'])->name('suratmasuk.show');
-});
+Route::get('suratmasuk/{id}', [SuratMasukController::class, 'show'])->name('suratmasuk.show');
+
 
 Route::middleware(['role:admin'])->group(function () {
     Route::resource('suratmasuk', SuratMasukController::class);
 });
 
-Route::get('disposisi/print', [App\Http\Controllers\DisposisiController::class, 'print'])->name('disposisi.print');
+Route::get('disposisi/{id}/print', [App\Http\Controllers\DisposisiController::class, 'print'])->name('disposisi.print');
 Route::get('bidang/all', [BidangController::class, 'all']);
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
 

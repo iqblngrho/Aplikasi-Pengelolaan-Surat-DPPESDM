@@ -16,8 +16,9 @@ class SuratKeluar extends Model
         'tanggal_surat',
         'sifat',
         'perihal',
+        'lampiran',
         'status',
-        'catatan',
+        'file',
         'id_bidang',
     ];
     public function bidang()

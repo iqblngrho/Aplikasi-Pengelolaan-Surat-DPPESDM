@@ -28,9 +28,9 @@
                 <td>{{ $row->id }}</td>
                 <td>{{ $row->asal_surat }}</td>
                 <td>{{ $row->nomor_surat }}</td>
-                <td>{{ $row->tanggal_surat }}</td>
+                <td>{{ $dateFormat->from($row->tanggal_surat) }}</td>
                 <td>{{ $row->perihal }}</td>
-                <td>{{ $row->tanggal_diterima }}</td>
+                <td>{{ $dateFormat->from($row->tanggal_diterima) }}</td>
                 <td>{{ $row->catatan }}</td>
                 <td>{{ $row->jenis }}</td>
                 <td>{!! $tindakanSurat->toBadge($row->tindakan) !!}</td>
@@ -45,8 +45,8 @@
                             title="Delete">
                             <i class="fa fa-lg fa-fw fa-trash"></i>
                         </button>
-                        <a target="_blank" class="btn btn-xs btn-default text-primary mx-1 shadow downloadFile"
-                            title="Cetak Disposisi">
+                        <a href="{{ route('disposisi.print', $row->id) }}" target="_blank"
+                            class="btn btn-xs btn-default text-primary mx-1 shadow downloadFile" title="Cetak Disposisi">
                             <i class="fa fa-lg fa-fw fa-print"></i>
                         </a>
                     @else
