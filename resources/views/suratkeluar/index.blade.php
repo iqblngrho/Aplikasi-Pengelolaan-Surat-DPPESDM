@@ -42,7 +42,7 @@
                         class="btn btn-xs btn-default text-primary mx-1 shadow btn-editSK" title="Edit Surat">
                         <i class="fa fa-lg fa-fw fa-pen"></i>
                     </button>
-                    <button type="button" data-toggle="modal" data-target="#deleteSuratMasukModal"
+                    <button type="button" data-toggle="modal" data-target="#deleteSuratKeluarModal"
                         data-id="{{ $row->id }}" class="btn btn-xs btn-default text-danger mx-1 shadow btn-delete"
                         title="Delete">
                         <i class="fa fa-lg fa-fw fa-trash"></i>
@@ -56,6 +56,7 @@
 
     @include('suratkeluar.create')
     @include('suratkeluar.edit')
+    @include('suratkeluar.delete')
 @stop
 
 
@@ -63,6 +64,32 @@
     <script>
         $(document).ready(function() {
             let suratkeluarId;
+             // When the delete button in the modal is clicked, send an AJAX request to delete the operator
+             $('#confirmDeleteBtn').on('click', function() {
+                if (suratkeluarId) {
+                    $.ajax({
+                        type: 'POST',
+                        url: `/suratkeluar/${suratkeluarId}`, // Replace with the actual delete route URL
+                        data: {
+                            _method: 'DELETE',
+                            _token: '{{ csrf_token() }}',
+                        },
+                        success: function(response) {
+                            $('#deleteSuratKeluarModal').modal('hide');
+                            window.location.href = "{{ route('suratkeluar.index') }}";
+                        },
+                        error: function(error) {
+                            console.error('Error deleting operator:', error);
+                            $('#deleteSuratKeluarModal').modal('hide');
+                        }
+                    });
+                }
+            });
+
+            // When the delete button in the table is clicked, store the operator ID to be deleted
+            $('.btn-delete').on('click', function() {
+                suratkeluarId = $(this).data('id');
+            });
 
             $('#createSubmitBtn').on('click', function(e) {
                 $.ajaxSetup({
