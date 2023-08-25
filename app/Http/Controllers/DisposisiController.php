@@ -6,8 +6,10 @@ use App\Models\User;
 use App\Models\Disposisi;
 use App\Models\SuratMasuk;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use App\Helpers\TindakanSurat;
 use Spatie\Browsershot\Browsershot;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class DisposisiController extends Controller
 {
@@ -31,8 +33,13 @@ class DisposisiController extends Controller
             ['label' => 'Actions', 'no-export' => true, 'width' => 5, 'text-align' => 'center'],
         ];
 
-        if (auth()->user()->hasRole('Kepala Dinas')) {
-            $disposisi = Disposisi::with(['surat_masuk', 'bidang'])->get();
+
+
+        if (auth()->user()->hasAnyRole(['Kepala Dinas', 'admin'])) {
+            $disposisi = Disposisi::with(['surat_masuk', 'bidang'])
+                ->whereHas('surat_masuk', function ($query) {
+                    $query->where('tindakan', TindakanSurat::SELESAI);
+                })->get();
         } else {
             $disposisi = Disposisi::with(['surat_masuk', 'bidang'])
                 ->whereHas('bidang', function ($query) {
@@ -44,6 +51,7 @@ class DisposisiController extends Controller
         return view('disposisi.index', [
             "disposisi" => $disposisi,
             "heads" => $heads,
+
         ]);
     }
 

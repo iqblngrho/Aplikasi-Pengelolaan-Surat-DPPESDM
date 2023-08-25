@@ -1,9 +1,9 @@
 {{-- Modal View Surat Masuk --}}
-<x-adminlte-modal id="detailmodal" title="Detail" theme="navy" icon="fa fa-lg fa-fw fa-info-circle" size='lg'
+<x-adminlte-modal id="detailmodal" title="DETAIL SURAT MASUK" theme="navy" icon="fa fa-lg fa-fw fa-info-circle" size='lg'
     disable-animations>
     <div class="row">
         <div class="col-md-6">
-            <x-adminlte-card id="detailsurat" title="NOMOR AGENDA" theme="light">
+            <x-adminlte-card id="detailsurat" title="NOMOR AGENDA" theme="secondary">
                 <table class="table table-sm table-hover">
                     <tr>
                         <td>No</td>
@@ -23,7 +23,7 @@
 
 
      <div class="col-md-6">
-            <x-adminlte-card id="detailsurat" title="INFORMASI TAMBAHAN" theme="warning">
+            <x-adminlte-card id="detailsurat" title="INFORMASI TAMBAHAN" theme="success">
                 <table class="table table-sm table-hover">
                      <tr>
                 <td style="width: 40%;">Catatan</td>
@@ -31,7 +31,7 @@
             </tr>
             <tr>
                 <td style="width: 40%;">Tindakan</td>
-                <td class="tindakan"></td>
+                <td ><span class="badge tindakan"></span></td>
             </tr>
             <tr>
                 <td style="width: 40%;">Jenis</td>
@@ -42,7 +42,7 @@
         </div>
     </div>
 
-    <x-adminlte-card id="detailsurat" title="INFORMASI DETAIL SURAT" theme="lightblue">
+    <x-adminlte-card id="detailsurat" title="DATA SURAT" theme="navy">
         <table class="table table-sm">
             <tr>
                 <td>Nomor Surat</td>

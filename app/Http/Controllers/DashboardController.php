@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\TindakanSurat;
+use App\Models\User;
 use App\Models\Disposisi;
 use App\Models\SuratMasuk;
-use App\Models\User;
+use App\Models\SuratKeluar;
 use Illuminate\Http\Request;
+use App\Helpers\TindakanSurat;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -49,11 +50,15 @@ class DashboardController extends Controller
         }
 
         $jumlahDisposisi = Disposisi::all();
+        $jumlahSuratMasuk = SuratMasuk::all();
+        $jumlahSuratKeluar = SuratKeluar::all();
 
         return view('dashboard.home', [
             "heads" => $heads,
             "suratMasuk" => $suratMasuk,
-            "jumlahDisposisi" => count($jumlahDisposisi)
+            "jumlahDisposisi" => count($jumlahDisposisi),
+            "jumlahSuratMasuk" => count($jumlahSuratMasuk),
+            "jumlahSuratKeluar" => count($jumlahSuratKeluar),
         ]);
     }
 

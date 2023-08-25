@@ -18,7 +18,7 @@
 
             <div class="small-box bg-info">
                 <div class="inner">
-                    <h3>jumlah</h3>
+                    <h3> {{ $jumlahSuratMasuk }} </h3>
                     <p>Surat Masuk</p>
                 </div>
                 <div class="icon">
@@ -32,13 +32,13 @@
 
             <div class="small-box bg-success">
                 <div class="inner">
-                    <h3>jumlah</h3>
+                    <h3>{{ $jumlahSuratKeluar }}</h3>
                     <p>Surat Keluar</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-stats-bars"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="/suratkeluar" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
 
@@ -52,7 +52,7 @@
                 <div class="icon">
                     <i class="ion ion-person-add"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="/disposisi" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
 
@@ -69,38 +69,37 @@
                 <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
-
-        <div class="container-fluid mt-5">
-            <x-adminlte-datatable id="table5" :heads="$heads" striped hoverable with-buttons>
-                @foreach ($suratMasuk as $row)
-                    <tr>
-                        <td>{!! $row->id !!}</td>
-                        <td>{!! $row->asal_surat !!}</td>
-                        <td>{!! $row->perihal !!}</td>
-                        <td>{!! $row->tanggal_diterima !!}</td>
-                        <td>{!! $tindakanSurat->toBadge($row->tindakan) !!}</td>
-                        <td>
-                            @role('sekretaris')
-                                <button type="button" data-toggle="modal" data-target="#ajukanModal"
-                                    data-id="{{ $row->id }}"
-                                    class="btn btn-xs btn-default text-primary mx-1 shadow btn-ajukan font-weight-bold"
-                                    title="Edit">
-                                    <span>Ajukan</span>
-                                    <i class="fa fa-lg fa-fw fa-pen"></i>
-                                </button>
-                            @endrole
-                            @role('Kepala Dinas')
-                                <button type="button" data-toggle="modal" data-target="#bidangModal"
-                                    data-id="{{ $row->id }}"
-                                    class="btn btn-xs btn-default text-primary mx-1 shadow btn-bidang" title="Edit">
-                                    <i class="fa fa-lg fa-fw fa-pen"></i>
-                                </button>
-                            @endrole
-                        </td>
-                    </tr>
-                @endforeach
-            </x-adminlte-datatable>
-        </div>
+            <div class="container-fluid mt-5">
+                <x-adminlte-datatable id="table5" :heads="$heads" striped hoverable with-buttons>
+                    @foreach ($suratMasuk as $row)
+                        <tr>
+                            <td>{!! $row->id !!}</td>
+                            <td>{!! $row->asal_surat !!}</td>
+                            <td>{!! $row->perihal !!}</td>
+                            <td>{!! $row->tanggal_diterima !!}</td>
+                            <td>{!! $tindakanSurat->toBadge($row->tindakan) !!}</td>
+                            <td>
+                                @role('sekretaris')
+                                    <button type="button" data-toggle="modal" data-target="#ajukanModal"
+                                        data-id="{{ $row->id }}"
+                                        class="btn btn-xs btn-default text-primary mx-1 shadow btn-ajukan font-weight-bold"
+                                        title="Edit">
+                                        <span>Ajukan</span>
+                                        <i class="fa fa-lg fa-fw fa-pen"></i>
+                                    </button>
+                                @endrole
+                                @role('Kepala Dinas')
+                                    <button type="button" data-toggle="modal" data-target="#bidangModal"
+                                        data-id="{{ $row->id }}"
+                                        class="btn btn-xs btn-default text-primary mx-1 shadow btn-bidang" title="Edit">
+                                        <i class="fa fa-lg fa-fw fa-pen"></i>
+                                    </button>
+                                @endrole
+                            </td>
+                        </tr>
+                    @endforeach
+                </x-adminlte-datatable>
+            </div>
     </div>
 
     @include('dashboard.ajukan_modal')

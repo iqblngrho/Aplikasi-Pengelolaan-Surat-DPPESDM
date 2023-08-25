@@ -90,22 +90,22 @@
                     <th colspan="4" class="text-center">CATATAN</th>
                 </tr>
                 <tr>
-                    <td style="height: 100px; vertical-align: center; padding-left: 4px">Sekretaris</td>
+                    <td style="height: 100px; vertical-align: center; padding-left: 4px">Sekretaris *)</td>
                     <td colspan="3"></td>
                 </tr>
                 <tr>
                     <th colspan="4" class="text-center">DISPOSISI/NOTA</th>
                 </tr>
                 <tr>
-                    <td style="height: 100px; vertical-align: center">Kepala Dinas</td>
+                    <td style="height: 100px; vertical-align: center">Kepala Dinas *)</td>
                     <td colspan="3" style="padding: 6px"> {{$disposisi->catatan}} </td>
                 </tr>
                 <tr>
-                    <td style="height: 100px; vertical-align: center">Sekretaris/Kepala Bidang</td>
+                    <td style="height: 100px; vertical-align: center">Sekretaris/ <br> Kepala Bidang *)</td>
                     <td colspan="3"></td>
                 </tr>
                 <tr>
-                    <td style="height: 100px; vertical-align: center">Kepala Sub Bagian/Kepala Seksi</td>
+                    <td style="height: 100px; vertical-align: center">Kepala Sub Bagian/Kepala Seksi *)</td>
                     <td colspan="3"></td>
                 </tr>
 

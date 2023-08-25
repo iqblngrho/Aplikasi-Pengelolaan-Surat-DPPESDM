@@ -106,6 +106,7 @@ class SuratMasukController extends Controller
     public function show($id)
     {
         $surat = SuratMasuk::findOrFail($id);
+
         return response()->json([
             'data' => $surat
         ]);
@@ -163,9 +164,8 @@ class SuratMasukController extends Controller
     {
         $suratMasuk = SuratMasuk::find($id);
 
-        if($suratMasuk->disposisi){
+        if ($suratMasuk->disposisi) {
             $suratMasuk->disposisi->delete();
         }
-
     }
 }

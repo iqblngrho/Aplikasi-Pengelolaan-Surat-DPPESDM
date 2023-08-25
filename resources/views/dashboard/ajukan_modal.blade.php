@@ -3,7 +3,7 @@
     <div class="row">
 
     </div>
-    <x-adminlte-card id="detailsurat" title="Detail Surat" theme="navy" icon="fas fa-lg fa-fan" collapsible>
+    <x-adminlte-card id="detailsurat" title="Detail Surat" theme="navy" icon="fas fa-lg fa-info-circle" collapsible>
         <table class="table table-sm">
             <tr>
                 <td>No</td>

@@ -24,7 +24,7 @@ class PermissionRoleSeeder extends Seeder
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
         // create permissions
-        Permission::create(['name' => 'delete']);
+        Permission::create(['name' => 'view']);
 
         //create roles and assign existing permissions
         $kepalaDinasRole = Role::create(['name' => 'Kepala Dinas']);
