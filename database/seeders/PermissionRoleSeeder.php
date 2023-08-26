@@ -30,26 +30,8 @@ class PermissionRoleSeeder extends Seeder
         $kepalaDinasRole = Role::create(['name' => 'Kepala Dinas']);
 //         $kepalaDinasRole->givePermissionTo('delete');
 
-        $kepalaBidangIndustriRole = Role::create(['name' => 'Kepala Bidang Industri']);
-        // $kepalaBidangIndustriRole->givePermissionTo('view');
-
-        $kepalaBidangDagluRole = Role::create(['name' => 'Kepala Bidang Daglu']);
-        // $kepalaBidangDagluRole->givePermissionTo('view');
-
-        $kepalaBidangDagriRole = Role::create(['name' => 'Kepala Bidang Dagri']);
-        // $kepalaBidangIndustriRole->givePermissionTo('view');
-
-        $kepalaBidangListrikEnergiRole = Role::create(['name' => 'Kepala Bidang Listrik/Energi']);
-        // $kepalaBidangListrikEnergiRole->givePermissionTo('view');
-
-        $kepalaBidangPengujianSertifikasiRole = Role::create(['name' => 'Kepala Bidang Pengujian/Sertifikasi']);
-        // $kepalaBidangPengujianSertifikasiRole->givePermissionTo('view');
-
-        $kepalaBidangSDMRole = Role::create(['name' => 'Kepala Bidang SDM']);
-        // $kepalaBidangSDMRole->givePermissionTo('view');
-
-
-
+        $kepalaBidangRole = Role::create(['name' => 'Kepala Bidang ']);
+        
         $sekretarisRole = Role::create(['name' => 'sekretaris']);
 
         $adminRole = Role::create(['name' => 'admin']);
@@ -90,7 +72,7 @@ class PermissionRoleSeeder extends Seeder
             'id_bidang' => 4,
             'jabatan' => 'Kepala Bidang'
         ]);
-        $user->assignRole($kepalaBidangIndustriRole);
+        $user->assignRole($kepalaBidangRole);
 
         $user = User::factory()->create([
             'nama' => 'Kepala Bidang Daglu',
@@ -99,7 +81,7 @@ class PermissionRoleSeeder extends Seeder
             'id_bidang' => 5,
             'jabatan' => 'Kepala Bidang'
         ]);
-        $user->assignRole($kepalaBidangDagluRole);
+        $user->assignRole($kepalaBidangRole);
 
         $user = User::factory()->create([
             'nama' => 'Kepala Bidang Dagri',
@@ -108,7 +90,7 @@ class PermissionRoleSeeder extends Seeder
             'id_bidang' => 6,
             'jabatan' => 'Kepala Bidang'
         ]);
-        $user->assignRole($kepalaBidangDagriRole);
+        $user->assignRole($kepalaBidangRole);
 
         $user = User::factory()->create([
             'nama' => 'Kepala Bidang Listrik/Energi',
@@ -117,7 +99,7 @@ class PermissionRoleSeeder extends Seeder
             'id_bidang' => 7,
             'jabatan' => 'Kepala Bidang'
         ]);
-        $user->assignRole($kepalaBidangListrikEnergiRole);
+        $user->assignRole($kepalaBidangRole);
 
         $user = User::factory()->create([
             'nama' => 'Kepala Bidang Pengujian/Sertifikasi',
@@ -126,7 +108,7 @@ class PermissionRoleSeeder extends Seeder
             'id_bidang' => 8,
             'jabatan' => 'Kepala Bidang'
         ]);
-        $user->assignRole($kepalaBidangPengujianSertifikasiRole);
+        $user->assignRole($kepalaBidangRole);
 
         $user = User::factory()->create([
             'nama' => 'Kepala Bidang SDM',
@@ -135,7 +117,7 @@ class PermissionRoleSeeder extends Seeder
             'id_bidang' => 9,
             'jabatan' => 'Kepala Bidang'
         ]);
-        $user->assignRole($kepalaBidangSDMRole);
+        $user->assignRole($kepalaBidangRole);
 
 
 
