@@ -1,9 +1,9 @@
-<x-adminlte-modal id="bidangModal" title="Bidang" theme="navy" icon="fas fa-solid fa-file-medical"
-                  size='lg' v-centered scrollable>
-    <x-adminlte-card id="detailsurat" title="Detail Surat" theme="navy" icon="fas fa-lg fa-fan" collapsible>
+<x-adminlte-modal id="bidangModal" title="Bidang" theme="navy" icon="fas fa-solid fa-file-medical" size='lg' v-centered
+    scrollable>
+    <x-adminlte-card id="detailsurat" title="Detail Surat" theme="navy" icon="fas fa-lg fa-info-circle" collapsible>
         <table class="table table-sm">
             <tr>
-                <td>No</td>
+                <td>No Agenda</td>
                 <td class="id"></td>
             </tr>
             <tr>
@@ -33,13 +33,12 @@
             <tr>
                 <td>File</td>
                 <td class="d-flex">
-                    <a target="_blank"
-                       class="btn btn-xs btn-default text-primary mx-1 shadow downloadFile" title="Lihat File">Download
-                        <i class="fa fa-lg fa-fw fa-file"></i>
-                    </a>
-                    <button
-                        class="btn btn-xs btn-default text-primary mx-1 shadow pdfViewerBtn"
+                    <a target="_blank" class="btn btn-xs btn-default text-primary mx-1 shadow downloadFile"
+                        title="Lihat File">Download
+                        <i class="fas fa-solid fa-download"></i> </a>
+                    <button class="btn btn-xs btn-default text-primary mx-1 shadow pdfViewerBtn"
                         title="Lihat File">Lihat PDF
+                        <i class="fas fa-regular fa-eye"></i>
                     </button>
                 </td>
             </tr>
@@ -61,12 +60,12 @@
 
                 <div class="form-group" id="catatanBidangContainer">
                     <label>Catatan</label>
-                    <x-adminlte-textarea name="catatan" placeholder="Tambah catatan" id="catatanBidang" required/>
+                    <x-adminlte-textarea name="catatan" placeholder="Tambah catatan" id="catatanBidang" required />
                 </div>
 
                 <div class="form-group">
-                    <label>Bidang</label>
-                    <select class="form-control bidang" name="id_bidang" id="bidang" required>
+                    <label>Pilih Bidang</label>
+                    <select  class="form-control bidang" name="id_bidang" id="bidang" required>
                     </select>
                 </div>
                 <x-slot name="footerSlot">
