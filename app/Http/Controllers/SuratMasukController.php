@@ -15,13 +15,12 @@ class SuratMasukController extends Controller
     public function index()
     {
         $heads = [
-            'No',
+            'No Agenda',
             'Alamat surat',
             'Nomor Surat',
             'Tanggal Surat',
             'Perihal',
             'Tanggal Diterima',
-            'Catatan',
             'Jenis Surat',
             'Tindakan',
             ['label' => 'Actions', 'no-export' => true, 'width' => 5, 'text-align' => 'center'],

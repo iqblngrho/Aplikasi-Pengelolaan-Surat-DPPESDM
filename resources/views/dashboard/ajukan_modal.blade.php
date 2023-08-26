@@ -6,7 +6,7 @@
     <x-adminlte-card id="detailsurat" title="Detail Surat" theme="navy" icon="fas fa-lg fa-info-circle" collapsible>
         <table class="table table-sm">
             <tr>
-                <td>No</td>
+                <td>No Agenda</td>
                 <td class="id"></td>
             </tr>
             <tr>
@@ -38,8 +38,7 @@
                 <td class="d-flex">
                     <a target="_blank" class="btn btn-xs btn-default text-primary mx-1 shadow downloadFile"
                         title="Lihat File">Download
-                        <i class="fa fa-lg fa-fw fa-file"></i>
-                    </a>
+                        <i class="fa-regular fa-floppy-disk"></i>                    </a>
                     <button class="btn btn-xs btn-default text-primary mx-1 shadow pdfViewerBtn"
                         title="Lihat File">Lihat PDF
                     </button>

@@ -9,9 +9,11 @@
 @section('plugins.DatatablesPlugin', true)
 
 @section('content')
+@role('admin')
     <div class="text-right" style="margin-top: -40px">
         <a class="btn btn-success mb-3 btn-tambah" data-toggle="modal" data-target="#tambahmodal">Tambah</a>
     </div>
+@endrole
 
 
     @if ($message = Session::get('message'))
@@ -38,6 +40,7 @@
                         class="btn btn-xs btn-default text-primary  mx-1 shadow" title="Lihat File">
                         <i class="fa fa-lg fa-fw fa-print"></i>
                     </a>
+                    @role('admin')
                     <button type="button" data-toggle="modal" data-target="#editmodalSK" data-id="{{ $row->id }}"
                         class="btn btn-xs btn-default text-primary mx-1 shadow btn-editSK" title="Edit Surat">
                         <i class="fa fa-lg fa-fw fa-pen"></i>
@@ -47,6 +50,7 @@
                         title="Delete">
                         <i class="fa fa-lg fa-fw fa-trash"></i>
                     </button>
+                    @endrole
                 </td>
             </tr>
         @endforeach

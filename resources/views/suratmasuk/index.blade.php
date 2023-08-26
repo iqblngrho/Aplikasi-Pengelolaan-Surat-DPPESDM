@@ -31,7 +31,6 @@
                 <td>{{ $dateFormat->from($row->tanggal_surat) }}</td>
                 <td>{{ $row->perihal }}</td>
                 <td>{{ $dateFormat->from($row->tanggal_diterima) }}</td>
-                <td>{{ $row->catatan }}</td>
                 <td>{{ $row->jenis }}</td>
                 <td>{!! $tindakanSurat->toBadge($row->tindakan) !!}</td>
                 <td class="d-flex" style="justify-content: center">
@@ -65,7 +64,7 @@
                         </button>
                         <a href="{{ Storage::url($row->file) }}" target="_blank"
                             class="btn btn-xs btn-default text-primary mx-1 shadow" title="Lihat File">
-                            <i class="fa fa-lg fa-fw fa-file"></i>
+                            <ion-icon name="save-outline"></ion-icon>
                         </a>
                         <button type="button" data-toggle="modal" data-target="#editTindakan"
                             data-id="{{ $row->id }}"
