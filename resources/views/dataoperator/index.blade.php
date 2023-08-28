@@ -17,8 +17,7 @@
                     <td>{{ $row->bidang->bidang }}</td>
                     <td>{{ strtoupper($row->getRoleNames()->first()) }}</td>
                     <td class="d-flex">
-
-
+                        @if(Auth::user()->id === $row->id)
                         <a href="{{ route('dataoperator.edit', $row->id) }}"
                             class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
                             <i class="fa fa-lg fa-fw fa-pen"></i>
@@ -27,6 +26,7 @@
                             class="btn btn-xs btn-default text-primary mx-1 shadow" title="Ubah Role">
                             <i class="fa fa-lg fa-fw fa-user-shield"></i>
                         </a>
+                        @endif
                         @role('admin')
                         <a href="{{ route('dataoperator.password', $row->id) }}"
                             class="btn btn-xs btn-default text-primary mx-1 shadow" title="Ubah Password">

@@ -24,7 +24,9 @@ class DataOperatorController extends Controller
             ['label' => 'Actions', 'no-export' => true, 'width' => 5, 'text-align' => 'center'],
         ];
 
-        $dataOperator = User::with(["bidang"])->get();
+        $dataOperator = User::with(["bidang"])
+        ->orderBy('created_at', 'desc') // Mengurutkan berdasarkan tanggal terbaru
+        ->get();
 
         return view('dataoperator.index', [
             "dataOperator" => $dataOperator,
