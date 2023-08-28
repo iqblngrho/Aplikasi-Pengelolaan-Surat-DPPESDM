@@ -22,7 +22,7 @@ class DisposisiController extends Controller
     public function index()
     {
         $heads = [
-            'No',
+            'No Disposisi',
             'Nomor Surat',
             'Perihal',
             'Asal Surat',

@@ -1,6 +1,6 @@
 {{-- Modal View Surat Masuk --}}
-<x-adminlte-modal id="detailmodal" title="DETAIL SURAT MASUK" theme="navy" icon="fa fa-lg fa-fw fa-info-circle" size='lg'
-    disable-animations>
+<x-adminlte-modal id="detailmodal" title="DETAIL SURAT MASUK" theme="navy" icon="fa fa-lg fa-fw fa-info-circle"
+    size='lg' disable-animations>
     <div class="row">
         <div class="col-md-6">
             <x-adminlte-card id="detailsurat" title="NOMOR AGENDA" theme="secondary">
@@ -22,21 +22,25 @@
         </div>
 
 
-     <div class="col-md-6">
+        <div class="col-md-6">
             <x-adminlte-card id="detailsurat" title="INFORMASI TAMBAHAN" theme="success">
                 <table class="table table-sm table-hover">
-                     <tr>
-                <td style="width: 40%;">Catatan</td>
-                <td class="catatan"></td>
-            </tr>
-            <tr>
-                <td style="width: 40%;">Tindakan</td>
-                <td ><span class="badge tindakan"></span></td>
-            </tr>
-            <tr>
-                <td style="width: 40%;">Jenis</td>
-                <td class="jenis"></td>
-            </tr>
+                    <tr>
+                        <td style="width: 40%;">Catatan</td>
+                        <td class="catatan"></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 40%;">Catatan Kadis</td>
+                        <td class="catatanKadis"></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 40%;">Tindakan</td>
+                        <td><span class="badge tindakan"></span></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 40%;">Jenis</td>
+                        <td class="jenis"></td>
+                    </tr>
                 </table>
             </x-adminlte-card>
         </div>
@@ -69,6 +73,7 @@
                 <td>
                     <button class="btn btn-xs btn-default text-primary mx-1 shadow pdfViewerBtn"
                         title="Lihat File">Lihat PDF
+                        <i class="fas fa-regular fa-eye"></i>
                     </button>
                 </td>
             </tr>

@@ -105,9 +105,9 @@ class SuratMasukController extends Controller
     public function show($id)
     {
         $surat = SuratMasuk::findOrFail($id);
-
         return response()->json([
-            'data' => $surat
+            'data' => $surat,
+            'disposisi' => $surat->disposisi
         ]);
     }
 

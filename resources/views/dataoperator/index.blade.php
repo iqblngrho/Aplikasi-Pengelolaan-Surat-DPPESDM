@@ -7,7 +7,6 @@
 @stop
 
 @section('content')
-    @role('admin')
         <x-adminlte-datatable id="table5" :heads="$heads">
             @foreach ($dataOperator as $row)
                 <tr>
@@ -24,33 +23,24 @@
                             class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
                             <i class="fa fa-lg fa-fw fa-pen"></i>
                         </a>
-                        <a href="{{ route('dataoperator.password', $row->id) }}"
-                            class="btn btn-xs btn-default text-primary mx-1 shadow" title="Ubah Password">
-                            <i class="fa fa-lg fa-fw fa-lock"></i>
-                        </a>
                         <a href="{{ route('dataoperator.role', $row->id) }}"
                             class="btn btn-xs btn-default text-primary mx-1 shadow" title="Ubah Role">
                             <i class="fa fa-lg fa-fw fa-user-shield"></i>
+                        </a>
+                        @role('admin')
+                        <a href="{{ route('dataoperator.password', $row->id) }}"
+                            class="btn btn-xs btn-default text-primary mx-1 shadow" title="Ubah Password">
+                            <i class="fa fa-lg fa-fw fa-lock"></i>
                         </a>
                         <button type="button" data-toggle="modal" data-target="#deleteModal" data-id="{{ $row->id }}"
                             class="btn btn-xs btn-default text-danger mx-1 shadow btn-delete" title="Delete">
                             <i class="fa fa-lg fa-fw fa-trash"></i>
                         </button>
-
-                        {{-- Kayaknya gk butuh button detail, karena data udah detail di tabel --}}
-                        {{-- <button type="button" class="btn btn-xs btn-default text-success mx-1 shadow btn-detail"
-                                title="Detail" data-toggle="modal" data-target="#detailmodal" data-id="{{ $row->id }}">
-                                <i class="fa fa-lg fa-fw fa-info-circle"></i>
-                            </button> --}}
+                        @endrole
                     </td>
                 </tr>
             @endforeach
         </x-adminlte-datatable>
-    @else
-        <x-adminlte-alert theme="danger" title="Tidak Dapat Mengakses">
-            Halaman ini hanya dapat diakses oleh Admin!
-        </x-adminlte-alert>
-    @endrole
 
     <x-adminlte-modal id="deleteModal" title="Hapus Akun" size="sm" theme="danger" icon="fas fa-trash" v-centered
         static-backdrop scrollable>

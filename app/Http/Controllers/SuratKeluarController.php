@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Bidang;
 use App\Models\SuratKeluar;
+use App\Models\SuratMasuk;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Carbon;
@@ -20,7 +21,7 @@ class SuratKeluarController extends Controller
     public function index()
     {
         $heads = [
-            'No',
+            'No Agenda',
             'Nomor Surat',
             'Perihal',
             'Bidang',
@@ -85,7 +86,8 @@ class SuratKeluarController extends Controller
     {
         $surat = SuratKeluar::findOrFail($id);
         return response()->json([
-            'data' => $surat
+            'data' => $surat,
+            'bidang' => $surat->bidang
         ]);
     }
 

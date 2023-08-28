@@ -69,37 +69,36 @@
                 <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
-            <div class="container-fluid mt-5">
-                <x-adminlte-datatable id="table5" :heads="$heads" striped hoverable with-buttons>
-                    @foreach ($suratMasuk as $row)
-                        <tr>
-                            <td>{!! $row->id !!}</td>
-                            <td>{!! $row->asal_surat !!}</td>
-                            <td>{!! $row->perihal !!}</td>
-                            <td>{!! $row->tanggal_diterima !!}</td>
-                            <td>{!! $tindakanSurat->toBadge($row->tindakan) !!}</td>
-                            <td>
-                                @role('sekretaris')
-                                    <button type="button" data-toggle="modal" data-target="#ajukanModal"
-                                        data-id="{{ $row->id }}"
-                                        class="btn btn-xs btn-default text-primary mx-1 shadow btn-ajukan font-weight-bold"
-                                        title="Edit">
-                                        <span>Ajukan</span>
-                                        <i class="fa fa-lg fa-fw fa-pen"></i>
-                                    </button>
-                                @endrole
-                                @role('Kepala Dinas')
-                                    <button type="button" data-toggle="modal" data-target="#bidangModal"
-                                        data-id="{{ $row->id }}"
-                                        class="btn btn-xs btn-default text-primary mx-1 shadow btn-bidang" title="Edit">
-                                        <i class="fa fa-lg fa-fw fa-pen"></i>
-                                    </button>
-                                @endrole
-                            </td>
-                        </tr>
-                    @endforeach
-                </x-adminlte-datatable>
-            </div>
+        <div class="container-fluid mt-5">
+            <x-adminlte-datatable id="table5" :heads="$heads" striped hoverable with-buttons>
+                @foreach ($suratMasuk as $row)
+                    <tr>
+                        <td>{!! $row->id !!}</td>
+                        <td>{!! $row->asal_surat !!}</td>
+                        <td>{!! $row->perihal !!}</td>
+                        <td>{!! $row->tanggal_diterima !!}</td>
+                        <td>{!! $tindakanSurat->toBadge($row->tindakan) !!}</td>
+                        <td>
+                            @role('sekretaris')
+                                <button type="button" data-toggle="modal" data-target="#ajukanModal"
+                                    data-id="{{ $row->id }}"
+                                    class="btn btn-xs btn-default text-primary mx-1 shadow btn-ajukan font-weight-bold"
+                                    title="Edit">
+                                    <span style="font-weight:bold;">Ajukan</span>
+                                    <i class="fa-lg fa-fw fas fa-solid fa-file-export"></i> </button>
+                            @endrole
+                            @role('Kepala Dinas')
+                                <button type="button" data-toggle="modal" data-target="#bidangModal"
+                                    data-id="{{ $row->id }}"
+                                    class="btn btn-xs btn-default text-primary mx-1 shadow btn-bidang" title="Edit">
+                                    <span style="font-weight:bold;">Bidang</span>
+                                    <i class="fas fa-lg fa-fw  fa-solid fa-file-export"></i> </button>
+                            @endrole
+                        </td>
+                    </tr>
+                @endforeach
+            </x-adminlte-datatable>
+        </div>
     </div>
 
     @include('dashboard.ajukan_modal')
@@ -112,20 +111,21 @@
 
             let suratId;
 
-            if ($("#tindakan").val() === "1") {
-                $('#catatanContainer').show();
-            } else {
-                $('#catatanContainer').hide();
-            }
-
-            $("#tindakan").change(function() {
-                var selectedOption = $(this).val();
-
-                if (selectedOption === "1") {
+            function toggleCatatanVisibility(selectedOption) {
+                if (selectedOption === "1" || selectedOption === "3") {
                     $('#catatanContainer').show();
                 } else {
                     $('#catatanContainer').hide();
                 }
+            }
+
+            // Memanggil fungsi toggleCatatanVisibility saat halaman dimuat pertama kali
+            toggleCatatanVisibility($("#tindakan").val());
+
+            // Menambahkan event handler untuk perubahan pilihan
+            $("#tindakan").change(function() {
+                var selectedOption = $(this).val();
+                toggleCatatanVisibility(selectedOption);
             });
 
             $('#btn-ajukan-submit').on('click', function(e) {
@@ -183,6 +183,8 @@
                         $('.asal_surat').html(data.data.asal_surat);
                         $('.tanggal_masuk').html(data.data.tanggal_diterima);
                         $('.perihal').html(data.data.perihal);
+                        $('.sifat').html(data.data.sifat);
+                        $('.lampiran').html(data.data.lampiran);
                         $('.jenis').html(data.data.jenis);
                         $('.downloadFile').attr('href', '{{ Storage::url(':file') }}'.replace(
                             ':file', data.data.file))
@@ -254,7 +256,10 @@
                         $('.asal_surat').html(data.data.asal_surat);
                         $('.tanggal_masuk').html(data.data.tanggal_diterima);
                         $('.perihal').html(data.data.perihal);
+                        $('.catatan').html(data.data.catatan);
                         $('.jenis').html(data.data.jenis);
+                        $('.sifat').text(data.data.sifat);
+                        $('.lampiran').text(`${data.data.lampiran} Lampiran`);
                         $('.downloadFile').attr('href', '{{ Storage::url(':file') }}'.replace(
                             ':file', data.data.file))
                         $('.pdfViewerBtn').attr('data-url', '{{ Storage::url(':file') }}'
@@ -270,10 +275,12 @@
                         selectElement.empty();
                         // Populate the select element with options
                         bidang.forEach(function(item) {
-                            selectElement.append($('<option>', {
-                                value: item.id,
-                                text: item.bidang
-                            }));
+                            if (item.id !== 1 && item.id !== 2 && item.id !== 3) {
+                                selectElement.append($('<option>', {
+                                    value: item.id,
+                                    text: item.bidang
+                                }));
+                            }
                         });
                     },
                 });

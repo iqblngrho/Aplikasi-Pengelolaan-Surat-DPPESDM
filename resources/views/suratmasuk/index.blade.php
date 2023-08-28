@@ -64,7 +64,7 @@
                         </button>
                         <a href="{{ Storage::url($row->file) }}" target="_blank"
                             class="btn btn-xs btn-default text-primary mx-1 shadow" title="Lihat File">
-                            <ion-icon name="save-outline"></ion-icon>
+                            <i class="fas fa fa-lg fa-fw fa-solid fa-file"></i>
                         </a>
                         <button type="button" data-toggle="modal" data-target="#editTindakan"
                             data-id="{{ $row->id }}"
@@ -160,11 +160,12 @@
                     $('.sifat').text(data.data.sifat);
                     $('.tindakan').addClass(`badge-${tindakanToBadge(data.data.tindakan)}`)
                     $('.tindakan').text(tindakanToString(data.data.tindakan));
-                    $('.catatan').text(data.data.catatan);
                     $('.jenis').text(data.data.jenis);
+                    $('.catatan').text(data.data.catatan);
                     $('.lampiran').text(`${data.data.lampiran} Lampiran`);
                     $('.pdfViewerBtn').attr('data-url', '{{ Storage::url(':file') }}'
                         .replace(':file', data.data.file))
+                    $('.catatanKadis').text(data.disposisi.catatan);
                 });
             });
 

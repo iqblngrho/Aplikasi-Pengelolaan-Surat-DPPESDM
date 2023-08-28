@@ -61,6 +61,7 @@
     @include('suratkeluar.create')
     @include('suratkeluar.edit')
     @include('suratkeluar.delete')
+    @include('suratkeluar.show')
 @stop
 
 
@@ -202,6 +203,28 @@
                     }
                 });
             });
+            $('.btn-detail').on('click', function(event) {
+                var id = $(this).data('id');
+                $('.pdfContainer').hide();
+                $.get(`suratkeluar/${id}`, function(data) {
+                    $('.id').text(data.data.id);
+                    $('.nomor_surat').text(data.data.nomor_surat);
+                    $('.tanggal_surat').text(data.data.tanggal_surat);
+                    $('.alamat_tujuan').text(data.data.alamat_tujuan);
+                    $('.perihal').text(data.data.perihal);
+                    $('.bidang').text(data.bidang.bidang);
+                    $('.sifat').text(data.data.sifat);
+                    $('.lampiran').text(`${data.data.lampiran} Lampiran`);
+                    $('.pdfViewerBtn').attr('data-url', '{{ Storage::url(':file') }}'
+                        .replace(':file', data.data.file))
+                });
+            });
+            $('.pdfViewerBtn').click(function(e) {
+                const url = $(this).data('url');
+                console.log(url);
+                $('.pdfViewer').attr('src', url);
+                $('.pdfContainer').show();
+            })
         })
     </script>
 @stop

@@ -1,5 +1,6 @@
-<x-adminlte-modal id="bidangModal" title="Bidang" theme="navy" icon="fas fa-solid fa-file-medical" size='lg' v-centered
-    scrollable>
+{{-- Modal View Surat Masuk --}}
+<x-adminlte-modal id="detailmodal" title="DETAIL SURAT MASUK" theme="navy" icon="fa fa-lg fa-fw fa-info-circle"
+    size='lg' disable-animations>
     <div class="row">
         <div class="col-md-6">
             <x-adminlte-card id="detailsurat" title="NOMOR AGENDA" theme="secondary">
@@ -9,12 +10,8 @@
                         <td class="id"></td>
                     </tr>
                     <tr>
-                        <td>Tanggal Diterima</td>
-                        <td class="tanggal_masuk"></td>
-                    </tr>
-                    <tr>
-                        <td>Lampiran</td>
-                        <td class="lampiran"></td>
+                        <td>Tanggal Surat</td>
+                        <td class="tanggal_surat"></td>
                     </tr>
                 </table>
             </x-adminlte-card>
@@ -25,16 +22,12 @@
             <x-adminlte-card id="detailsurat" title="INFORMASI TAMBAHAN" theme="success">
                 <table class="table table-sm table-hover">
                     <tr>
-                        <td style="width: 40%;">Catatan</td>
-                        <td class="catatan"></td>
+                        <td style="width: 40%;">Bidang</td>
+                        <td class="bidang"></td>
                     </tr>
                     <tr>
                         <td style="width: 40%;">Sifat</td>
                         <td class="sifat"></td>
-                    </tr>
-                    <tr>
-                        <td style="width: 40%;">Jenis</td>
-                        <td class="jenis"></td>
                     </tr>
                 </table>
             </x-adminlte-card>
@@ -49,15 +42,15 @@
             </tr>
             <tr>
                 <td>Asal Surat</td>
-                <td class="asal_surat"></td>
+                <td class="alamat_tujuan"></td>
             </tr>
             <tr>
                 <td>Perihal Surat</td>
                 <td class="perihal"></td>
             </tr>
             <tr>
-                <td>Tanggal Surat</td>
-                <td class="tanggal_surat"></td>
+                <td>Lampiran</td>
+                <td class="lampiran"></td>
             </tr>
             <tr>
                 <td>File</td>
@@ -77,26 +70,5 @@
             </div>
         </div>
     </div>
-    <div class="card">
-        <div class="card-body">
-            <form id="tindakanBidangForm" method="POST">
-                @csrf
-
-                <div class="form-group" id="catatanBidangContainer">
-                    <label>Catatan</label>
-                    <x-adminlte-textarea name="catatan" placeholder="Tambah catatan" id="catatanBidang" required />
-                </div>
-
-                <div class="form-group">
-                    <label>Pilih Bidang</label>
-                    <select class="form-control bidang" name="id_bidang" id="bidang" required>
-                    </select>
-                </div>
-                <x-slot name="footerSlot">
-                    <x-adminlte-button theme="danger" label="Tutup" data-dismiss="modal" />
-                    <button type="button" class="btn btn-success btn-submit-bidang update">Simpan</button>
-                </x-slot>
-            </form>
-        </div>
-    </div>
 </x-adminlte-modal>
+{{-- End Modal View Surat Masuk --}}
