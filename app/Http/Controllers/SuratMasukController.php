@@ -165,10 +165,17 @@ class SuratMasukController extends Controller
 
     public function destroy($id)
     {
-        $suratMasuk = SuratMasuk::find($id);
+        try {
+            $suratMasuk = SuratMasuk::find($id);
 
-        if ($suratMasuk->disposisi) {
-            $suratMasuk->disposisi->delete();
+            if ($suratMasuk->disposisi) {
+                $suratMasuk->disposisi->delete();
+            }
+
+            $suratMasuk->delete();
+
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e], 500);
         }
     }
 }

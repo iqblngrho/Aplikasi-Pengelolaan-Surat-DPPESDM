@@ -150,27 +150,29 @@
             $('.btn-detail').on('click', function(event) {
                 var id = $(this).data('id');
                 $('.pdfContainer').hide();
-                $.get(`suratmasuk/${id}`, function(data) {
-                    $('.id').text(data.data.id);
-                    $('.nomor_surat').text(data.data.nomor_surat);
-                    $('.tanggal_surat').text(data.data.tanggal_surat);
-                    $('.tanggal_masuk').text(data.data.tanggal_diterima);
-                    $('.asal_surat').text(data.data.asal_surat);
-                    $('.perihal').text(data.data.perihal);
-                    $('.sifat').text(data.data.sifat);
-                    $('.tindakan').addClass(`badge-${tindakanToBadge(data.data.tindakan)}`)
-                    $('.tindakan').text(tindakanToString(data.data.tindakan));
-                    $('.jenis').text(data.data.jenis);
-                    $('.catatan').text(data.data.catatan != "" ? data.data.catatan : "-");
-                    $('.catatanKadis').text(data.data.disposisi != null ? data.data.disposisi
-                        .catatan : '-');
-                    $('.lampiran').text(`${data.data.lampiran} Lampiran`);
-                    console.log(data.data.file);
-                    // $('.pdfViewerBtn').attr('data-url', '{{ asset(':file') }}'
-                    //     .replace(':file', data.data.file))
 
-                    filePdf = data.data.file
-                });
+
+                $.get(`suratmasuk/${id}`)
+                    .done(function(data) {
+                        $('.id').text(data.data.id);
+                        $('.nomor_surat').text(data.data.nomor_surat);
+                        $('.tanggal_surat').text(data.data.tanggal_surat);
+                        $('.tanggal_masuk').text(data.data.tanggal_diterima);
+                        $('.asal_surat').text(data.data.asal_surat);
+                        $('.perihal').text(data.data.perihal);
+                        $('.sifat').text(data.data.sifat);
+                        $('.tindakan').addClass(`badge-${tindakanToBadge(data.data.tindakan)}`)
+                        $('.tindakan').text(tindakanToString(data.data.tindakan));
+                        $('.jenis').text(data.data.jenis);
+                        $('.catatan').text(data.data.catatan != "" ? data.data.catatan : "-");
+                        $('.catatanKadis').text(data.data.disposisi != null ? data.data.disposisi
+                            .catatan : '-');
+                        $('.lampiran').text(`${data.data.lampiran} Lampiran`);
+                        filePdf = data.data.file
+                    })
+                    .fail(function(jqXHR, textStatus, errorThrown) {
+                        console.error('AJAX error:', textStatus, errorThrown);
+                    });
             });
 
             //Handle Create Form Submit
