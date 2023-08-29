@@ -62,7 +62,7 @@
                             class="btn btn-xs btn-default text-primary mx-1 shadow btn-edit" title="Edit Surat">
                             <i class="fa fa-lg fa-fw fa-pen"></i>
                         </button>
-                        <a href="{{ Storage::url($row->file) }}" target="_blank"
+                        <a href="{{ asset($row->file) }}" target="_blank"
                             class="btn btn-xs btn-default text-primary mx-1 shadow" title="Lihat File">
                             <i class="fas fa fa-lg fa-fw fa-solid fa-file"></i>
                         </a>
@@ -163,7 +163,7 @@
                     $('.jenis').text(data.data.jenis);
                     $('.catatan').text(data.data.catatan);
                     $('.lampiran').text(`${data.data.lampiran} Lampiran`);
-                    $('.pdfViewerBtn').attr('data-url', '{{ Storage::url(':file') }}'
+                    $('.pdfViewerBtn').attr('data-url', '{{ asset(':file') }}'
                         .replace(':file', data.data.file))
                     $('.catatanKadis').text(data.disposisi.catatan);
                 });

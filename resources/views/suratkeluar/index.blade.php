@@ -9,11 +9,11 @@
 @section('plugins.DatatablesPlugin', true)
 
 @section('content')
-@role('admin')
-    <div class="text-right" style="margin-top: -40px">
-        <a class="btn btn-success mb-3 btn-tambah" data-toggle="modal" data-target="#tambahmodal">Tambah</a>
-    </div>
-@endrole
+    @role('admin')
+        <div class="text-right" style="margin-top: -40px">
+            <a class="btn btn-success mb-3 btn-tambah" data-toggle="modal" data-target="#tambahmodal">Tambah</a>
+        </div>
+    @endrole
 
 
     @if ($message = Session::get('message'))
@@ -36,20 +36,20 @@
                         data-toggle="modal" data-target="#detailmodal" data-id="{{ $row->id }}">
                         <i class="fa fa-lg fa-fw fa-info-circle"></i>
                     </button>
-                    <a href="{{ Storage::url($row->file) }}" target="_blank"
+                    <a href="{{ asset($row->file) }}" target="_blank"
                         class="btn btn-xs btn-default text-primary  mx-1 shadow" title="Lihat File">
                         <i class="fa fa-lg fa-fw fa-print"></i>
                     </a>
                     @role('admin')
-                    <button type="button" data-toggle="modal" data-target="#editmodalSK" data-id="{{ $row->id }}"
-                        class="btn btn-xs btn-default text-primary mx-1 shadow btn-editSK" title="Edit Surat">
-                        <i class="fa fa-lg fa-fw fa-pen"></i>
-                    </button>
-                    <button type="button" data-toggle="modal" data-target="#deleteSuratKeluarModal"
-                        data-id="{{ $row->id }}" class="btn btn-xs btn-default text-danger mx-1 shadow btn-delete"
-                        title="Delete">
-                        <i class="fa fa-lg fa-fw fa-trash"></i>
-                    </button>
+                        <button type="button" data-toggle="modal" data-target="#editmodalSK" data-id="{{ $row->id }}"
+                            class="btn btn-xs btn-default text-primary mx-1 shadow btn-editSK" title="Edit Surat">
+                            <i class="fa fa-lg fa-fw fa-pen"></i>
+                        </button>
+                        <button type="button" data-toggle="modal" data-target="#deleteSuratKeluarModal"
+                            data-id="{{ $row->id }}" class="btn btn-xs btn-default text-danger mx-1 shadow btn-delete"
+                            title="Delete">
+                            <i class="fa fa-lg fa-fw fa-trash"></i>
+                        </button>
                     @endrole
                 </td>
             </tr>
@@ -69,8 +69,8 @@
     <script>
         $(document).ready(function() {
             let suratkeluarId;
-             // When the delete button in the modal is clicked, send an AJAX request to delete the operator
-             $('#confirmDeleteBtn').on('click', function() {
+            // When the delete button in the modal is clicked, send an AJAX request to delete the operator
+            $('#confirmDeleteBtn').on('click', function() {
                 if (suratkeluarId) {
                     $.ajax({
                         type: 'POST',
@@ -141,7 +141,8 @@
             $('.btn-editSK').click(function(e) {
                 suratkeluarId = $(this).data('id');
 
-                const url = '{{ route('suratkeluar.edit', ':suratkeluarId') }}'.replace(':suratkeluarId',suratkeluarId);
+                const url = '{{ route('suratkeluar.edit', ':suratkeluarId') }}'.replace(':suratkeluarId',
+                    suratkeluarId);
 
                 $.ajax({
                     url: url,
@@ -149,7 +150,8 @@
                     success: function(response) {
                         $('#editNomorSuratKeluar').val(response.suratkeluar.nomor_surat);
                         $('#editTanggalSuratKeluar').val(response.suratkeluar.tanggal_surat);
-                        $('#editAlamatTujuanSuratKeluar').val(response.suratkeluar.alamat_tujuan);
+                        $('#editAlamatTujuanSuratKeluar').val(response.suratkeluar
+                            .alamat_tujuan);
                         $('#editSifatSuratKeluar').val(response.suratkeluar.sifat);
                         $('#editBidangSuratKeluar').val(response.suratkeluar.id_bidang);
                         $('#editLampiranSuratKeluar').val(response.suratkeluar.lampiran);
@@ -170,7 +172,8 @@
                 const form = $('#editFormSK');
                 const formData = new FormData(form[0]);
 
-                const url = '{{ route('suratkeluar.update', ':suratkeluarId') }}'.replace(':suratkeluarId',suratkeluarId);
+                const url = '{{ route('suratkeluar.update', ':suratkeluarId') }}'.replace(':suratkeluarId',
+                    suratkeluarId);
 
                 $.ajax({
                     url: url,
@@ -215,7 +218,7 @@
                     $('.bidang').text(data.bidang.bidang);
                     $('.sifat').text(data.data.sifat);
                     $('.lampiran').text(`${data.data.lampiran} Lampiran`);
-                    $('.pdfViewerBtn').attr('data-url', '{{ Storage::url(':file') }}'
+                    $('.pdfViewerBtn').attr('data-url', '{{ asset(':file') }}'
                         .replace(':file', data.data.file))
                 });
             });

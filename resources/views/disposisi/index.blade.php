@@ -60,9 +60,9 @@
                             $('.tanggal_masuk').html(data.data.tanggal_diterima);
                             $('.perihal').html(data.data.perihal);
                             $('.jenis').html(data.data.jenis);
-                            $('.downloadFile').attr('href', '{{ Storage::url(':file') }}'.replace(
+                            $('.downloadFile').attr('href', '{{ asset(':file') }}'.replace(
                                 ':file', data.data.file))
-                            $('.pdfViewerBtn').attr('data-url', '{{ Storage::url(':file') }}'
+                            $('.pdfViewerBtn').attr('data-url', '{{ asset(':file') }}'
                                 .replace(':file', data.data.file))
                         },
                     });

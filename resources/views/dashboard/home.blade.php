@@ -60,7 +60,7 @@
 
             <div class="small-box bg-danger">
                 <div class="inner">
-                    <h3>{{$jumlahdataoperator}}</h3>
+                    <h3>{{ $jumlahdataoperator }}</h3>
                     <p>Data Operator</p>
                 </div>
                 <div class="icon">
@@ -186,9 +186,9 @@
                         $('.sifat').html(data.data.sifat);
                         $('.lampiran').html(data.data.lampiran);
                         $('.jenis').html(data.data.jenis);
-                        $('.downloadFile').attr('href', '{{ Storage::url(':file') }}'.replace(
+                        $('.downloadFile').attr('href', '{{ asset(':file') }}'.replace(
                             ':file', data.data.file))
-                        $('.pdfViewerBtn').attr('data-url', '{{ Storage::url(':file') }}'
+                        $('.pdfViewerBtn').attr('data-url', '{{ asset(':file') }}'
                             .replace(':file', data.data.file))
                     },
                 });
@@ -260,9 +260,9 @@
                         $('.jenis').html(data.data.jenis);
                         $('.sifat').text(data.data.sifat);
                         $('.lampiran').text(`${data.data.lampiran} Lampiran`);
-                        $('.downloadFile').attr('href', '{{ Storage::url(':file') }}'.replace(
+                        $('.downloadFile').attr('href', '{{ asset(':file') }}'.replace(
                             ':file', data.data.file))
-                        $('.pdfViewerBtn').attr('data-url', '{{ Storage::url(':file') }}'
+                        $('.pdfViewerBtn').attr('data-url', '{{ asset(':file') }}'
                             .replace(':file', data.data.file))
                     },
                 });
