@@ -64,10 +64,12 @@ class SuratMasukController extends Controller
         $data = $request->all();
 
         $file = $request->file('file');
-        $filename = 'surat-masuk-' . $file->getClientOriginalName();
-        $path = $file->storeAs('suratmasuk', $filename, 'public');
+        $fileName = 'suratmasuk-' . $file->getClientOriginalName();
+        $filePath = public_path('surat-masuk'); // Path to the public folder
+        $file->move($filePath, $fileName); // Move the file to the public folder
 
-        $data['file'] = $path;
+        $data['file'] = 'surat-masuk/' . $fileName; // Save relative path
+
         try {
 
             SuratMasuk::create($data);
@@ -142,9 +144,11 @@ class SuratMasukController extends Controller
 
         if ($request->hasFile('file')) {
             $file = $request->file('file');
-            $fileName = 'profile-' . time() . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('files', $fileName, 'public');
-            $data['file'] = $path;
+            $fileName = 'profile-' . $file->getClientOriginalName();
+            $filePath = public_path('files'); // Path to the public folder
+            $file->move($filePath, $fileName); // Move the file to the public folder
+
+            $data['file'] = 'files/' . $fileName; // Save relative path
         }
 
         $data['tanggal_surat'] = Carbon::createFromFormat('d-m-Y', Carbon::parse($request->tanggal_surat)->format('d-m-Y'));
