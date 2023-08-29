@@ -89,7 +89,7 @@
 @section('js')
     <script>
         $(document).ready(function() {
-            let suratId;
+            let suratId, filePdf;
 
             // When the delete button in the modal is clicked, send an AJAX request to delete the operator
             $('#confirmDeleteBtn').on('click', function() {
@@ -161,11 +161,15 @@
                     $('.tindakan').addClass(`badge-${tindakanToBadge(data.data.tindakan)}`)
                     $('.tindakan').text(tindakanToString(data.data.tindakan));
                     $('.jenis').text(data.data.jenis);
-                    $('.catatan').text(data.data.catatan);
+                    $('.catatan').text(data.data.catatan != "" ? data.data.catatan : "-");
+                    $('.catatanKadis').text(data.data.disposisi != null ? data.data.disposisi
+                        .catatan : '-');
                     $('.lampiran').text(`${data.data.lampiran} Lampiran`);
-                    $('.pdfViewerBtn').attr('data-url', '{{ asset(':file') }}'
-                        .replace(':file', data.data.file))
-                    $('.catatanKadis').text(data.disposisi.catatan);
+                    console.log(data.data.file);
+                    // $('.pdfViewerBtn').attr('data-url', '{{ asset(':file') }}'
+                    //     .replace(':file', data.data.file))
+
+                    filePdf = data.data.file
                 });
             });
 
@@ -327,9 +331,7 @@
             });
 
             $('.pdfViewerBtn').click(function(e) {
-                const url = $(this).data('url');
-                console.log(url);
-                $('.pdfViewer').attr('src', url);
+                $('.pdfViewer').attr('src', filePdf);
                 $('.pdfContainer').show();
             })
         })

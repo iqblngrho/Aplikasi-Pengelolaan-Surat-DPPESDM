@@ -68,7 +68,8 @@
 @section('js')
     <script>
         $(document).ready(function() {
-            let suratkeluarId;
+            let suratkeluarId, filePdf;
+
             // When the delete button in the modal is clicked, send an AJAX request to delete the operator
             $('#confirmDeleteBtn').on('click', function() {
                 if (suratkeluarId) {
@@ -218,14 +219,11 @@
                     $('.bidang').text(data.bidang.bidang);
                     $('.sifat').text(data.data.sifat);
                     $('.lampiran').text(`${data.data.lampiran} Lampiran`);
-                    $('.pdfViewerBtn').attr('data-url', '{{ asset(':file') }}'
-                        .replace(':file', data.data.file))
+                    filePdf = data.data.file;
                 });
             });
             $('.pdfViewerBtn').click(function(e) {
-                const url = $(this).data('url');
-                console.log(url);
-                $('.pdfViewer').attr('src', url);
+                $('.pdfViewer').attr('src', filePdf);
                 $('.pdfContainer').show();
             })
         })
