@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => '',
+    'title' => 'Sistem Informasi Tata Usaha',
     'title_prefix' => 'SiTU |',
     'title_postfix' => '',
 
