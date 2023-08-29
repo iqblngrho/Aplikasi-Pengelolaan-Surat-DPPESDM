@@ -6,6 +6,9 @@
     <h1>Data Operator</h1>
 @stop
 
+@section('plugins.Datatables', true)
+@section('plugins.DatatablesPlugin', true)
+
 @section('content')
         <x-adminlte-datatable id="table5" :heads="$heads">
             @foreach ($dataOperator as $row)

@@ -18,7 +18,7 @@
     @php( $password_reset_url = $password_reset_url ? url($password_reset_url) : '' )
 @endif
 
-@section('auth_header', __('adminlte::adminlte.login_message'))
+@section('auth_header', __('Sistem Informasi Tata Usaha'))
 
 @section('auth_body')
     <form action="{{ $login_url }}" method="post">
@@ -75,7 +75,7 @@
             <div class="col-5">
                 <button type=submit class="btn btn-block {{ config('adminlte.classes_auth_btn', 'btn-flat btn-primary') }}">
                     <span class="fas fa-sign-in-alt"></span>
-                    {{ __('adminlte::adminlte.sign_in') }}
+                    {{ __('Masuk') }}
                 </button>
             </div>
         </div>
@@ -85,19 +85,19 @@
 
 @section('auth_footer')
     {{-- Password reset link --}}
-    @if($password_reset_url)
+    {{-- @if($password_reset_url)
         <p class="my-0">
             <a href="{{ $password_reset_url }}">
-                {{ __('adminlte::adminlte.i_forgot_my_password') }}
+                {{ __('adminlte::adminlte._forgot_my_password') }}
             </a>
         </p>
-    @endif
+    @endif --}}
 
     {{-- Register link --}}
     @if($register_url)
         <p class="my-0">
             <a href="{{ $register_url }}">
-                {{ __('adminlte::adminlte.register_a_new_membership') }}
+                {{ __('Daftar Akun Jika Belum Memiliki Akun.') }}
             </a>
         </p>
     @endif

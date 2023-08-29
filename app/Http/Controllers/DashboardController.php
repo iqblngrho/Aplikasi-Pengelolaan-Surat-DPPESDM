@@ -52,10 +52,12 @@ class DashboardController extends Controller
         $jumlahDisposisi = Disposisi::all();
         $jumlahSuratMasuk = SuratMasuk::all();
         $jumlahSuratKeluar = SuratKeluar::all();
+        $jumlahDataOperator = User::all();
 
         return view('dashboard.home', [
             "heads" => $heads,
             "suratMasuk" => $suratMasuk,
+            "jumlahdataoperator" => count($jumlahDataOperator),
             "jumlahDisposisi" => count($jumlahDisposisi),
             "jumlahSuratMasuk" => count($jumlahSuratMasuk),
             "jumlahSuratKeluar" => count($jumlahSuratKeluar),

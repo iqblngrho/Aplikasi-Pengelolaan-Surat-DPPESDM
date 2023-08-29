@@ -13,7 +13,7 @@
 
 
 
-@section('auth_header', __('adminlte::adminlte.register_message'))
+@section('auth_header', __('Daftar Akun Baru'))
 
 @section('auth_body')
     <form action="{{ $register_url }}" method="post">
@@ -129,7 +129,7 @@
         {{-- Register button --}}
         <button type="submit" class="btn btn-block {{ config('adminlte.classes_auth_btn', 'btn-flat btn-primary') }}">
             <span class="fas fa-user-plus"></span>
-            {{ __('adminlte::adminlte.register') }}
+            {{ __('Daftar') }}
         </button>
 
     </form>
@@ -138,7 +138,7 @@
 @section('auth_footer')
     <p class="my-0">
         <a href="{{ $login_url }}">
-            {{ __('adminlte::adminlte.i_already_have_a_membership') }}
+            {{ __('Sudah Memiliki Akun.') }}
         </a>
     </p>
 @stop
